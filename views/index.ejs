@@ -1,9 +1,12 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="degulog">
   <head>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+    <script src="http://code.angularjs.org/1.4.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="/js/app.js"></script>
     <link rel="stylesheet" href="/css/normalize.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
@@ -15,13 +18,13 @@
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand">ぱずめいろぐ</a>
+            <a class="navbar-brand" href="#/">ぱずめいろぐ</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">飼育日記</a></li>
-            <li><a href="#">体重管理</a></li>
-            <li><a href="#">購入履歴</a></li>
-            <li><a href="#">写真集</a></li>
+            <li class="active"><a href="#/blog">飼育日記</a></li>
+            <li><a href="#/weight">体重管理</a></li>
+            <li><a href="#/bought">購入履歴</a></li>
+            <li><a href="#/photos">写真集</a></li>
           </ul>
         </div>
       </nav>
@@ -45,7 +48,7 @@
         </div>
         <!-- メインコンテンツ -->
         <div class="col-sm-10 container">
-          メインコンテンツ
+          <article ng-view ng-cloak class="pageContainer"></article>
         </div>
       </div>
     </div>

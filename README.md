@@ -27,7 +27,7 @@
 |Debian|8.7|
 |Node.JS|7.4.0|
 |express|4.14.0|
-|AngularJS|1.6.1|
+|AngularJS|1.4.1|
 |MongoDB|3.2.9|
 
 ## インストール手順

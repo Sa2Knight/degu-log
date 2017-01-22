@@ -1,3 +1,7 @@
+/*
+  NodeJS/express側のコアファイル
+*/
+
 var express = require('express');
 var ObjectID = require('mongodb').ObjectID;
 var collection = require('./mongo');
@@ -15,6 +19,7 @@ app.get('/', function (req, res) {
 app.use('/css', express.static('public/css'));
 app.use('/js', express.static('public/js'));
 app.use('/img' , express.static('public/img'))
+app.use('/views' , express.static('views'));
 
 /* サーバー起動 */
 var server = app.listen(8086, function () {
