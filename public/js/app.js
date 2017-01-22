@@ -2,12 +2,9 @@
   AngularJS側のコアファイル
 */
 
-app = angular.module('degulog', ['ngRoute' , 'ngAnimate']);
-app.config(function($routeProvider) {
+degulog = angular.module('degulog', ['ngRoute' , 'ngAnimate']);
+degulog.config(function($routeProvider) {
   $routeProvider
-  .when('/' , {
-    templateUrl: 'views/top.html'
-  })
   .when('/blog' , {
     templateUrl: 'views/blog.html'
   })
@@ -20,7 +17,4 @@ app.config(function($routeProvider) {
   .when('/photos' , {
     templateUrl: 'views/photos.html'
   })
-  .otherwise({
-    redirectTo: '/'
-  });
 });

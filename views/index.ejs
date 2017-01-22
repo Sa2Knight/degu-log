@@ -7,24 +7,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/main.js"></script>
     <link rel="stylesheet" href="/css/normalize.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <title>ぱずめいろぐ</title>
   </head>
   <body>
     <!-- ヘッダー -->
-    <header>
+    <header ng-controller="MainController">
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#/">ぱずめいろぐ</a>
+            <a class="navbar-brand" href="#/blog">ぱずめいろぐ</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#/blog">飼育日記</a></li>
-            <li><a href="#/weight">体重管理</a></li>
-            <li><a href="#/bought">購入履歴</a></li>
-            <li><a href="#/photos">写真集</a></li>
+            <li ng-class="{ active: isActiveMenu('/blog') }"><a href="#/blog">飼育日記</a></li>
+            <li ng-class="{ active: isActiveMenu('/weight') }"><a href="#/weight">体重管理</a></li>
+            <li ng-class="{ active: isActiveMenu('/bought') }"><a href="#/bought">購入履歴</a></li>
+            <li ng-class="{ active: isActiveMenu('/photos') }"><a href="#/photos">写真集</a></li>
           </ul>
         </div>
       </nav>
@@ -33,16 +35,16 @@
     <div class="content">
       <div class="row">
         <!-- サイドメニュー -->
-        <div class="col-sm-2 side-menu">
+        <div ng-controller="MainController" class="col-sm-2 side-menu">
           <div class="panel panel-default">
-            <div class="panel-heading">
-              Menu
-            </div>
+            <div class="panel-heading">Menu</div>
             <ul class="nav nav-pills nav-stacked">
-                <li><a href=""><i class="glyphicon glyphicon-pencil"></i> submenu1</a></li>
-                <li><a href=""><i class="glyphicon glyphicon-download"></i> submenu2</a></li>
-                <li><a href=""><i class="glyphicon glyphicon-leaf"></i> submenu3</a></li>
-                <li><a href=""><i class="glyphicon glyphicon-folder-open"></i> submenu4</a></li>
+              <li ng-repeat="m in getSideMenu()">
+                <a href="{{m.url}}">
+                  <i class="fa {{m.icon}}" aria-hidden="true"></i>
+                  {{m.label}}
+                </a>
+              </li>
             </ul>
           </div>
         </div>

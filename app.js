@@ -20,6 +20,7 @@ app.use('/css', express.static('public/css'));
 app.use('/js', express.static('public/js'));
 app.use('/img' , express.static('public/img'))
 app.use('/views' , express.static('public/views'));
+app.use('/fonts' , express.static('public/fonts'));
 
 /* サーバー起動 */
 var server = app.listen(8086, function () {
