@@ -34,7 +34,8 @@ degulog.config(function($routeProvider) {
     templateUrl: 'views/weight/new.html'
   })
   .when('/weight/list' , {
-    templateUrl: 'views/weight/list.html'
+    templateUrl: 'views/weight/list.html',
+    controller: 'weightController as weight'
   })
   .when('/weight/graf' , {
     templateUrl: 'views/weight/graf.html'

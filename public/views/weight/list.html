@@ -1,1 +1,21 @@
-体重一覧
+<h1>体重記録</h1>
+<table class="table table-striped center">
+  <thead>
+    <tr>
+      <th class="col-xs-2">日時</th>
+      <th class="col-xs-4">パズー</th>
+      <th class="col-xs-4">メイ</th>
+      <th class="col-xs-1">編集</th>
+      <th class="col-xs-1">削除</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="w in weight.list.history | orderBy: '-date'">
+      <td>{{w.date}}</td>
+      <td>{{w.pazoo}}</td>
+      <td>{{w.may}}</td>
+      <td><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+      <td><button class="btn btn-primary btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+    </tr>
+  </tbody>
+</table>
