@@ -38,7 +38,8 @@ degulog.config(function($routeProvider) {
     controller: 'weightController as weight'
   })
   .when('/weight/graf' , {
-    templateUrl: 'views/weight/graf.html'
+    templateUrl: 'views/weight/graf.html',
+    controller: 'weightController as weight'
   })
   /* 購入履歴 */
   .when('/bought' , {

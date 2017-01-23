@@ -3,7 +3,7 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'util' , fun
   let weight = this;
   weight.list = {};
 
-  /* 体重記録 */
+  /* [データ] 体重記録 */
   weight.list.history = [
     { date: '2016/09/23', pazoo: 217, may: 207 },
     { date: '2016/09/28', pazoo: 216, may: 201 },
@@ -17,5 +17,36 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'util' , fun
     { date: '2017/01/13', pazoo: 208, may: 206 },
     { date: '2017/01/21', pazoo: 213, may: 219 },
   ];
+
+  /* [メソッド] 折れ線グラを生成 */
+  weight.list.createGraf = function() {
+    // 体重記録をc3js向けのデータに変換する
+    let date = ['date'] , pazoo = ['パズー'] , may = ['メイ'];
+    weight.list.history.forEach(function(h) {
+      date.push(h.date);
+      pazoo.push(h.pazoo);
+      may.push(h.may);
+    });
+    //グラフを生成する
+    c3.generate({
+      bindto: '#weight-graf',
+      data: {
+        x: 'date',
+        xFormat: '%Y/%m/%d',
+        columns: [date , pazoo , may]
+      },
+      axis: {
+        x: {
+          show: true,
+          type: 'timeseries',
+          tick: {
+            format: '%y/%m/%d'
+          }
+        }
+      }
+    });
+  };
+
+  weight.list.createGraf();
 
 }]);
