@@ -1,1 +1,36 @@
-ブログ記事新規投稿
+<h1>新規投稿</h1>
+<form>
+  <!-- 投稿日 -->
+  <div class="form-group">
+    <label>日時</label>
+    <div class="input-group">
+      <input type="text" class="form-control datetime" ng-model="blog.newPost.datetime">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    </div>
+  </div>
+  <!-- タイトル -->
+  <div class="form-group">
+    <label>タイトル</label>
+    <input type="text" class="form-control" ng-model="blog.newPost.title">
+  </div>
+  <!-- 本文 -->
+  <div class="form-group">
+    <label>本文</label>
+    <textarea class="form-control" rows="10" ng-model="blog.newPost.body"></textarea>
+  </div>
+  <!-- 添付ファイル -->
+  <div class="form-group">
+    <label>写真</label>
+    <div class="input-group">
+      <input class="dummy-file" type="file" style="display:none">
+      <input type="text" class="file form-control" placeholder="投稿する写真を選択" readonly>
+      <span class="input-group-btn"><button type="button" class="btn btn-info" onclick="$('.dummy-file').click();">選択</button></span>
+    </div>
+  </div>
+  <!-- submit -->
+  <div class="form-group">
+    <button class="form-control btn-primary" type="submit">投稿</button>
+  </div>
+</form>
+
+{{blog.newPost}}

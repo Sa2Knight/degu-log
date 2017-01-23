@@ -16,6 +16,9 @@ a {
 p {
   line-height: 2;
 }
+.right {
+  text-align: right;
+}
 
 /*------------------------
  * Header
@@ -37,6 +40,19 @@ header {
   .content {
     padding-top: 180px;
   }
+}
+
+/*-------------------------
+ * Article
+ *-------------------------*/
+article {
+  margin-top: -20px;
+}
+article h1 {
+  font-size: 18px;
+  padding: .5em .75em;
+  background-color: #f6f6f6;
+  border-left: 6px solid #ccc;
 }
 
 /*-------------------------
