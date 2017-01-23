@@ -17,4 +17,7 @@ degulog.config(function($routeProvider) {
   .when('/photos' , {
     templateUrl: 'views/photos.html'
   })
+  .otherwise({
+    redirectTo: '/blog'
+  })
 });
