@@ -1,1 +1,19 @@
-ブログ記事一覧
+<h1>記事一覧</h1>
+<table class='table table-striped center'>
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>本文</th>
+      <th>投稿日時</th>
+      <th>サムネイル</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="post in blog.list.posts">
+      <td>{{ post.title }}</td>
+      <td>{{ post.body }}</td>
+      <td>{{ post.datetime }}</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

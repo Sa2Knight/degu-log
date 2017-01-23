@@ -16,8 +16,11 @@ a {
 p {
   line-height: 2;
 }
-.right {
-  text-align: right;
+table.center th {
+  text-align: center;
+}
+table.center td {
+  text-align: center;
 }
 
 /*------------------------
