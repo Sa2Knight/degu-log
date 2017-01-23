@@ -20,13 +20,13 @@
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#/blog">ぱずめいろぐ</a>
+            <a class="navbar-brand" href="#/blog/list">ぱずめいろぐ</a>
           </div>
           <ul class="nav navbar-nav">
-            <li ng-class="{ active: isActiveMenu('/blog') }"><a href="#/blog">飼育日記</a></li>
-            <li ng-class="{ active: isActiveMenu('/weight') }"><a href="#/weight">体重管理</a></li>
-            <li ng-class="{ active: isActiveMenu('/bought') }"><a href="#/bought">購入履歴</a></li>
-            <li ng-class="{ active: isActiveMenu('/photos') }"><a href="#/photos">写真集</a></li>
+            <li ng-class="{ active: isActiveMenu('/blog') }"><a href="#/blog/list">飼育日記</a></li>
+            <li ng-class="{ active: isActiveMenu('/weight') }"><a href="#/weight/list">体重管理</a></li>
+            <li ng-class="{ active: isActiveMenu('/bought') }"><a href="#/bought/list">購入履歴</a></li>
+            <li ng-class="{ active: isActiveMenu('/photos') }"><a href="#/photos/list">写真集</a></li>
           </ul>
         </div>
       </nav>
@@ -37,9 +37,9 @@
         <!-- サイドメニュー -->
         <div ng-controller="MainController" class="col-sm-2 side-menu">
           <div class="panel panel-default">
-            <div class="panel-heading">Menu</div>
+            <div class="panel-heading">{{ activeMenuTitle() }}</div>
             <ul class="nav nav-pills nav-stacked">
-              <li ng-repeat="m in getSideMenu()">
+              <li ng-repeat="m in getSideMenu()" ng-class="{ active: isActiveSideMenu('{{m.url}}') }">
                 <a href="{{m.url}}">
                   <i class="fa {{m.icon}}" aria-hidden="true"></i>
                   {{m.label}}
