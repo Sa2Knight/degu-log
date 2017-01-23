@@ -41,5 +41,5 @@ pull後、以下の手順でNode環境を構築
 $ npm install express
 $ npm install ejs
 $ npm install mongodb
-$ npm install node-dev -g
+$ npm install nodemon -g
 ```
