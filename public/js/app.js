@@ -20,7 +20,8 @@ degulog.config(function($routeProvider) {
     controller: 'blogController as blog'
   })
   .when('/blog/calendar' , {
-    templateUrl: 'views/blog/calendar.html'
+    templateUrl: 'views/blog/calendar.html',
+    controller: 'blogController as blog'
   })
   .when('/blog/category' , {
     templateUrl: 'views/blog/category.html'

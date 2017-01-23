@@ -86,6 +86,12 @@ degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , funct
     $('.datetime').change(function() {
       $scope.$apply(() => $scope.blog.newPost.datetime = $(this).val());
     });
+    // カレンダーUI
+    $('#mini-calendar').html('').miniCalendar({
+      year: 2017,
+      month: 1,
+      events: []
+    });
   })();
 
 }]);
