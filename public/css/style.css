@@ -22,6 +22,9 @@ table.center th {
 table.center td {
   text-align: center;
 }
+form span.error {
+  color: #A00;
+}
 
 /*------------------------
  * Header

@@ -2,12 +2,19 @@ degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , funct
 
   let blog = this;
 
-  /* 新規投稿 */
+  /* [データ] 新規投稿オブジェクト*/
   blog.newPost = {
     datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm'),
   };
 
-  /* 記事一覧 */
+  /* [メソッド] 新規投稿を登録する */
+  blog.createNewPost = function() {
+    if ($scope.newPostForm.$valid) {
+      alert('POSTしました');
+    }
+  };
+
+  /* [データ] 記事一覧 */
   blog.list = {
     posts: [
       {

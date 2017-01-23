@@ -1,23 +1,31 @@
 <h1>新規投稿</h1>
-<form>
+
+<form novalidate name="newPostForm" ng-submit="blog.createNewPost()">
+
   <!-- 投稿日 -->
   <div class="form-group">
-    <label>日時</label>
+    <label>投稿日</label>
+    <span class="error" ng-show="newPostForm.$submitted && newPostForm.datetime.$error.required">(※入力必須です)</span>
     <div class="input-group">
-      <input type="text" class="form-control datetime" ng-model="blog.newPost.datetime">
+      <input type="text" class="form-control datetime" name="datetime" ng-model="blog.newPost.datetime" required>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
   </div>
+
   <!-- タイトル -->
   <div class="form-group">
     <label>タイトル</label>
-    <input type="text" class="form-control" ng-model="blog.newPost.title">
+    <span class="error" ng-show="newPostForm.$submitted && newPostForm.title.$error.required">(※入力必須です)</span>
+    <span class="error" ng-show="newPostForm.$submitted && newPostForm.title.$error.maxlength">(※18文字以内で入力してください)</span>
+    <input type="text" class="form-control" name="title" placeholder="タイトルを入力してください" ng-model="blog.newPost.title" required ng-maxlength="18">
   </div>
+
   <!-- 本文 -->
   <div class="form-group">
     <label>本文</label>
-    <textarea class="form-control" rows="10" ng-model="blog.newPost.body"></textarea>
+    <textarea class="form-control" rows="10" name="body" placeholder="本文を入力してください" ng-model="blog.newPost.body"></textarea>
   </div>
+
   <!-- 添付ファイル -->
   <div class="form-group">
     <label>写真</label>
@@ -27,10 +35,9 @@
       <span class="input-group-btn"><button type="button" class="btn btn-info" onclick="$('.dummy-file').click();">選択</button></span>
     </div>
   </div>
+
   <!-- submit -->
   <div class="form-group">
     <button class="form-control btn-primary" type="submit">投稿</button>
   </div>
 </form>
-
-{{blog.newPost}}
