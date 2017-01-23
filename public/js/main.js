@@ -3,28 +3,23 @@ degulog.controller('MainController', ['$scope', '$location' , function($scope , 
   /* メニューごとのサブメニューを定義 */
   $scope.sideMenus = {
     '/blog': [
-      {label: 'ブログ１' , url: '#/blog' , icon: 'fa-external-link'},
-      {label: 'ブログ２' , url: '#/blog' , icon: 'fa-external-link'},
-      {label: 'ブログ３' , url: '#/blog' , icon: 'fa-external-link'},
-      {label: 'ブログ４' , url: '#/blog' , icon: 'fa-external-link'},
+      {label: '新規投稿' ,      url: '#/blog/new' ,       icon: 'fa-external-link'},
+      {label: '記事一覧' ,      url: '#/blog/list' ,      icon: 'fa-external-link'},
+      {label: 'カレンダー' ,    url: '#/blog/calendar' ,  icon: 'fa-external-link'},
+      {label: 'カテゴリ管理' ,  url: '#/blog/category' ,  icon: 'fa-external-link'},
     ],
     '/weight': [
-      {label: '体重１' , url: '#/weight' , icon: 'fa-external-link'},
-      {label: '体重２' , url: '#/weight' , icon: 'fa-external-link'},
-      {label: '体重３' , url: '#/weight' , icon: 'fa-external-link'},
-      {label: '体重４' , url: '#/weight' , icon: 'fa-external-link'},
+      {label: '体重登録' ,      url: '#/weight/new' ,     icon: 'fa-external-link'},
+      {label: '体重遷移' ,      url: '#/weight/graf' ,    icon: 'fa-external-link'},
     ],
     '/bought': [
-      {label: '購買１' , url: '#/bought' , icon: 'fa-external-link'},
-      {label: '購買２' , url: '#/bought' , icon: 'fa-external-link'},
-      {label: '購買３' , url: '#/bought' , icon: 'fa-external-link'},
-      {label: '購買４' , url: '#/bought' , icon: 'fa-external-link'},
+      {label: '購入記録' ,      url: '#/bought/list' ,    icon: 'fa-external-link'},
+      {label: '支出記録' ,      url: '#/bought/paid' ,    icon: 'fa-external-link'},
     ],
     '/photos': [
-      {label: '写真集１' , url: '#/photos' , icon: 'fa-external-link'},
-      {label: '写真集２' , url: '#/photos' , icon: 'fa-external-link'},
-      {label: '写真集３' , url: '#/photos' , icon: 'fa-external-link'},
-      {label: '写真集４' , url: '#/photos' , icon: 'fa-external-link'},
+      {label: '新規投稿' ,      url: '#/photos/new' ,     icon: 'fa-external-link'},
+      {label: '写真一覧' ,      url: '#/photos/list' ,    icon: 'fa-external-link'},
+      {label: 'タグ管理' ,      url: '#/photos/tag' ,     icon: 'fa-external-link'},
     ]
   };
 
