@@ -23,9 +23,6 @@ degulog.config(function($routeProvider) {
     templateUrl: 'views/blog/calendar.html',
     controller: 'blogController as blog'
   })
-  .when('/blog/category' , {
-    templateUrl: 'views/blog/category.html'
-  })
   /* 体重 */
   .when('/weight' , {
     redirectTo: 'weight/list'

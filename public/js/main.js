@@ -17,7 +17,6 @@ degulog.controller('MainController', ['$scope', '$location' , function($scope , 
       {label: '記事一覧' ,      url: '#/blog/list' ,      icon: 'fa-list'},
       {label: '新規投稿' ,      url: '#/blog/new' ,       icon: 'fa-plus-circle'},
       {label: 'カレンダー' ,    url: '#/blog/calendar' ,  icon: 'fa-calendar'},
-      {label: 'カテゴリ管理' ,  url: '#/blog/category' ,  icon: 'fa-tags'},
     ],
     '/weight': [
       {label: '記録一覧' ,      url: '#/weight/list' ,    icon: 'fa-list'},
