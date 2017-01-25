@@ -9,14 +9,14 @@ degulog.config(function($routeProvider) {
   /* ブログ */
   $routeProvider
   .when('/blog' , {
-    redirectTo: '/blog/list'
+    redirectTo: '/blog/posts'
   })
-  .when('/blog/new' , {
-    templateUrl: 'views/blog/new.html',
+  .when('/blog/create' , {
+    templateUrl: 'views/blog/edit.html',
     controller: 'blogController as blog'
   })
-  .when('/blog/list' , {
-    templateUrl: 'views/blog/list.html',
+  .when('/blog/posts' , {
+    templateUrl: 'views/blog/posts.html',
     controller: 'blogController as blog'
   })
   .when('/blog/calendar' , {
@@ -25,14 +25,14 @@ degulog.config(function($routeProvider) {
   })
   /* 体重 */
   .when('/weight' , {
-    redirectTo: 'weight/list'
+    redirectTo: 'weight/history'
   })
-  .when('/weight/new' , {
-    templateUrl: 'views/weight/new.html',
+  .when('/weight/create' , {
+    templateUrl: 'views/weight/edit.html',
     controller: 'weightController as weight'
   })
-  .when('/weight/list' , {
-    templateUrl: 'views/weight/list.html',
+  .when('/weight/history' , {
+    templateUrl: 'views/weight/history.html',
     controller: 'weightController as weight'
   })
   .when('/weight/graf' , {
@@ -41,33 +41,33 @@ degulog.config(function($routeProvider) {
   })
   /* 購入履歴 */
   .when('/bought' , {
-    redirectTo: 'bought/list'
+    redirectTo: 'bought/history'
   })
-  .when('/bought/new' , {
-    templateUrl: 'views/bought/new.html'
+  .when('/bought/create' , {
+    templateUrl: 'views/bought/edit.html'
   })
-  .when('/bought/list' , {
-    templateUrl: 'views/bought/list.html'
+  .when('/bought/history' , {
+    templateUrl: 'views/bought/history.html'
   })
   .when('/bought/graf' , {
     templateUrl: 'views/bought/graf.html'
   })
   /* 写真 */
-  .when('/photos' , {
-    redirectTo: 'photos/list'
+  .when('/photo' , {
+    redirectTo: 'photo/collection'
   })
-  .when('/photos/new' , {
-    templateUrl: 'views/photos/new.html'
+  .when('/photo/create' , {
+    templateUrl: 'views/photo/edit.html'
   })
-  .when('/photos/list' , {
-    templateUrl: 'views/photos/list.html'
+  .when('/photo/collection' , {
+    templateUrl: 'views/photo/collection.html'
   })
-  .when('/photos/tag' , {
-    templateUrl: 'views/photos/tag.html'
+  .when('/photo/tag' , {
+    templateUrl: 'views/photo/tag.html'
   })
   /* その他 */
   .otherwise({
-    redirectTo: '/blog/list'
+    redirectTo: '/blog/posts'
   })
 });
 

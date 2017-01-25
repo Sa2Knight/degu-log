@@ -14,7 +14,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , funct
     }
   };
 
-  /* [データ] 記事一覧 */
+  /* 記事一覧 */
   blog.list = {
     posts: [
       {
@@ -72,7 +72,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , funct
         title: 'ダミータイトル',
         body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'
       },
-    ]
+    ] ,
   };
 
   /* カレンダー */

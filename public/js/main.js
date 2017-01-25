@@ -8,30 +8,29 @@ degulog.controller('MainController', ['$scope', '$location' , function($scope , 
     '/blog'  : 'ブログ'  ,
     '/weight': '体重管理',
     '/bought': '購入履歴',
-    '/photos': '写真集'  ,
+    '/photo': '写真集'  ,
   };
 
   /* メニューごとのサブメニューを定義 */
   $scope.sideMenus = {
     '/blog': [
-      {label: '記事一覧' ,      url: '#/blog/list' ,      icon: 'fa-list'},
-      {label: '新規投稿' ,      url: '#/blog/new' ,       icon: 'fa-plus-circle'},
+      {label: '記事一覧' ,      url: '#/blog/posts' ,      icon: 'fa-list'},
+      {label: '新規投稿' ,      url: '#/blog/create' ,       icon: 'fa-plus-circle'},
       {label: 'カレンダー' ,    url: '#/blog/calendar' ,  icon: 'fa-calendar'},
     ],
     '/weight': [
-      {label: '記録一覧' ,      url: '#/weight/list' ,    icon: 'fa-list'},
-      {label: '新規登録' ,      url: '#/weight/new' ,     icon: 'fa-plus-circle'},
+      {label: '記録一覧' ,      url: '#/weight/history' ,    icon: 'fa-list'},
+      {label: '新規登録' ,      url: '#/weight/create' ,     icon: 'fa-plus-circle'},
       {label: '体重遷移' ,      url: '#/weight/graf' ,    icon: 'fa-line-chart'},
     ],
     '/bought': [
-      {label: '購入記録' ,      url: '#/bought/list' ,    icon: 'fa-list'},
-      {label: '新規登録' ,      url: '#/bought/new' ,     icon: 'fa-plus-circle'},
+      {label: '購入記録' ,      url: '#/bought/history' ,    icon: 'fa-list'},
       {label: '支出記録' ,      url: '#/bought/graf' ,    icon: 'fa-bar-chart'},
     ],
-    '/photos': [
-      {label: '写真一覧' ,      url: '#/photos/list' ,    icon: 'fa-picture-o'},
-      {label: '新規投稿' ,      url: '#/photos/new' ,     icon: 'fa-camera'},
-      {label: 'タグ管理' ,      url: '#/photos/tag' ,     icon: 'fa-tags'},
+    '/photo': [
+      {label: '写真一覧' ,      url: '#/photo/collection' ,    icon: 'fa-picture-o'},
+      {label: '新規投稿' ,      url: '#/photo/create' ,    icon: 'fa-picture-o'},
+      {label: 'タグ管理' ,      url: '#/photo/tag' ,     icon: 'fa-tags'},
     ]
   };
 
