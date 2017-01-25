@@ -75,6 +75,42 @@ degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , funct
     ]
   };
 
+  /* カレンダー */
+  blog.calendar = {
+    year: 2017,
+    month: 1,
+    events: [],
+    show: function() {
+      $('#mini-calendar').html('').miniCalendar({
+        year: this.year,
+        month: this.month,
+        events: this.events,
+      });
+    },
+    next: function() {
+      this.month++;
+      if (this.month > 12) {
+        this.year++;
+        this.month = 1;
+      }
+      this.show();
+    },
+    prev: function() {
+      this.month--;
+      if (this.month <= 0) {
+        this.year--;
+        this.month = 12;
+      }
+      this.show();
+    },
+    today: function() {
+      let today = new Date();
+      this.year = today.getFullYear();
+      this.month = today.getMonth() + 1;
+      this.show();
+    }
+  };
+
   /* UI生成 */
   (function() {
     // ファイル添付UI
@@ -94,11 +130,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , funct
       $scope.$apply(() => $scope.blog.newPost.datetime = $(this).val());
     });
     // カレンダーUI
-    $('#mini-calendar').html('').miniCalendar({
-      year: 2017,
-      month: 1,
-      events: []
-    });
+    blog.calendar.show();
   })();
 
 }]);

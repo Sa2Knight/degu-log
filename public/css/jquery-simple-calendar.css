@@ -5,9 +5,13 @@
 .calendar-head {
   text-align: center;
 }
-#mini-calendar .calendar-year-month {
+.calendar-year-month {
+  display: inline-block;
   text-align: center;
   font-size: 24px;
+}
+.mini-calendar-btn {
+  float: right;
 }
 #mini-calendar table {
   width: 100%;

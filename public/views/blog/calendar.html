@@ -1,2 +1,9 @@
 <h1>カレンダー</h1>
+
+<div class="calendar-head">
+  <button id="next_month_btn" class="mini-calendar-btn btn btn-default" ng-click="blog.calendar.next()">来月</button>
+  <button id="today_btn" class="mini-calendar-btn btn btn-default" ng-click="blog.calendar.today()">今月</button>
+  <button id="last_month_btn" class="mini-calendar-btn btn btn-default" ng-click="blog.calendar.prev()">先月</button>
+  <p class="calendar-year-month">{{ blog.calendar.year }}年{{ blog.calendar.month }}月</p>
+</div>
 <div id="mini-calendar">カレンダー</div>
