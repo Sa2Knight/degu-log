@@ -2,21 +2,23 @@ degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , funct
 
   let blog = this;
 
-  /* [データ] 新規投稿オブジェクト*/
-  blog.newPost = {
-    datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm'),
+  /*
+   * ブログ新規投稿・編集
+   */
+  blog.edit = {
+    post: {datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')},
+    submit: function() {
+      if ($scope.postForm.$valid) {
+        alert('POSTしました');
+      }
+    },
   };
 
-  /* [メソッド] 新規投稿を登録する */
-  blog.createNewPost = function() {
-    if ($scope.newPostForm.$valid) {
-      alert('POSTしました');
-    }
-  };
-
-  /* 記事一覧 */
-  blog.list = {
-    posts: [
+  /*
+   * 投稿一覧
+   */
+  blog.posts = {
+    list: [
       { id: 'hogehoge1', datetime: '2017/01/07 15:41', title: 'ダミータイトル1', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
       { id: 'hogehoge2', datetime: '2017/01/07 15:41', title: 'ダミータイトル2', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
       { id: 'hogehoge3', datetime: '2017/01/07 15:41', title: 'ダミータイトル3', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
@@ -27,10 +29,12 @@ degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , funct
       { id: 'hogehoge8', datetime: '2017/01/07 15:41', title: 'ダミータイトル8', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
       { id: 'hogehoge9', datetime: '2017/01/07 15:41', title: 'ダミータイトル9', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
       { id: 'hogehoge10', datetime: '2017/01/07 15:41', title: 'ダミータイトル10', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
-    ]
-  };
+    ],
+  }
 
-  /* カレンダー */
+  /*
+   * カレンダー
+   */
   blog.calendar = {
     year: 2017,
     month: 1,
@@ -66,7 +70,9 @@ degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , funct
     }
   };
 
-  /* UI生成 */
+  /*
+   * UI生成
+   */
   (function() {
     // ファイル添付UI
     $('.dummy-file').change(function() {
@@ -82,7 +88,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , funct
       scrollInput: false,
     });
     $('.datetime').change(function() {
-      $scope.$apply(() => $scope.blog.newPost.datetime = $(this).val());
+      $apply(() => blog.edit.post.datetime = $(this).val());
     });
     // カレンダーUI
     blog.calendar.show();

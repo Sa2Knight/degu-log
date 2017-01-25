@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm-5">
       <div class="input-group">
-        <input type="text" class="form-control" ng-model="blog.list.freeWord" placeholder="フリーワード検索">
+        <input type="text" class="form-control" ng-model="blog.posts.searchWord" placeholder="フリーワード検索">
         <span class="input-group-btn"><button class="form-control btn btn-primary">検索</button></span>
       </div>
     </div>
@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="post in blog.list.posts">
+    <tr ng-repeat="post in blog.posts.list">
       <td>{{ post.title }}</td>
       <td>{{ post.body }}</td>
       <td>{{ post.datetime }}</td>

@@ -1,14 +1,14 @@
 <h1>新規投稿</h1>
 
-<form novalidate name="newPostForm" ng-submit="blog.createNewPost()">
+<form novalidate name="postForm" ng-submit="blog.edit.submit()">
 
   <!-- 投稿日 -->
   <div class="form-group">
     <label>投稿日</label>
-    <span class="error" ng-show="newPostForm.$submitted && newPostForm.datetime.$error.required">(※入力必須です)</span>
-    <span class="error" ng-show="newPostForm.$submitted && newPostForm.datetime.$error.pattern">(※日時のフォーマットが正しくありません)</span>
+    <span class="error" ng-show="postForm.$submitted && postForm.datetime.$error.required">(※入力必須です)</span>
+    <span class="error" ng-show="postForm.$submitted && postForm.datetime.$error.pattern">(※日時のフォーマットが正しくありません)</span>
     <div class="input-group">
-      <input type="text" class="form-control datetime" name="datetime" ng-model="blog.newPost.datetime" ng-pattern="/^\d{4}/\d{2}/\d{2} \d{2}:\d{2}$/" required>
+      <input type="text" class="form-control datetime" name="datetime" ng-model="blog.edit.post.datetime" ng-pattern="/^\d{4}/\d{2}/\d{2} \d{2}:\d{2}$/" required>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
   </div>
@@ -16,15 +16,15 @@
   <!-- タイトル -->
   <div class="form-group">
     <label>タイトル</label>
-    <span class="error" ng-show="newPostForm.$submitted && newPostForm.title.$error.required">(※入力必須です)</span>
-    <span class="error" ng-show="newPostForm.$submitted && newPostForm.title.$error.maxlength">(※18文字以内で入力してください)</span>
-    <input type="text" class="form-control" name="title" placeholder="タイトルを入力してください" ng-model="blog.newPost.title" required ng-maxlength="18">
+    <span class="error" ng-show="postForm.$submitted && postForm.title.$error.required">(※入力必須です)</span>
+    <span class="error" ng-show="postForm.$submitted && postForm.title.$error.maxlength">(※18文字以内で入力してください)</span>
+    <input type="text" class="form-control" name="title" placeholder="タイトルを入力してください" ng-model="blog.edit.post.title" required ng-maxlength="18">
   </div>
 
   <!-- 本文 -->
   <div class="form-group">
     <label>本文</label>
-    <textarea class="form-control" rows="10" name="body" placeholder="本文を入力してください" ng-model="blog.newPost.body"></textarea>
+    <textarea class="form-control" rows="10" name="body" placeholder="本文を入力してください" ng-model="blog.edit.post.body"></textarea>
   </div>
 
   <!-- 添付ファイル -->
