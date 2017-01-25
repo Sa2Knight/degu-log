@@ -2,6 +2,7 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'util' , fun
 
   let weight = this;
   weight.list = {};
+  weight.newWeight = {date: util.formatDate(new Date() , 'YYYY/MM/DD')};
 
   /* [データ] 体重記録 */
   weight.list.history = [
@@ -17,6 +18,13 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'util' , fun
     { date: '2017/01/13', pazoo: 208, may: 206 },
     { date: '2017/01/21', pazoo: 213, may: 219 },
   ];
+
+  /* [メソッド] 体重を新規登録 */
+  weight.newWeight.create = function() {
+    if ($scope.newWeightForm.$valid) {
+      alert('POSTしました');
+    }
+  };
 
   /* [メソッド] 折れ線グラを生成 */
   weight.list.createGraf = function() {
@@ -47,6 +55,21 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'util' , fun
     });
   };
 
-  weight.list.createGraf();
-
+  /* UI生成 */
+  (function() {
+    // 日付時刻用datetimepicker
+    $.datetimepicker.setLocale('ja');
+    $('.date').datetimepicker({
+      format : 'Y/m/d',
+      timepickerScrollbar: false,
+      scrollMonth: false,
+      scrollInput: false,
+      timepicker: false
+    });
+    $('.date').change(function() {
+      $scope.$apply(() => $scope.weight.newWeight.date = $(this).val());
+    });
+    // 折れ線グラフ
+    weight.list.createGraf();
+  })();
 }]);

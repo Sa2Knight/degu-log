@@ -1,1 +1,39 @@
-体重新規登録
+<h1>体重新規登録</h1>
+
+<form novalidate name="newWeightForm" ng-submit="weight.newWeight.create()">
+
+  <!-- 計測日 -->
+  <div class="form-group">
+    <label>計測日</label>
+    <span class="error" ng-show="newWeightForm.$submitted && newWeightForm.date.$error.required">(※入力必須です)</span>
+    <span class="error" ng-show="newWeightForm.$submitted && newWeightForm.date.$error.pattern">(※計測日のフォーマットが正しくありません)</span>
+    <div class="input-group">
+      <input type="text" class="form-control date" name="date" ng-model="weight.newWeight.date" ng-pattern="/^\d{4}/\d{2}/\d{2}$/" required>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    </div>
+  </div>
+
+  <!-- 体重(パズー) -->
+  <div class="form-group">
+    <label>パズー(g)</label>
+    <span class="error" ng-show="newWeightForm.$submitted && newWeightForm.pazoo.$error.required">(※入力必須です)</span>
+    <span class="error" ng-show="newWeightForm.$submitted && newWeightForm.pazoo.$error.min">(※体重は100g以上にしてください)</span>
+    <span class="error" ng-show="newWeightForm.$submitted && newWeightForm.pazoo.$error.max">(※体重は300g以下にしてください)</span>
+    <input type="number" class="form-control" name="pazoo" step="0.1" ng-model="weight.newWeight.pazoo" min="100" max="300" required>
+  </div>
+
+  <!-- 体重(メイ) -->
+  <div class="form-group">
+    <label>メイ(g)</label>
+    <span class="error" ng-show="newWeightForm.$submitted && newWeightForm.may.$error.required">(※入力必須です)</span>
+    <span class="error" ng-show="newWeightForm.$submitted && newWeightForm.may.$error.min">(※体重は100g以上にしてください)</span>
+    <span class="error" ng-show="newWeightForm.$submitted && newWeightForm.may.$error.max">(※体重は300g以下にしてください)</span>
+    <input type="number" class="form-control" name="may" step="0.1" ng-model="weight.newWeight.may" min="100" max="300" required>
+  </div>
+
+  <!-- Submit -->
+  <div class="form-group">
+    <button type="submit" class="form-control btn-primary">登録</button>
+  </div>
+
+</form>

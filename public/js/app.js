@@ -28,7 +28,8 @@ degulog.config(function($routeProvider) {
     redirectTo: 'weight/list'
   })
   .when('/weight/new' , {
-    templateUrl: 'views/weight/new.html'
+    templateUrl: 'views/weight/new.html',
+    controller: 'weightController as weight'
   })
   .when('/weight/list' , {
     templateUrl: 'views/weight/list.html',
