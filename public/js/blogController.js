@@ -71,7 +71,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , funct
   };
 
   /*
-   * UI生成
+   * Init
    */
   (function() {
     // ファイル添付UI
