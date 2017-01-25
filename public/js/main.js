@@ -15,12 +15,12 @@ degulog.controller('MainController', ['$scope', '$location' , function($scope , 
   $scope.sideMenus = {
     '/blog': [
       {label: '記事一覧' ,      url: '#/blog/posts' ,      icon: 'fa-list'},
-      {label: '新規投稿' ,      url: '#/blog/create' ,       icon: 'fa-plus-circle'},
+      {label: '新規・編集' ,      url: '#/blog/create' ,       icon: 'fa-plus-circle'},
       {label: 'カレンダー' ,    url: '#/blog/calendar' ,  icon: 'fa-calendar'},
     ],
     '/weight': [
       {label: '記録一覧' ,      url: '#/weight/history' ,    icon: 'fa-list'},
-      {label: '新規登録' ,      url: '#/weight/create' ,     icon: 'fa-plus-circle'},
+      {label: '新規・編集' ,      url: '#/weight/create' ,     icon: 'fa-plus-circle'},
       {label: '体重遷移' ,      url: '#/weight/graf' ,    icon: 'fa-line-chart'},
     ],
     '/bought': [
@@ -29,7 +29,7 @@ degulog.controller('MainController', ['$scope', '$location' , function($scope , 
     ],
     '/photo': [
       {label: '写真一覧' ,      url: '#/photo/collection' ,    icon: 'fa-picture-o'},
-      {label: '新規投稿' ,      url: '#/photo/create' ,    icon: 'fa-picture-o'},
+      {label: '新規・編集' ,      url: '#/photo/create' ,    icon: 'fa-picture-o'},
       {label: 'タグ管理' ,      url: '#/photo/tag' ,     icon: 'fa-tags'},
     ]
   };
