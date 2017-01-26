@@ -1,4 +1,4 @@
-degulog.controller('weightController' , ['$scope' , '$routeParams', 'util' , function($scope , $routeParams , util) {
+degulog.controller('weightController' , ['$scope' , '$routeParams', 'weight', 'util' , function($scope , $routeParams , weightModel , util) {
 
   let weight = this;
   weight.graf = {};
@@ -7,22 +7,8 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'util' , fun
    * 体重記録一覧
    */
   weight.history = {
-    list: [
-      { id: 'hogehoge1', date: '2017/01/21', pazoo: 213, may: 219 },
-      { id: 'hogehoge2', date: '2017/01/13', pazoo: 208, may: 206 },
-      { id: 'hogehoge3', date: '2017/01/06', pazoo: 214, may: 220 },
-      { id: 'hogehoge4', date: '2016/12/22', pazoo: 208, may: 228 },
-      { id: 'hogehoge5', date: '2016/12/10', pazoo: 207, may: 219 },
-      { id: 'hogehoge6', date: '2016/12/04', pazoo: 210, may: 220 },
-      { id: 'hogehoge7', date: '2016/11/19', pazoo: 209, may: 222 },
-      { id: 'hogehoge8', date: '2016/10/14', pazoo: 216, may: 204 },
-      { id: 'hogehoge9', date: '2016/10/08', pazoo: 224, may: 198 },
-      { id: 'hogehoge10', date: '2016/09/28', pazoo: 216, may: 201 },
-      { id: 'hogehoge11', date: '2016/09/23', pazoo: 217, may: 207 },
-    ],
-    remove: function(index) {
-      this.list.splice(index , 1);
-    }
+    list: weightModel.all(),
+    remove: (id) => weightModel.remove(id),
   };
 
   /*
