@@ -20,6 +20,10 @@ degulog.config(function($routeProvider) {
     templateUrl: 'views/blog/posts.html',
     controller: 'blogController as blog'
   })
+  .when('/blog/posts/:id' , {
+    templateUrl: 'views/blog/edit.html',
+    controller: 'blogController as blog'
+  })
   .when('/blog/calendar' , {
     templateUrl: 'views/blog/calendar.html',
     controller: 'blogController as blog'
@@ -89,7 +93,9 @@ degulog.factory('blog' , [function() {
     { id: 'hogehoge10', datetime: '2017/01/07 15:41', title: 'ダミータイトル10', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
   ];
   return {
-    get: () => list,
+    all: () => list,
+    get: (id) => list.find((e) => e.id === id),
+    emptyPost: () => {{datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')}},
     append: function(newPost) {
       list.push({
         id:       new Date().getTime().toString(),
@@ -97,6 +103,15 @@ degulog.factory('blog' , [function() {
         title:    newPost.title,
         body:     newPost.body
       });
+    },
+    update: function(updatedPost) {
+      let targetIndex = list.findIndex((e) => e.id === updatedPost.id);
+      list[targetIndex] = {
+        id:       updatedPost.id,
+        datetime: updatedPost.datetime,
+        title:    updatedPost.title,
+        body:     updatedPost.body
+      };
     },
     remove: function(id) {
       let targetIndex = list.findIndex((e) => e.id === id);

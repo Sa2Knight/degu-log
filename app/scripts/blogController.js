@@ -1,4 +1,4 @@
-degulog.controller('blogController' , ['$scope' , 'blog' , 'util' , function($scope , blogModel , util) {
+degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blog' , 'util' , function($scope , $routeParams , blogModel , util) {
 
   let blog = this;
 
@@ -6,7 +6,7 @@ degulog.controller('blogController' , ['$scope' , 'blog' , 'util' , function($sc
    * 投稿一覧
    */
   blog.posts = {
-    list: blogModel.get(),
+    list: blogModel.all(),
     remove: (id) => blogModel.remove(id),
   }
 
@@ -14,20 +14,31 @@ degulog.controller('blogController' , ['$scope' , 'blog' , 'util' , function($sc
    * ブログ新規投稿・編集
    */
   blog.edit = {
-    post: {datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')},
+    post: (function() {
+      if ($routeParams.id) {
+        return blogModel.get($routeParams.id);
+      } else {
+        return {datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')}
+      }
+    })(),
     success: false,
     submit: function() {
-      if ($scope.postForm.$valid) {
+      if ($scope.postForm.$invalid) {
+        this.success = false;
+        return;
+      }
+      if (this.post.id) {
+        blogModel.update(this.post);
+      } else {
         blogModel.append(this.post);
         this.post.title = '';
         this.post.body = '';
-        this.success = true;
-        $scope.postForm.$submitted = false;
-      } else {
-        this.success = false;
       }
+      this.success = true;
+      $scope.postForm.$submitted = false;
     },
   };
+  blog.edit.headerText = $routeParams.id ? `【${blog.edit.post.title}】を編集` : '新規投稿',
 
   /*
    * カレンダー
