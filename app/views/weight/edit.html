@@ -2,6 +2,9 @@
 
 <form novalidate name="weightForm" ng-submit="weight.edit.submit()">
 
+  <!-- システムメッセージ -->
+  <div class="system-msg" ng-show="weight.edit.success">投稿しました</div>
+
   <!-- 計測日 -->
   <div class="form-group">
     <label>計測日</label>

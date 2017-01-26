@@ -153,8 +153,15 @@ degulog.factory('weight' , [function() {
   return {
     all: () => history,
     get: (id) => history.find((h) => h.id === id),
+    append(newWeight) {
+      history.push({
+        id: new Date().getTime().toString(),
+        date:   newWeight.date,
+        pazoo:  newWeight.pazoo,
+        may:    newWeight.may,
+      });
+    },
     remove(id) {
-      console.log(id);
       let targetIndex = history.findIndex((h) => h.id === id);
       history.splice(targetIndex , 1);
     },

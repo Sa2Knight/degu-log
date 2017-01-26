@@ -16,10 +16,14 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'weight', 'u
    */
   weight.edit = {
     post: { date: util.formatDate(new Date() , 'YYYY/MM/DD') },
+    success: false,
     submit: function() {
-      if ($scope.weightForm.$valid) {
-        alert('POSTしました');
+      if ($scope.weightForm.$invalid) {
+        return;
       }
+      weightModel.append(this.post);
+      this.success = true;
+      $scope.weightForm.$submitted = false;
     },
   };
 
