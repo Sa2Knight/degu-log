@@ -46,12 +46,21 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blog' , 'uti
   blog.calendar = {
     year: 2017,
     month: 1,
-    events: [],
     show: function() {
+      events = [];
+      let posts = blogModel.getByMonth(this.year , this.month);
+      let reg = new RegExp('^[0-9]{4}/[0-9]{2}/([0-9]{2}) [0-9]{2}:[0-9]{2}$');
+      posts.forEach(function(post) {
+        let day = Number(post.datetime.match(reg)[1]);
+        events.push({
+          day: day,
+          text: post.title
+        });
+      });
       $('#mini-calendar').html('').miniCalendar({
         year: this.year,
         month: this.month,
-        events: this.events,
+        events: events,
       });
     },
     next: function() {
@@ -96,7 +105,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blog' , 'uti
       scrollInput: false,
     });
     $('.datetime').change(function() {
-      $apply(() => blog.edit.post.datetime = $(this).val());
+      $scope.$apply(() => blog.edit.post.datetime = $(this).val());
     });
     // カレンダーUI
     blog.calendar.show();

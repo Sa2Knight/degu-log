@@ -135,9 +135,10 @@
         }
 
         $(this.ele).find('#' + dateID).append(calendarLabel);
-        this.events[i].images.forEach(function(i) {
+        calendarLabel.append($('<p>').text(this.events[i].text));
+        /*this.events[i].images.forEach(function(i) {
           calendarLabel.append($('<img src="' + i + '">').prop('width' , '32'));
-        });
+        });*/
       }
     },
   };
