@@ -109,7 +109,7 @@ degulog.factory('blog' , [function() {
       let reg = new RegExp(`^${year}/0?${month}/[0-9]{2} [0-9]{2}:[0-9]{2}$`);
       return list.filter((e) => e.datetime.match(reg));
     },
-    append: function(newPost) {
+    append(newPost) {
       list.push({
         id:       new Date().getTime().toString(),
         datetime: newPost.datetime,
@@ -117,7 +117,7 @@ degulog.factory('blog' , [function() {
         body:     newPost.body
       });
     },
-    update: function(updatedPost) {
+    update(updatedPost) {
       let targetIndex = list.findIndex((e) => e.id === updatedPost.id);
       list[targetIndex] = {
         id:       updatedPost.id,
@@ -126,7 +126,7 @@ degulog.factory('blog' , [function() {
         body:     updatedPost.body
       };
     },
-    remove: function(id) {
+    remove(id) {
       let targetIndex = list.findIndex((e) => e.id === id);
       list.splice(targetIndex , 1);
     },
