@@ -36,6 +36,10 @@ degulog.config(function($routeProvider) {
     templateUrl: 'views/weight/edit.html',
     controller: 'weightController as weight'
   })
+  .when('/weight/create/:id' , {
+    templateUrl: 'views/weight/edit.html',
+    controller: 'weightController as weight'
+  })
   .when('/weight/history' , {
     templateUrl: 'views/weight/history.html',
     controller: 'weightController as weight'
@@ -160,6 +164,15 @@ degulog.factory('weight' , [function() {
         pazoo:  newWeight.pazoo,
         may:    newWeight.may,
       });
+    },
+    update(newWeight) {
+      let targetIndex = history.findIndex((e) => e.id === newWeight.id);
+      history[targetIndex] = {
+        id:     newWeight.id,
+        date:   newWeight.date,
+        pazoo:  newWeight.pazoo,
+        may:    newWeight.may,
+      };
     },
     remove(id) {
       let targetIndex = history.findIndex((h) => h.id === id);

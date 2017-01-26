@@ -15,17 +15,30 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'weight', 'u
    * 体重の新規登録・編集
    */
   weight.edit = {
-    post: { date: util.formatDate(new Date() , 'YYYY/MM/DD') },
+    post: (function() {
+      if ($routeParams.id) {
+        return weightModel.get($routeParams.id);
+      } else {
+        return {date: util.formatDate(new Date() , 'YYYY/MM/DD') };
+      }
+    })(),
     success: false,
     submit: function() {
       if ($scope.weightForm.$invalid) {
         return;
       }
-      weightModel.append(this.post);
+      if (this.post.id) {
+        weightModel.update(this.post);
+      } else {
+        weightModel.append(this.post);
+        this.post.pazoo = '';
+        this.post.may = '';
+      }
       this.success = true;
       $scope.weightForm.$submitted = false;
     },
   };
+  weight.edit.headerText = $routeParams.id ? `【${weight.edit.post.date}】を編集` : '新規登録',
 
   /*
    * グラフ出力
