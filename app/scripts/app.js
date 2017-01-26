@@ -16,12 +16,12 @@ degulog.config(function($routeProvider) {
     templateUrl: 'views/blog/edit.html',
     controller: 'blogController as blog'
   })
-  .when('/blog/posts' , {
-    templateUrl: 'views/blog/posts.html',
+  .when('/blog/create/:id' , {
+    templateUrl: 'views/blog/edit.html',
     controller: 'blogController as blog'
   })
-  .when('/blog/posts/:id' , {
-    templateUrl: 'views/blog/edit.html',
+  .when('/blog/posts' , {
+    templateUrl: 'views/blog/posts.html',
     controller: 'blogController as blog'
   })
   .when('/blog/calendar' , {

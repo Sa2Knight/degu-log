@@ -1,7 +1,8 @@
 degulog.controller('MainController', ['$scope', '$location' , function($scope , $location) {
 
-  /* ベースURLを取得 */
+  /* URLを取得 */
   let baseURL = () => ('/' + $location.path().split('/')[1]);
+  let subURL = () => $location.path().split('/').slice(1,3).join('/');
 
   /* メニューごとのラベルを定義 */
   $scope.menus = {
@@ -14,23 +15,23 @@ degulog.controller('MainController', ['$scope', '$location' , function($scope , 
   /* メニューごとのサブメニューを定義 */
   $scope.sideMenus = {
     '/blog': [
-      {label: '記事一覧' ,      url: '#/blog/posts' ,      icon: 'fa-list'},
-      {label: '新規・編集' ,      url: '#/blog/create' ,       icon: 'fa-plus-circle'},
-      {label: 'カレンダー' ,    url: '#/blog/calendar' ,  icon: 'fa-calendar'},
+      {label: '記事一覧' ,      url: '#/blog/posts' ,       icon: 'fa-list'},
+      {label: '新規・編集' ,    url: '#/blog/create' ,      icon: 'fa-plus-circle'},
+      {label: 'カレンダー' ,    url: '#/blog/calendar' ,    icon: 'fa-calendar'},
     ],
     '/weight': [
-      {label: '記録一覧' ,      url: '#/weight/history' ,    icon: 'fa-list'},
-      {label: '新規・編集' ,      url: '#/weight/create' ,     icon: 'fa-plus-circle'},
-      {label: '体重遷移' ,      url: '#/weight/graf' ,    icon: 'fa-line-chart'},
+      {label: '記録一覧' ,      url: '#/weight/history' ,   icon: 'fa-list'},
+      {label: '新規・編集' ,    url: '#/weight/create' ,    icon: 'fa-plus-circle'},
+      {label: '体重遷移' ,      url: '#/weight/graf' ,      icon: 'fa-line-chart'},
     ],
     '/bought': [
-      {label: '購入記録' ,      url: '#/bought/history' ,    icon: 'fa-list'},
-      {label: '支出記録' ,      url: '#/bought/graf' ,    icon: 'fa-bar-chart'},
+      {label: '購入記録' ,      url: '#/bought/history' ,   icon: 'fa-list'},
+      {label: '支出記録' ,      url: '#/bought/graf' ,      icon: 'fa-bar-chart'},
     ],
     '/photo': [
-      {label: '写真一覧' ,      url: '#/photo/collection' ,    icon: 'fa-picture-o'},
-      {label: '新規・編集' ,      url: '#/photo/create' ,    icon: 'fa-picture-o'},
-      {label: 'タグ管理' ,      url: '#/photo/tag' ,     icon: 'fa-tags'},
+      {label: '写真一覧' ,      url: '#/photo/collection' , icon: 'fa-picture-o'},
+      {label: '新規・編集' ,    url: '#/photo/create' ,     icon: 'fa-picture-o'},
+      {label: 'タグ管理' ,      url: '#/photo/tag' ,        icon: 'fa-tags'},
     ]
   };
 
@@ -41,9 +42,8 @@ degulog.controller('MainController', ['$scope', '$location' , function($scope , 
   $scope.isActiveMenu = (viewLocation) => (viewLocation === baseURL());
 
   /* 指定したサイドメニューが現在選択中か？ */
-  $scope.isActiveSideMenu = (viewLocation) => ('#' + $location.path()) === viewLocation;
+  $scope.isActiveSideMenu = (viewLocation) => ('#/' + subURL()) === viewLocation;
 
   /* メニューに応じたサブメニューのリストを取得 */
   $scope.getSideMenu = () => $scope.sideMenus[baseURL()];
-
 }]);
