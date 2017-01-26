@@ -2,6 +2,9 @@
 
 <form novalidate name="postForm" ng-submit="blog.edit.submit()">
 
+  <!-- システムメッセージ -->
+  <div class="system-msg" ng-show="blog.edit.success">投稿に成功しました</div>
+
   <!-- 投稿日 -->
   <div class="form-group">
     <label>投稿日</label>

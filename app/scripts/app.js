@@ -1,10 +1,11 @@
 /*
-  AngularJS側のコアファイル
+  AngularJS側のコアモジュール
 */
-
 degulog = angular.module('degulog', ['ngRoute' , 'ngAnimate']);
 
-/* ルーティング */
+/*
+  [ルーティング] SPAルーティング
+*/
 degulog.config(function($routeProvider) {
   /* ブログ */
   $routeProvider
@@ -71,7 +72,38 @@ degulog.config(function($routeProvider) {
   })
 });
 
-/* 汎用メソッド */
+/*
+  [モデル] 飼育日記モデル
+*/
+degulog.factory('blog' , [function() {
+  let list = [
+    { id: 'hogehoge01', datetime: '2017/01/07 15:41', title: 'ダミータイトル01', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
+    { id: 'hogehoge02', datetime: '2017/01/07 15:41', title: 'ダミータイトル02', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
+    { id: 'hogehoge03', datetime: '2017/01/07 15:41', title: 'ダミータイトル03', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
+    { id: 'hogehoge04', datetime: '2017/01/07 15:41', title: 'ダミータイトル04', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
+    { id: 'hogehoge05', datetime: '2017/01/07 15:41', title: 'ダミータイトル05', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
+    { id: 'hogehoge06', datetime: '2017/01/07 15:41', title: 'ダミータイトル06', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
+    { id: 'hogehoge07', datetime: '2017/01/07 15:41', title: 'ダミータイトル07', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
+    { id: 'hogehoge08', datetime: '2017/01/07 15:41', title: 'ダミータイトル08', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
+    { id: 'hogehoge09', datetime: '2017/01/07 15:41', title: 'ダミータイトル09', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
+    { id: 'hogehoge10', datetime: '2017/01/07 15:41', title: 'ダミータイトル10', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
+  ];
+  return {
+    get: () => list,
+    append: function(newPost) {
+      list.push({
+        id:       new Date().getTime().toString(),
+        datetime: newPost.datetime,
+        title:    newPost.title,
+        body:     newPost.body
+      });
+    },
+  };
+}]);
+
+/*
+  [Util] 汎用メソッド
+*/
 degulog.factory('util' , [function() {
   return {
     /* 時刻を特定のフォーマットに変換する */

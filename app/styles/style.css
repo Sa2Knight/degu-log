@@ -25,6 +25,10 @@ table.center td {
 form span.error {
   color: #A00;
 }
+.system-msg {
+  text-align: center;
+  color: #A00;
+}
 
 /*------------------------
  * Header

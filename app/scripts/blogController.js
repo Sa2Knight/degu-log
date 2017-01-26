@@ -1,36 +1,32 @@
-degulog.controller('blogController' , ['$scope' , '$routeParams', 'util' , function($scope , $routeParams , util) {
+degulog.controller('blogController' , ['$scope' , 'blog' , 'util' , function($scope , blogModel , util) {
 
   let blog = this;
+
+  /*
+   * 投稿一覧
+   */
+  blog.posts = {
+    list: blogModel.get()
+  }
 
   /*
    * ブログ新規投稿・編集
    */
   blog.edit = {
     post: {datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')},
+    success: false,
     submit: function() {
       if ($scope.postForm.$valid) {
-        alert('POSTしました');
+        blogModel.append(this.post);
+        this.post.title = '';
+        this.post.body = '';
+        this.success = true;
+        $scope.postForm.$submitted = false;
+      } else {
+        this.success = false;
       }
     },
   };
-
-  /*
-   * 投稿一覧
-   */
-  blog.posts = {
-    list: [
-      { id: 'hogehoge1', datetime: '2017/01/07 15:41', title: 'ダミータイトル1', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
-      { id: 'hogehoge2', datetime: '2017/01/07 15:41', title: 'ダミータイトル2', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
-      { id: 'hogehoge3', datetime: '2017/01/07 15:41', title: 'ダミータイトル3', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
-      { id: 'hogehoge4', datetime: '2017/01/07 15:41', title: 'ダミータイトル4', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
-      { id: 'hogehoge5', datetime: '2017/01/07 15:41', title: 'ダミータイトル5', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
-      { id: 'hogehoge6', datetime: '2017/01/07 15:41', title: 'ダミータイトル6', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
-      { id: 'hogehoge7', datetime: '2017/01/07 15:41', title: 'ダミータイトル7', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
-      { id: 'hogehoge8', datetime: '2017/01/07 15:41', title: 'ダミータイトル8', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
-      { id: 'hogehoge9', datetime: '2017/01/07 15:41', title: 'ダミータイトル9', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
-      { id: 'hogehoge10', datetime: '2017/01/07 15:41', title: 'ダミータイトル10', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
-    ],
-  }
 
   /*
    * カレンダー
