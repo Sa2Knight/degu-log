@@ -16,6 +16,8 @@
       <th>本文</th>
       <th>投稿日時</th>
       <th>サムネイル</th>
+      <th>編集</th>
+      <th>削除</th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +26,8 @@
       <td>{{ post.body }}</td>
       <td>{{ post.datetime }}</td>
       <td></td>
+      <td><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+      <td><button class="btn btn-primary btn-sm" ng-click="blog.posts.remove(post.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
     </tr>
   </tbody>
 </table>

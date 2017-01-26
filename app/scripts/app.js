@@ -98,6 +98,10 @@ degulog.factory('blog' , [function() {
         body:     newPost.body
       });
     },
+    remove: function(id) {
+      let targetIndex = list.findIndex((e) => e.id === id);
+      list.splice(targetIndex , 1);
+    },
   };
 }]);
 

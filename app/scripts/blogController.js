@@ -6,7 +6,8 @@ degulog.controller('blogController' , ['$scope' , 'blog' , 'util' , function($sc
    * 投稿一覧
    */
   blog.posts = {
-    list: blogModel.get()
+    list: blogModel.get(),
+    remove: (id) => blogModel.remove(id),
   }
 
   /*
