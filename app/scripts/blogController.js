@@ -47,7 +47,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blog' , 'uti
     year: 2017,
     month: 1,
     show: function() {
-      events = [];
+      let events = [];
       let posts = blogModel.getByMonth(this.year , this.month);
       let reg = new RegExp('^[0-9]{4}/[0-9]{2}/([0-9]{2}) [0-9]{2}:[0-9]{2}$');
       posts.forEach(function(post) {
