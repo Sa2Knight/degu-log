@@ -48,7 +48,7 @@
         <!-- サイドメニュー -->
         <div ng-controller="MainController" class="col-sm-2 side-menu">
           <div class="panel panel-default">
-            <div class="panel-heading">{{ activeMenuTitle() }}</div>
+            <div id="sub-menu-title" class="panel-heading">{{ activeMenuTitle() }}</div>
             <ul class="nav nav-pills nav-stacked">
               <li ng-repeat="m in getSideMenu()" ng-class="{ active: isActiveSideMenu('{{m.url}}') }">
                 <a href="{{m.url}}">
