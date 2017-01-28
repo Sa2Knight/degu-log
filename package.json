@@ -1,0 +1,31 @@
+{
+  "name": "degulog",
+  "version": "1.0.0",
+  "description": "* 個人用のデグー飼育支援アプリ * MEANスタックによる開発の練習が主な目的",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
+    "gulp-babel": "^6.1.2",
+    "mongodb": "^2.2.21",
+    "phantom": "^4.0.0",
+    "should": "^11.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sa2Knight/degu-log.git"
+  },
+  "author": "s.sasaki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sa2Knight/degu-log/issues"
+  },
+  "homepage": "https://github.com/Sa2Knight/degu-log#readme"
+}

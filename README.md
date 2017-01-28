@@ -35,11 +35,7 @@
 pull後、以下の手順でNode環境を構築
 
 1. http://tomosoft.jp/design/?p=7525 に沿ってNode環境を構築
-2. 以下の追加nodeモジュールを導入
 
 ```lang=bash
-$ npm install express
-$ npm install ejs
-$ npm install mongodb
-$ npm install nodemon -g
+$ sudo npm install
 ```
