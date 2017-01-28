@@ -1,7 +1,7 @@
 /*
   AngularJS側のコアモジュール
 */
-let degulog = angular.module('degulog', ['ngRoute' , 'ngAnimate']);
+let degulog = angular.module('degulog', ['ngRoute']);
 
 /*
   [ルーティング] SPAルーティング
@@ -114,7 +114,7 @@ degulog.factory('blog' , [function() {
       return list.filter((e) => e.datetime.match(reg));
     },
     append(newPost) {
-      list.push({
+      list.unshift({
         id:       new Date().getTime().toString(),
         datetime: newPost.datetime,
         title:    newPost.title,
@@ -159,7 +159,7 @@ degulog.factory('weight' , [function() {
     all: () => history,
     get: (id) => history.find((h) => h.id === id),
     append(newWeight) {
-      history.push({
+      history.unshift({
         id: new Date().getTime().toString(),
         date:   newWeight.date,
         pazoo:  newWeight.pazoo,
