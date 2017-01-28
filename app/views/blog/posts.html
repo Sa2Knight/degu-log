@@ -9,7 +9,7 @@
     </div>
   </div>
 </form>
-<table class='table table-striped center'>
+<table class='blog-posts table table-striped center'>
   <thead>
     <tr>
       <th>タイトル</th>
@@ -22,12 +22,20 @@
   </thead>
   <tbody>
     <tr ng-repeat="post in blog.posts.list">
-      <td>{{ post.title }}</td>
-      <td>{{ post.body }}</td>
-      <td>{{ post.datetime }}</td>
-      <td></td>
-      <td><a ng-href="#/blog/create/{{post.id}}"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a></td>
-      <td><button class="btn btn-primary btn-sm" ng-click="blog.posts.remove(post.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+      <td class="post-title" id="post-title-{{$index}}">{{ post.title }}</td>
+      <td class="post-body"  id="post-body-{{$index}}">{{ post.body }}</td>
+      <td class="post-datetime"  id="post-datetime-{{$index}}">{{ post.datetime }}</td>
+      <td class="post-thumbnail" id="post-thumbnail-{{$index}}"></td>
+      <td class="post-edit-btn">
+        <a ng-href="#/blog/create/{{post.id}}">
+          <button class="btn btn-primary btn-sm" id="post-edit-btn-{{$index}}"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+        </a>
+      </td>
+      <td class="post-delete-btn">
+        <button class="btn btn-primary btn-sm" id="post-delete-btn-{{$index}}" ng-click="blog.posts.remove(post.id)">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
