@@ -22,7 +22,7 @@ table.center th {
 table.center td {
   text-align: center;
 }
-form span.error {
+form .error {
   color: #A00;
 }
 .system-msg {

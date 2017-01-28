@@ -3,13 +3,15 @@
 <form novalidate name="postForm" ng-submit="blog.edit.submit()">
 
   <!-- システムメッセージ -->
-  <div class="system-msg" ng-show="blog.edit.success">投稿に成功しました</div>
+  <div id="success-msg" class="system-msg" ng-show="blog.edit.success">投稿に成功しました</div>
 
   <!-- 投稿日 -->
   <div class="form-group">
     <label>投稿日</label>
-    <span class="error" ng-show="postForm.$submitted && postForm.datetime.$error.required">(※入力必須です)</span>
-    <span class="error" ng-show="postForm.$submitted && postForm.datetime.$error.pattern">(※日時のフォーマットが正しくありません)</span>
+    <div class="error" ng-show="postForm.$submitted">
+      <span id="datetime-require-error" ng-show="postForm.datetime.$error.required">(※投稿日は入力必須です)</span>
+      <span id="datetime-format-error" ng-show="postForm.datetime.$error.pattern">(※日時のフォーマットが正しくありません)</span>
+    </div>
     <div class="input-group">
       <input type="text" class="form-control datetime" name="datetime" ng-model="blog.edit.post.datetime" ng-pattern="/^\d{4}/\d{2}/\d{2} \d{2}:\d{2}$/" required>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -19,8 +21,10 @@
   <!-- タイトル -->
   <div class="form-group">
     <label>タイトル</label>
-    <span class="error" ng-show="postForm.$submitted && postForm.title.$error.required">(※入力必須です)</span>
-    <span class="error" ng-show="postForm.$submitted && postForm.title.$error.maxlength">(※18文字以内で入力してください)</span>
+    <div class="error" ng-show="postForm.$submitted">
+      <span id="title-require-error" ng-show="postForm.title.$error.required">(※タイトルは入力必須です)</span>
+      <span id="title-length-error" ng-show="postForm.title.$error.maxlength">(※18文字以内で入力してください)</span>
+    </div>
     <input type="text" class="form-control" name="title" placeholder="タイトルを入力してください" ng-model="blog.edit.post.title" required ng-maxlength="18">
   </div>
 
