@@ -1,9 +1,9 @@
 <h1>記事一覧</h1>
-<form>
+<form name="postSearchForm">
   <div class="row">
     <div class="col-sm-5">
       <div class="input-group">
-        <input type="text" class="form-control" ng-model="blog.posts.searchWord" placeholder="フリーワード検索">
+        <input type="text" class="form-control" ng-model="blog.posts.searchWord" name="searchWord" placeholder="フリーワード検索">
         <span class="input-group-btn"><button class="form-control btn btn-primary">検索</button></span>
       </div>
     </div>
@@ -21,7 +21,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="post in blog.posts.list">
+    <tr ng-repeat="post in blog.posts.list | filter:blog.posts.searchWord">
       <td class="post-title" id="post-title-{{$index}}">{{ post.title }}</td>
       <td class="post-body"  id="post-body-{{$index}}">{{ post.body }}</td>
       <td class="post-datetime"  id="post-datetime-{{$index}}">{{ post.datetime }}</td>

@@ -18,6 +18,12 @@ casper.test.begin('ブログ機能'  , function(test) {
     test.assertEquals(this.fetchText('#post-title-0') , 'ダミータイトル11' , '特定記事のタイトルが正しい');
     test.assertEquals(this.fetchText('#post-datetime-3') , '2016/12/08 15:41' , '特定記事の投稿日が正しい');
     test.assertEquals(this.fetchText('#post-body-5') , 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文' , '特定記事の本文が正しい');
+
+    test.comment('検索フォームによるフィルタリング');
+    this.fill('form[name=postSearchForm]' , { searchWord: 'ダミータイトル20'}, false);
+    test.assertEquals(this.fetchText('#post-title-0') , 'ダミータイトル20' , '検索条件に合致する記事が表示される');
+    test.assertNotExists('#post-title-1' , '検索条件に合致しない記事は表示されない');
+    this.fill('form[name=postSearchForm]' , { searchWord: ''}, false);
   });
 
   /* 記事一覧ページから記事の削除ができるか */
@@ -118,7 +124,6 @@ casper.test.begin('ブログ機能'  , function(test) {
 
   casper.run(function() {
     test.done();
-    this.capture('/vagrant/result.png');
   });
 
 });
