@@ -11,11 +11,19 @@
   </thead>
   <tbody>
     <tr ng-repeat="w in weight.history.list">
-      <td>{{w.date}}</td>
-      <td>{{w.pazoo}}</td>
-      <td>{{w.may}}</td>
-      <td><a ng-href="#/weight/create/{{w.id}}"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a></td>
-      <td><button class="btn btn-primary btn-sm" ng-click="weight.history.remove(w.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+      <td id="weight-date-{{$index}}">{{w.date}}</td>
+      <td id="weight-pazoo-{{$index}}">{{w.pazoo}}</td>
+      <td id="weight-may-{{$index}}">{{w.may}}</td>
+      <td>
+        <a ng-href="#/weight/create/{{w.id}}">
+          <button id="weight-edit-btn-{{$index}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+        </a>
+      </td>
+      <td>
+        <button id="weight-remove-btn-{{$index}}" class="btn btn-primary btn-sm" ng-click="weight.history.remove(w.id)">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

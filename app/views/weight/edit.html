@@ -3,13 +3,15 @@
 <form novalidate name="weightForm" ng-submit="weight.edit.submit()">
 
   <!-- システムメッセージ -->
-  <div class="system-msg" ng-show="weight.edit.success">投稿しました</div>
+  <div id="success-msg" class="system-msg" ng-show="weight.edit.success">投稿しました</div>
 
   <!-- 計測日 -->
   <div class="form-group">
     <label>計測日</label>
-    <span class="error" ng-show="weightForm.$submitted && weightForm.date.$error.required">(※入力必須です)</span>
-    <span class="error" ng-show="weightForm.$submitted && weightForm.date.$error.pattern">(※計測日のフォーマットが正しくありません)</span>
+    <div class="error" ng-show="weightForm.$submitted">
+      <span id="date-require-error" ng-show="weightForm.date.$error.required">(※入力必須です)</span>
+      <span id="date-format-error" ng-show="weightForm.date.$error.pattern">(※計測日のフォーマットが正しくありません)</span>
+    </div>
     <div class="input-group">
       <input type="text" class="form-control date" name="date" ng-model="weight.edit.post.date" ng-pattern="/^\d{4}/\d{2}/\d{2}$/" required>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -19,18 +21,22 @@
   <!-- 体重(パズー) -->
   <div class="form-group">
     <label>パズー(g)</label>
-    <span class="error" ng-show="weightForm.$submitted && weightForm.pazoo.$error.required">(※入力必須です)</span>
-    <span class="error" ng-show="weightForm.$submitted && weightForm.pazoo.$error.min">(※体重は100g以上にしてください)</span>
-    <span class="error" ng-show="weightForm.$submitted && weightForm.pazoo.$error.max">(※体重は300g以下にしてください)</span>
+    <div class="error" ng-show="weightForm.$submitted">
+      <span id="pazoo-require-error" ng-show="weightForm.pazoo.$error.required">(※入力必須です)</span>
+      <span id="pazoo-min-error" ng-show="weightForm.pazoo.$error.min">(※体重は100g以上にしてください)</span>
+      <span id="pazoo-max-error" ng-show="weightForm.pazoo.$error.max">(※体重は300g以下にしてください)</span>
+    </div>
     <input type="number" class="form-control" name="pazoo" step="0.1" ng-model="weight.edit.post.pazoo" min="100" max="300" required>
   </div>
 
   <!-- 体重(メイ) -->
   <div class="form-group">
     <label>メイ(g)</label>
-    <span class="error" ng-show="weightForm.$submitted && weightForm.may.$error.required">(※入力必須です)</span>
-    <span class="error" ng-show="weightForm.$submitted && weightForm.may.$error.min">(※体重は100g以上にしてください)</span>
-    <span class="error" ng-show="weightForm.$submitted && weightForm.may.$error.max">(※体重は300g以下にしてください)</span>
+    <div class="error" ng-show="weightForm.$submitted">
+      <span id="may-require-error" ng-show="weightForm.may.$error.required">(※入力必須です)</span>
+      <span id="may-min-error" ng-show="weightForm.may.$error.min">(※体重は100g以上にしてください)</span>
+      <span id="may-max-error" ng-show="weightForm.may.$error.max">(※体重は300g以下にしてください)</span>
+    </div>
     <input type="number" class="form-control" name="may" step="0.1" ng-model="weight.edit.post.may" min="100" max="300" required>
   </div>
 

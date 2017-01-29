@@ -3,11 +3,13 @@ var url = 'http://localhost:8086/#/blog/posts';
 casper.userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.74.9 (KHTML, like Gecko) Version/7.0.2 Safari/537.74.9");
 casper.test.begin('ブログ機能'  , function(test) {
 
+  /* ページにアクセスできるか */
   casper.start(url , function() {
     test.assertHttpStatus(200 , 'ステータスコードが200である');
     test.assertTitle('ぱずめいろぐ' , 'ページタイトルが正しく表示される');
   });
 
+  /* 記事一覧ページが表示されるか*/
   casper.then(function() {
     test.comment('記事一覧ページの表示内容');
     this.click('#side-menu-0');
@@ -16,13 +18,17 @@ casper.test.begin('ブログ機能'  , function(test) {
     test.assertEquals(this.fetchText('#post-title-0') , 'ダミータイトル11' , '特定記事のタイトルが正しい');
     test.assertEquals(this.fetchText('#post-datetime-3') , '2016/12/08 15:41' , '特定記事の投稿日が正しい');
     test.assertEquals(this.fetchText('#post-body-5') , 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文' , '特定記事の本文が正しい');
+  });
 
+  /* 記事一覧ページから記事の削除ができるか */
+  casper.then(function() {
     test.comment('記事一覧から記事の削除');
     this.click('#post-delete-btn-0');
     test.assertNotEquals(this.fetchText('#post-title-0') , 'ダミータイトル11' , '特定記事を削除できる');
     this.click('#post-edit-btn-0');
   });
 
+  /* 記事の編集ができるか */
   casper.then(function() {
     test.comment('記事投稿画面の表示内容');
     test.assertEquals(this.fetchText('article h1') , '【ダミータイトル12】を編集' , '記事編集画面の見出しが正しい');
@@ -34,15 +40,15 @@ casper.test.begin('ブログ機能'  , function(test) {
     this.fill('form[name=postForm]' , { datetime: '', title: '', body: '' }, false);
     test.assertAllVisible('error > span' , 'submit前はエラーメッセージが表示されない');
     this.fill('form[name=postForm]' , { datetime: '', title: '', body: '' }, true);
-    test.assertVisible('#datetime-require-error' , '投稿日未入力エラーが表示される')
-    test.assertVisible('#title-require-error' , 'タイトル未入力エラーが表示される')
+    test.assertVisible('#datetime-require-error' , '投稿日未入力エラーが表示される');
+    test.assertVisible('#title-require-error' , 'タイトル未入力エラーが表示される');
     this.fill('form[name=postForm]' , { datetime: 'hogehoge', title: '0123456789012345678', body: '' }, false);
     test.assertVisible('#title-length-error' , 'タイトル文字数エラーが表示される');
 
     test.comment('記事の編集');
-    test.assertNotVisible('#success-msg' , '投稿前は投稿完了メッセージが表示されない')
+    test.assertNotVisible('#success-msg' , '投稿前は投稿完了メッセージが表示されない');
     this.fill('form[name=postForm]' , { datetime: '1900/01/01 13:00', title: '更新後タイトル', body: '更新後本文' }, true);
-    test.assertVisible('#success-msg' , '投稿後は投稿完了メッセージが表示される')
+    test.assertVisible('#success-msg' , '投稿後は投稿完了メッセージが表示される');
     this.click('#side-menu-0');
     test.assertEquals(this.fetchText('#post-title-0') , '更新後タイトル' , '編集後のタイトルが正しい');
     test.assertEquals(this.fetchText('#post-datetime-0') , '1900/01/01 13:00' , '編集後の投稿日が正しい');
@@ -50,6 +56,7 @@ casper.test.begin('ブログ機能'  , function(test) {
     this.click('#side-menu-1');
   });
 
+  /* 記事の新規投稿ができるか */
   casper.then(function() {
     test.comment('新規記事投稿画面');
     test.assertEquals(this.fetchText('article h1') , '新規投稿' , '新規投稿画面の見出しが正しい');
@@ -59,9 +66,9 @@ casper.test.begin('ブログ機能'  , function(test) {
     test.assertEquals(this.fetchText('textarea[name=body]') , '' , '本文が空になっている');
 
     test.comment('新規記事を投稿する');
-    test.assertNotVisible('#success-msg' , '投稿前は投稿完了メッセージが表示されない')
+    test.assertNotVisible('#success-msg' , '投稿前は投稿完了メッセージが表示されない');
     this.fill('form[name=postForm]' , { datetime: '2000/01/01 13:00', title: '新規タイトル', body: '新規本文' }, true);
-    test.assertVisible('#success-msg' , '投稿後は投稿完了メッセージが表示される')
+    test.assertVisible('#success-msg' , '投稿後は投稿完了メッセージが表示される');
     this.click('#side-menu-0');
     test.assertEquals(this.fetchText('#post-title-0') , '新規タイトル' , '作成したタイトルが正しい');
     test.assertEquals(this.fetchText('#post-datetime-0') , '2000/01/01 13:00' , '作成した投稿日が正しい');
@@ -69,8 +76,8 @@ casper.test.begin('ブログ機能'  , function(test) {
     this.click('#side-menu-2');
   });
 
+  /* カレンダーが表示されるか */
   casper.then(function() {
-
     test.comment('カレンダー表示');
     var getMonth = function(opt) {
       var d = new Date();
@@ -91,6 +98,7 @@ casper.test.begin('ブログ機能'  , function(test) {
       }
       return year + '年' + month + '月';
     }
+    test.assertEquals(this.fetchText('article h1') , 'カレンダー' , 'カレンダー画面の見出しが正しい');
     test.assertEquals(this.fetchText('.calendar-year-month') , getMonth() , '現在年月が正しい');
     this.click('#next_month_btn');
     this.click('#next_month_btn');
