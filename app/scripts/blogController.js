@@ -6,7 +6,6 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blog' , 'uti
    * 投稿一覧
    */
   blog.posts = {
-    list: blogModel.all(),
     remove: (id) => blogModel.remove(id),
   }
 
@@ -109,6 +108,10 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blog' , 'uti
     });
     // カレンダーUI
     blog.calendar.show();
+    // 記事一覧を取得
+    if (! blog.posts.list) {
+      blogModel.load().then(() => blog.posts.list = blogModel.all());
+    }
   })();
 
 }]);
