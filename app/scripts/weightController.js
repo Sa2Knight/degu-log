@@ -7,7 +7,6 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'weight', 'u
    * 体重記録一覧
    */
   weight.history = {
-    list: weightModel.all(),
     remove: (id) => weightModel.remove(id),
   };
 
@@ -89,5 +88,9 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'weight', 'u
     });
     // 折れ線グラフ
     weight.graf.show();
+    // 体重記録一覧を取得
+    if (! weight.history.list) {
+      weightModel.load().then(() => weight.history.list = weightModel.all());
+    }
   })();
 }]);

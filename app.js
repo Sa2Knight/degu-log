@@ -26,6 +26,20 @@ var dummy = {
     { id: 'hogehoge09', datetime: '2017/01/27 15:41', title: 'ダミータイトル09', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
     { id: 'hogehoge10', datetime: '2017/01/31 15:41', title: 'ダミータイトル10', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
   ],
+  weights: [
+    { id: 'hogehoge12', date: '2017/01/27', pazoo: 190, may: 193 },
+    { id: 'hogehoge1',  date: '2017/01/21', pazoo: 213, may: 219 },
+    { id: 'hogehoge2',  date: '2017/01/13', pazoo: 208, may: 206 },
+    { id: 'hogehoge3',  date: '2017/01/06', pazoo: 214, may: 220 },
+    { id: 'hogehoge4',  date: '2016/12/22', pazoo: 208, may: 228 },
+    { id: 'hogehoge5',  date: '2016/12/10', pazoo: 207, may: 219 },
+    { id: 'hogehoge6',  date: '2016/12/04', pazoo: 210, may: 220 },
+    { id: 'hogehoge7',  date: '2016/11/19', pazoo: 209, may: 222 },
+    { id: 'hogehoge8',  date: '2016/10/14', pazoo: 216, may: 204 },
+    { id: 'hogehoge9',  date: '2016/10/08', pazoo: 224, may: 198 },
+    { id: 'hogehoge10', date: '2016/09/28', pazoo: 216, may: 201 },
+    { id: 'hogehoge11', date: '2016/09/23', pazoo: 217, may: 207 },
+  ],
 };
 
 var express = require('express');
@@ -52,6 +66,18 @@ app.get('/rest/blog/get' , function(req , res) {
 /* ブログ一覧を更新 */
 app.post('/rest/blog/post' , function(req , res) {
   dummy.blogs = req.body;
+  res.send('success');
+});
+
+/* 体重一覧を取得 */
+app.get('/rest/weight/get' , function(req , res) {
+  res.contentType('application/json');
+  res.send(JSON.stringify(dummy.weights));
+});
+
+/* ブログ一覧を更新 */
+app.post('/rest/weight/post' , function(req , res) {
+  dummy.weights = req.body;
   res.send('success');
 });
 

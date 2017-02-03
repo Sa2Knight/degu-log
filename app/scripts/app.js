@@ -137,20 +137,7 @@ degulog.factory('blog' , ['$http' , function($http) {
   [モデル] 体重
 */
 degulog.factory('weight' , [function() {
-  let history = [
-      { id: 'hogehoge12', date: '2017/01/27', pazoo: 190, may: 193 },
-      { id: 'hogehoge1',  date: '2017/01/21', pazoo: 213, may: 219 },
-      { id: 'hogehoge2',  date: '2017/01/13', pazoo: 208, may: 206 },
-      { id: 'hogehoge3',  date: '2017/01/06', pazoo: 214, may: 220 },
-      { id: 'hogehoge4',  date: '2016/12/22', pazoo: 208, may: 228 },
-      { id: 'hogehoge5',  date: '2016/12/10', pazoo: 207, may: 219 },
-      { id: 'hogehoge6',  date: '2016/12/04', pazoo: 210, may: 220 },
-      { id: 'hogehoge7',  date: '2016/11/19', pazoo: 209, may: 222 },
-      { id: 'hogehoge8',  date: '2016/10/14', pazoo: 216, may: 204 },
-      { id: 'hogehoge9',  date: '2016/10/08', pazoo: 224, may: 198 },
-      { id: 'hogehoge10', date: '2016/09/28', pazoo: 216, may: 201 },
-      { id: 'hogehoge11', date: '2016/09/23', pazoo: 217, may: 207 },
-  ]
+  let history = [];
   return {
     all: () => history,
     get: (id) => history.find((h) => h.id === id),
@@ -162,6 +149,20 @@ degulog.factory('weight' , [function() {
         may:    newWeight.may,
       });
     },
+    load() {
+      return $http.get('/rest/weight/get').success(function(data, status, headers, config) {
+        history = data;
+      });
+    },
+    upload() {
+      console.log(list);
+      $http({
+        url: "/rest/weight/post",
+        method: "POST",
+        data: history,
+        headers: {'Content-Type': 'application/json; charset=utf-8'}
+      });
+    },
     update(newWeight) {
       let targetIndex = history.findIndex((e) => e.id === newWeight.id);
       history[targetIndex] = {
@@ -170,10 +171,12 @@ degulog.factory('weight' , [function() {
         pazoo:  newWeight.pazoo,
         may:    newWeight.may,
       };
+      this.upload();
     },
     remove(id) {
       let targetIndex = history.findIndex((h) => h.id === id);
       history.splice(targetIndex , 1);
+      this.upload();
     },
   };
 }]);
