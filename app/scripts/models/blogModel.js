@@ -1,7 +1,7 @@
 /*
   [モデル] 飼育日記モデル
 */
-degulog.factory('blog' , ['$http' , function($http) {
+degulog.factory('blogModel' , ['$http' , function($http) {
   let list = [];
   return {
     all: () => list,

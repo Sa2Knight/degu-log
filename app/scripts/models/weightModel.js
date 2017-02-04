@@ -1,7 +1,7 @@
 /*
   [モデル] 体重
 */
-degulog.factory('weight' , ['$http' , function($http) {
+degulog.factory('weightModel' , ['$http' , function($http) {
   let history = [];
   return {
     all: () => history,

@@ -1,4 +1,4 @@
-degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blog' , 'util' , function($scope , $routeParams , blogModel , util) {
+degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blogModel' , 'util' , function($scope , $routeParams , blogModel , util) {
 
   let blog = this;
 

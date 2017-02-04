@@ -1,4 +1,4 @@
-degulog.controller('weightController' , ['$scope' , '$routeParams', 'weight', 'util' , function($scope , $routeParams , weightModel , util) {
+degulog.controller('weightController' , ['$scope' , '$routeParams', 'weightModel', 'util' , function($scope , $routeParams , weightModel , util) {
 
   let weight = this;
   weight.graf = {};
