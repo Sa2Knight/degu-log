@@ -1,7 +1,7 @@
 /*
   AngularJS側のコアモジュール
 */
-let degulog = angular.module('degulog', ['ngRoute']);
+const degulog = angular.module('degulog', ['ngRoute']);
 
 /*
   [ルーティング] SPAルーティング
