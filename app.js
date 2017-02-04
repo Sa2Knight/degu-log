@@ -27,6 +27,7 @@ var dummy = {
     { id: 'hogehoge10', datetime: '2017/01/31 15:41', title: 'ダミータイトル10', body: 'ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文'},
   ],
   weights: [
+    { id: 'hogehoge13', date: '2017/02/04', pazoo: 218, may: 227 },
     { id: 'hogehoge12', date: '2017/01/27', pazoo: 190, may: 193 },
     { id: 'hogehoge1',  date: '2017/01/21', pazoo: 213, may: 219 },
     { id: 'hogehoge2',  date: '2017/01/13', pazoo: 208, may: 206 },
