@@ -1,6 +1,5 @@
 *.swp
-/app/scripts/build/*
-!es5.js
+/app/build/*.js
 !.gitkeep
 /node_modules/*
 

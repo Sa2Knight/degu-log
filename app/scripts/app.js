@@ -98,7 +98,6 @@ degulog.factory('blog' , ['$http' , function($http) {
       });
     },
     upload() {
-      console.log(list);
       $http({
         url: "/rest/blog/post",
         method: "POST",
@@ -155,7 +154,6 @@ degulog.factory('weight' , ['$http' , function($http) {
       });
     },
     upload() {
-      console.log(list);
       $http({
         url: "/rest/weight/post",
         method: "POST",
