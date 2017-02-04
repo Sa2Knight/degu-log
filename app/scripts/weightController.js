@@ -86,11 +86,12 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'weight', 'u
     $('.date').change(function() {
       $scope.$apply(() => $scope.weight.edit.post.date = $(this).val());
     });
-    // 折れ線グラフ
-    weight.graf.show();
     // 体重記録一覧を取得
     if (! weight.history.list) {
-      weightModel.load().then(() => weight.history.list = weightModel.all());
+      weightModel.load().then(function() {
+        weight.history.list = weightModel.all();
+        weight.graf.show();
+      });
     }
   })();
 }]);

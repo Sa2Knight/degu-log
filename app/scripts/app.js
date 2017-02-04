@@ -136,7 +136,7 @@ degulog.factory('blog' , ['$http' , function($http) {
 /*
   [モデル] 体重
 */
-degulog.factory('weight' , [function() {
+degulog.factory('weight' , ['$http' , function($http) {
   let history = [];
   return {
     all: () => history,
