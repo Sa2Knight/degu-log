@@ -10,18 +10,13 @@ var babelTargets = [
   'app/scripts/models/*.js',
 ];
 
-gulp.task('babel-concat' , function() {
+gulp.task('js' , function() {
   gulp.src(babelTargets)
     .pipe(concat('degulog.js'))
     .pipe(babel({presets: ['es2015']}))
+    .pipe(uglify({ mangle: false }))
+    .pipe(rename('degulog.min.js'))
     .pipe(gulp.dest('app/build'));
-});
-
-gulp.task('uglify' , ['babel-concat'] , function() {
-  gulp.src('app/build/degulog.js')
-      .pipe(uglify({ mangle: false }))
-      .pipe(rename('degulog.min.js'))
-      .pipe(gulp.dest('app/build'));
 });
 
 gulp.task('less' , function() {
@@ -31,8 +26,8 @@ gulp.task('less' , function() {
 });
 
 gulp.task('watch' , function() {
-  gulp.watch(babelTargets , ['babel-concat' , 'uglify']);
+  gulp.watch(babelTargets , ['js']);
   gulp.watch('app/styles/style.less' , ['less']);
 });
 
-gulp.task('default' , ['babel-concat' , 'uglify' , 'less' , 'watch']);
+gulp.task('default' , ['js' , 'less' , 'watch']);
