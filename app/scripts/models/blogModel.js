@@ -5,7 +5,7 @@ degulog.factory('blogModel' , ['$http' , function($http) {
   let list = [];
   return {
     all: () => list,
-    get: (id) => list.find((e) => e.id === id),
+    get: (id) => list.find((e) => e._id === id),
     getByMonth: function(year , month) {
       let reg = new RegExp(`^${year}/0?${month}/[0-9]{2} [0-9]{2}:[0-9]{2}$`);
       return list.filter((e) => e.datetime.match(reg));

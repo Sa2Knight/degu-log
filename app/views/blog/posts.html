@@ -27,12 +27,12 @@
       <td class="post-datetime"  id="post-datetime-{{$index}}">{{ post.datetime }}</td>
       <td class="post-thumbnail" id="post-thumbnail-{{$index}}"></td>
       <td class="post-edit-btn">
-        <a ng-href="#/blog/create/{{post.id}}">
+        <a ng-href="#/blog/create/{{post._id}}">
           <button class="btn btn-primary btn-sm" id="post-edit-btn-{{$index}}"><i class="fa fa-pencil" aria-hidden="true"></i></button>
         </a>
       </td>
       <td class="post-delete-btn">
-        <button class="btn btn-primary btn-sm" id="post-delete-btn-{{$index}}" ng-click="blog.posts.remove(post.id)">
+        <button class="btn btn-primary btn-sm" id="post-delete-btn-{{$index}}" ng-click="blog.posts.remove(post._id)">
           <i class="fa fa-trash-o" aria-hidden="true"></i>
         </button>
       </td>

@@ -5,7 +5,7 @@ degulog.factory('weightModel' , ['$http' , function($http) {
   let history = [];
   return {
     all: () => history,
-    get: (id) => history.find((h) => h.id === id),
+    get: (id) => history.find((h) => h._id === id),
     append(newWeight) {
       history.unshift({
         id: new Date().getTime().toString(),
