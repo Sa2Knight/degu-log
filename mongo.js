@@ -1,7 +1,7 @@
 var db;
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-var url = 'mongodb://0.0.0.0:27017/mydb';
+var url = 'mongodb://0.0.0.0:27017/degulog';
 
 MongoClient.connect(url, function(err, mongodb) {
   assert.equal(null, err);
