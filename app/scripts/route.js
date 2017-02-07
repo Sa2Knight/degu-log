@@ -16,7 +16,7 @@ degulog.config(function($routeProvider) {
     templateUrl: 'views/blog/edit.html',
     controller: 'blogController as blog'
   })
-  .when('/blog/create/:id' , {
+  .when('/blog/create/:_id' , {
     templateUrl: 'views/blog/edit.html',
     controller: 'blogController as blog'
   })
@@ -36,7 +36,7 @@ degulog.config(function($routeProvider) {
     templateUrl: 'views/weight/edit.html',
     controller: 'weightController as weight'
   })
-  .when('/weight/create/:id' , {
+  .when('/weight/create/:_id' , {
     templateUrl: 'views/weight/edit.html',
     controller: 'weightController as weight'
   })

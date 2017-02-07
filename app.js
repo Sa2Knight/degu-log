@@ -27,7 +27,7 @@ app.get('/rest/blog/get' , function(req , res) {
 
 /* ブログ一覧を更新 */
 app.post('/rest/blog/post' , function(req , res) {
-  dummy.blogs = req.body;
+  console.log(req.body);
   res.send('success');
 });
 
@@ -38,9 +38,10 @@ app.get('/rest/weight/get' , function(req , res) {
   });
 });
 
-/* ブログ一覧を更新 */
+/* 体重一覧を更新 */
 app.post('/rest/weight/post' , function(req , res) {
-  dummy.weights = req.body;
+  collection('weight').remove();
+  collection('weight').insert(req.body);
   res.send('success');
 });
 

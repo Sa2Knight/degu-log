@@ -7,26 +7,27 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'weightModel
    * 体重記録一覧
    */
   weight.history = {
-    remove: (id) => weightModel.remove(id),
+    remove: (_id) => weightModel.remove(_id),
   };
 
   /*
    * 体重の新規登録・編集
    */
   weight.edit = {
+    /* [フィールド] 入力中の体重データ */
     post: (function() {
-      if ($routeParams.id) {
-        return weightModel.get($routeParams.id);
+      if ($routeParams._id) {
+        return weightModel.get($routeParams._id);
       } else {
         return {date: util.formatDate(new Date() , 'YYYY/MM/DD') };
       }
     })(),
+    /* [フィールド] submitの結果 */
     success: false,
-    submit: function() {
-      if ($scope.weightForm.$invalid) {
-        return;
-      }
-      if (this.post.id) {
+    /* [メソッド] 体重記録を登録 */
+    submit() {
+      if ($scope.weightForm.$inval_id) { return; }
+      if (this.post._id) {
         weightModel.update(this.post);
       } else {
         weightModel.append(this.post);
@@ -37,7 +38,7 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'weightModel
       $scope.weightForm.$submitted = false;
     },
   };
-  weight.edit.headerText = $routeParams.id ? `【${weight.edit.post.date}】を編集` : '新規登録',
+  weight.edit.headerText = $routeParams._id ? `【${weight.edit.post.date}】を編集` : '新規登録',
 
   /*
    * グラフ出力
