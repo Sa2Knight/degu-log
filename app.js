@@ -27,7 +27,8 @@ app.get('/rest/blog/get' , function(req , res) {
 
 /* ブログ一覧を更新 */
 app.post('/rest/blog/post' , function(req , res) {
-  console.log(req.body);
+  collection('blog').remove();
+  collection('blog').insert(req.body);
   res.send('success');
 });
 

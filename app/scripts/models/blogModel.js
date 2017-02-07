@@ -4,17 +4,13 @@
 degulog.factory('blogModel' , ['$http' , function($http) {
   let list = [];
   return {
-    all: () => list,
-    get: (id) => list.find((e) => e._id === id),
-    getByMonth: function(year , month) {
-      let reg = new RegExp(`^${year}/0?${month}/[0-9]{2} [0-9]{2}:[0-9]{2}$`);
-      return list.filter((e) => e.datetime.match(reg));
-    },
+    /* load: ブログ一覧をサーバから取得 */
     load() {
       return $http.get('/rest/blog/get').success(function(data, status, headers, config) {
         list = data;
       });
     },
+    /* load: ブログ一覧をサーバにアップロード */
     upload() {
       $http({
         url: "/rest/blog/post",
@@ -23,27 +19,38 @@ degulog.factory('blogModel' , ['$http' , function($http) {
         headers: {'Content-Type': 'application/json; charset=utf-8'}
       });
     },
+    /* all: 全てのブログを取得 */
+    all: () => list,
+    /* get: 指定したブログを取得 */
+    get: (_id) => list.find((e) => e._id === _id),
+    /* getByMonth: 指定した年月のブログ一覧を取得 */
+    getByMonth: function(year , month) {
+      let reg = new RegExp(`^${year}/0?${month}/[0-9]{2} [0-9]{2}:[0-9]{2}$`);
+      return list.filter((e) => e.datetime.match(reg));
+    },
+    /* append: ブログを新規登録 */
     append(newPost) {
       list.unshift({
-        id:       new Date().getTime().toString(),
         datetime: newPost.datetime,
         title:    newPost.title,
         body:     newPost.body
       });
       this.upload();
     },
+    /* update: 既存のブログを編集 */
     update(updatedPost) {
-      let targetIndex = list.findIndex((e) => e.id === updatedPost.id);
+      let targetIndex = list.findIndex((e) => e._id === updatedPost._id);
       list[targetIndex] = {
-        id:       updatedPost.id,
+        _id:       updatedPost._id,
         datetime: updatedPost.datetime,
         title:    updatedPost.title,
         body:     updatedPost.body
       };
       this.upload();
     },
-    remove(id) {
-      let targetIndex = list.findIndex((e) => e.id === id);
+    /* remove: 既存のブログを削除 */
+    remove(_id) {
+      let targetIndex = list.findIndex((e) => e._id === _id);
       list.splice(targetIndex , 1);
       this.upload();
     },

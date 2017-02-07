@@ -26,7 +26,6 @@ degulog.factory('weightModel' , ['$http' , function($http) {
     /* append: 体重記録を新規登録 */
     append(newWeight) {
       history.unshift({
-        _id: new Date().getTime().toString(),
         date:   newWeight.date,
         pazoo:  newWeight.pazoo,
         may:    newWeight.may,

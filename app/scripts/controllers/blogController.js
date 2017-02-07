@@ -6,7 +6,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blogModel' ,
    * 投稿一覧
    */
   blog.posts = {
-    remove: (id) => blogModel.remove(id),
+    remove: (_id) => blogModel.remove(_id),
   }
 
   /*
@@ -14,8 +14,8 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blogModel' ,
    */
   blog.edit = {
     post: (function() {
-      if ($routeParams.id) {
-        return blogModel.get($routeParams.id);
+      if ($routeParams._id) {
+        return blogModel.get($routeParams._id);
       } else {
         return {datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')}
       }
@@ -26,7 +26,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blogModel' ,
         this.success = false;
         return;
       }
-      if (this.post.id) {
+      if (this.post._id) {
         blogModel.update(this.post);
       } else {
         blogModel.append(this.post);
@@ -37,7 +37,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blogModel' ,
       $scope.postForm.$submitted = false;
     },
   };
-  blog.edit.headerText = $routeParams.id ? `【${blog.edit.post.title}】を編集` : '新規投稿',
+  blog.edit.headerText = $routeParams._id ? `【${blog.edit.post.title}】を編集` : '新規投稿',
 
   /*
    * カレンダー
