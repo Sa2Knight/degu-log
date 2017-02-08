@@ -21,7 +21,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blogModel' ,
       }
     })(),
     success: false,
-    submit: function() {
+    submit() {
       if ($scope.postForm.$invalid) {
         this.success = false;
         return;
@@ -45,7 +45,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blogModel' ,
   blog.calendar = {
     year: 2017,
     month: 1,
-    show: function() {
+    show() {
       let events = [];
       let posts = blogModel.getByMonth(this.year , this.month);
       let reg = new RegExp('^[0-9]{4}/[0-9]{2}/([0-9]{2}) [0-9]{2}:[0-9]{2}$');
@@ -62,7 +62,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blogModel' ,
         events: events,
       });
     },
-    next: function() {
+    next() {
       this.month++;
       if (this.month > 12) {
         this.year++;
@@ -70,7 +70,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blogModel' ,
       }
       this.show();
     },
-    prev: function() {
+    prev() {
       this.month--;
       if (this.month <= 0) {
         this.year--;
@@ -78,7 +78,7 @@ degulog.controller('blogController' , ['$scope' , '$routeParams' , 'blogModel' ,
       }
       this.show();
     },
-    today: function() {
+    today() {
       let today = new Date();
       this.year = today.getFullYear();
       this.month = today.getMonth() + 1;

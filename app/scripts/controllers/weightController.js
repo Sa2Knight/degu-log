@@ -44,7 +44,7 @@ degulog.controller('weightController' , ['$scope' , '$routeParams', 'weightModel
    * グラフ出力
    */
   weight.graf = {
-    show: function() {
+    show() {
       let date = ['date'] , pazoo = ['パズー'] , may = ['メイ'];
       weight.history.list.forEach(function(h) {
         date.push(h.date);
