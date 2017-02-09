@@ -14,19 +14,19 @@ degulog.config(function($routeProvider) {
   })
   .when('/blog/create' , {
     templateUrl: 'views/blog/edit.html',
-    controller: 'blogController as blog'
+    controller: 'blogEditController as blogEdit'
   })
   .when('/blog/create/:_id' , {
     templateUrl: 'views/blog/edit.html',
-    controller: 'blogController as blog'
+    controller: 'blogEditController as blogEdit'
   })
   .when('/blog/posts' , {
     templateUrl: 'views/blog/posts.html',
-    controller: 'blogController as blog'
+    controller: 'blogListController as blogList'
   })
   .when('/blog/calendar' , {
     templateUrl: 'views/blog/calendar.html',
-    controller: 'blogController as blog'
+    controller: 'blogCalendarController as blogCalendar'
   })
   /* 体重 */
   .when('/weight' , {

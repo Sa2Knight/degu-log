@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm-5">
       <div class="input-group">
-        <input type="text" class="form-control" ng-model="blog.posts.searchWord" name="searchWord" placeholder="フリーワード検索">
+        <input type="text" class="form-control" ng-model="blogList.searchWord" name="searchWord" placeholder="フリーワード検索">
         <span class="input-group-btn"><button class="form-control btn btn-primary">検索</button></span>
       </div>
     </div>
@@ -21,7 +21,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="post in blog.posts.list | filter:blog.posts.searchWord">
+    <tr ng-repeat="post in blogList.list | filter:blogList.searchWord">
       <td class="post-title" id="post-title-{{$index}}">{{ post.title|abbreviate:20 }}</td>
       <td class="post-body"  id="post-body-{{$index}}">{{ post.body|abbreviate:25 }}</td>
       <td class="post-datetime"  id="post-datetime-{{$index}}">{{ post.datetime }}</td>
@@ -34,7 +34,7 @@
         </a>
       </td>
       <td class="post-delete-btn">
-        <button class="btn btn-primary btn-sm" ng-click="blog.posts.remove(post._id)">
+        <button class="btn btn-primary btn-sm" ng-click="blogList.remove(post._id)">
           <i class="fa fa-trash-o" aria-hidden="true"></i>
         </button>
       </td>
