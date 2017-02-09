@@ -34,19 +34,19 @@ degulog.config(function($routeProvider) {
   })
   .when('/weight/create' , {
     templateUrl: 'views/weight/edit.html',
-    controller: 'weightController as weight'
+    controller: 'weightEditController as weightEdit'
   })
   .when('/weight/create/:_id' , {
     templateUrl: 'views/weight/edit.html',
-    controller: 'weightController as weight'
+    controller: 'weightEditController as weightEdit'
   })
   .when('/weight/history' , {
     templateUrl: 'views/weight/history.html',
-    controller: 'weightController as weight'
+    controller: 'weightHistoryController as weightHistory'
   })
   .when('/weight/graf' , {
     templateUrl: 'views/weight/graf.html',
-    controller: 'weightController as weight'
+    controller: 'weightGrafController as weightGraf'
   })
   /* 購入履歴 */
   .when('/bought' , {
