@@ -67,7 +67,8 @@ degulog.controller('blogCalendarController' , ['blogModel' , function(blogModel)
       let day = Number(post.datetime.match(reg)[1]);
       events.push({
         day: day,
-        text: post.title
+        text: post.title,
+        onclick: () => location.href = `/#/blog/create/${post._id}`
       });
     });
     $('#mini-calendar').html('').miniCalendar({

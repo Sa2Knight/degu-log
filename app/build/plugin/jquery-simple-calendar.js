@@ -127,8 +127,7 @@
         var calendarLabel = $('<span>').addClass('calendar-event').addClass(labelClass);
         if (this.events[i].onclick) {
           (function(f) {
-            calendarLabel.addClass('pointer').click(function() {
-              console.log('hoge');
+            calendarLabel.css('cursor' , 'pointer').click(function() {
               f();
             });
           })(this.events[i].onclick);
