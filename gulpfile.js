@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     babel = require('gulp-babel'),
     rename = require('gulp-rename');
     plumber = require('gulp-plumber');
+    eslint = require('gulp-eslint');
 var babelTargets = [
   'app/scripts/*.js' ,
   'app/scripts/controllers/*.js',
@@ -14,6 +15,8 @@ var babelTargets = [
 gulp.task('babel' , function() {
   return gulp.src(babelTargets)
     .pipe(plumber())
+    .pipe(eslint())
+    .pipe(eslint.format())
     .pipe(babel({presets: ['es2015']}))
     .pipe(gulp.dest('app/build'));
 });
