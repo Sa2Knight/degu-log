@@ -11,14 +11,19 @@ var babelTargets = [
   'app/scripts/models/*.js',
 ];
 
-gulp.task('js' , function() {
+gulp.task('babel' , function() {
   return gulp.src(babelTargets)
     .pipe(plumber())
-    .pipe(concat('degulog.js'))
     .pipe(babel({presets: ['es2015']}))
-    .pipe(uglify({ mangle: false }))
-    .pipe(rename('degulog.min.js'))
     .pipe(gulp.dest('app/build'));
+});
+
+gulp.task('concat-uglify' , ['babel'] , function() {
+  gulp.src('app/build/*.js')
+      .pipe(concat('degulog.js'))
+      .pipe(uglify({ mangle: false }))
+      .pipe(rename('degulog.min.js'))
+      .pipe(gulp.dest('app/build'));
 });
 
 gulp.task('less' , function() {
@@ -28,8 +33,8 @@ gulp.task('less' , function() {
 });
 
 gulp.task('watch' , function() {
-  gulp.watch(babelTargets , ['js']);
+  gulp.watch(babelTargets , ['babel' , 'concat-uglify']);
   gulp.watch('app/styles/style.less' , ['less']);
 });
 
-gulp.task('default' , ['js' , 'less' , 'watch']);
+gulp.task('default' , ['babel' , 'concat-uglify' ,  'less' , 'watch']);
