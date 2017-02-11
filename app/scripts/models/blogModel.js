@@ -6,7 +6,7 @@ degulog.factory('blogModel' , ['$http' , function($http) {
   return {
     /* load: ブログ一覧をサーバから取得 */
     load() {
-      return $http.get('/rest/blog/get').success(function(data, status, headers, config) {
+      return $http.get('/rest/blog/get').success(function(data) {
         list = data;
       });
     },

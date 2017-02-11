@@ -15,9 +15,8 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 
   blogEdit.post = (function() {
     if ($routeParams._id) {
       return blogModel.get($routeParams._id);
-    } else {
-      return {datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')}
     }
+    return {datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')};
   })();
   blogEdit.success = false;
   blogEdit.submit = function() {

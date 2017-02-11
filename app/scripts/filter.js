@@ -5,8 +5,7 @@ degulog.filter('abbreviate', function () {
     end = end || "…";
     if (text.length > len) {
       return text.substring(0, len - 1) + end;
-    } else {
-      return text;
     }
+    return text;
   };
 });

@@ -6,7 +6,7 @@ degulog.factory('weightModel' , ['$http' , function($http) {
   return {
     /* load: 体重記録の一覧をサーバから取得する */
     load() {
-      return $http.get('/rest/weight/get').success(function(data, status, headers, config) {
+      return $http.get('/rest/weight/get').success(function(data) {
         history = data;
       });
     },

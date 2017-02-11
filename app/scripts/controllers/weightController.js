@@ -15,9 +15,8 @@ degulog.controller('weightEditController' , ['$routeParams' , '$scope' ,  'util'
   weightEdit.post = (function() {
     if ($routeParams._id) {
       return weightModel.get($routeParams._id);
-    } else {
-      return {date: util.formatDate(new Date() , 'YYYY/MM/DD') };
     }
+    return {date: util.formatDate(new Date() , 'YYYY/MM/DD') };
   })();
   weightEdit.success = false;
   weightEdit.submit = function() {

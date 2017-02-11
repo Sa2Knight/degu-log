@@ -77,5 +77,5 @@ degulog.config(function($routeProvider) {
   /* その他 */
   .otherwise({
     redirectTo: '/blog/posts'
-  })
+  });
 });
