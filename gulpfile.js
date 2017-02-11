@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     uglify = require("gulp-uglify"),
     babel = require('gulp-babel'),
     rename = require('gulp-rename');
+    plumber = require('gulp-plumber');
 var babelTargets = [
   'app/scripts/*.js' ,
   'app/scripts/controllers/*.js',
@@ -11,7 +12,8 @@ var babelTargets = [
 ];
 
 gulp.task('js' , function() {
-  gulp.src(babelTargets)
+  return gulp.src(babelTargets)
+    .pipe(plumber())
     .pipe(concat('degulog.js'))
     .pipe(babel({presets: ['es2015']}))
     .pipe(uglify({ mangle: false }))
