@@ -10,12 +10,21 @@ degulog.factory('blogModel' , ['$http' , function($http) {
         list = data;
       });
     },
-    /* load: ブログ一覧をサーバにアップロード */
+    /* upload: ブログ一覧をサーバにアップロード */
     upload() {
       $http({
         url: "/rest/blog/post",
         method: "POST",
         data: list,
+        headers: {'Content-Type': 'application/json; charset=utf-8'}
+      });
+    },
+    /* put: 新規ブログをサーバにアップロード */
+    put(newPost) {
+      $http({
+        url: '/rest/blog/put',
+        method: 'POST',
+        data: JSON.stringify(newPost),
         headers: {'Content-Type': 'application/json; charset=utf-8'}
       });
     },
@@ -35,7 +44,7 @@ degulog.factory('blogModel' , ['$http' , function($http) {
         title:    newPost.title,
         body:     newPost.body
       });
-      this.upload();
+      this.put(newPost);
     },
     /* update: 既存のブログを編集 */
     update(updatedPost) {

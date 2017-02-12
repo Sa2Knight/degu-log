@@ -32,6 +32,13 @@ app.post('/rest/blog/post' , function(req , res) {
   res.send('success');
 });
 
+/* ブログを新規登録 */
+app.post('/rest/blog/put' , function(req , res) {
+  var blog = req.body;
+  collection('blog').insert(blog);
+  res.send('success');
+});
+
 /* 体重一覧を取得 */
 app.get('/rest/weight/get' , function(req , res) {
   collection('weight').find({}).toArray(function(err , docs) {
