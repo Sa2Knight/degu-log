@@ -26,7 +26,7 @@ gulp.task('concat-uglify' , ['babel'] , function() {
       .pipe(concat('degulog.js'))
       .pipe(uglify({ mangle: false }))
       .pipe(rename('degulog.min.js'))
-      .pipe(gulp.dest('app/build'));
+      .pipe(gulp.dest('app/build/bin'));
 });
 
 gulp.task('less' , function() {

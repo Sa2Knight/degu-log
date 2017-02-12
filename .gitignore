@@ -1,5 +1,6 @@
 *.swp
 /app/build/*.js
+/app/build/bin
 !.gitkeep
 /node_modules/*
 
