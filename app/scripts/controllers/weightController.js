@@ -20,7 +20,10 @@ degulog.controller('weightEditController' , ['$routeParams' , '$scope' ,  'util'
   })();
   weightEdit.success = false;
   weightEdit.submit = function() {
-    if ($scope.weightForm.$inval_id) { return; }
+    if ($scope.weightForm.$invalid) {
+      this.success = false;
+      return;
+    }
     if (this.post._id) {
       weightModel.update(this.post);
     } else {
