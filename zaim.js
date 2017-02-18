@@ -9,7 +9,6 @@ var zaim = new Zaim({
 
 zaim.getPaid = function(callback) {
   this.getMoney({
-    limit: 1000,
     genre_id: '10203',
   } , function(data) {
     callback(data.money);
