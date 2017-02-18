@@ -1,10 +1,10 @@
 /*
   NodeJS/express側のコアファイル
 */
-
 var express = require('express');
 var ObjectID = require('mongodb').ObjectID;
 var collection = require('./mongo');
+var zaim = require('./zaim');
 var bodyParser = require('body-parser');
 var app = express();
 
@@ -51,6 +51,13 @@ app.post('/rest/weight/post' , function(req , res) {
   collection('weight').remove();
   collection('weight').insert(req.body);
   res.send('success');
+});
+
+/* 支払い一覧を取得 */
+app.get('/rest/bought/get' , function(req , res) {
+  zaim.getPaid(function(data) {
+    res.send(data);
+  });
 });
 
 /* 静的ファイル */

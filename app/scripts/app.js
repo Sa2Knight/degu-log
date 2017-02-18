@@ -55,8 +55,9 @@ degulog.config(function($routeProvider) {
   .when('/bought/create' , {
     templateUrl: 'views/bought/edit.html'
   })
-  .when('/bought/history' , {
-    templateUrl: 'views/bought/history.html'
+  .when('/bought/list' , {
+    templateUrl: 'views/bought/list.html',
+    controller: 'boughtListController as boughtList',
   })
   .when('/bought/graf' , {
     templateUrl: 'views/bought/graf.html'

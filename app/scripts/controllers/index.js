@@ -25,7 +25,7 @@ degulog.controller('MainController', ['$scope', '$location' , function($scope , 
       {label: '体重遷移' ,      url: '#/weight/graf' ,      icon: 'fa-line-chart'},
     ],
     '/bought': [
-      {label: '購入記録' ,      url: '#/bought/history' ,   icon: 'fa-list'},
+      {label: '購入記録' ,      url: '#/bought/list' ,      icon: 'fa-list'},
       {label: '支出記録' ,      url: '#/bought/graf' ,      icon: 'fa-bar-chart'},
     ],
     '/photo': [

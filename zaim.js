@@ -7,11 +7,13 @@ var zaim = new Zaim({
   accessTokenSecret: 'KbEIZLRQEhagUIwrPWZCJplgbTNmo7b0yppFhXKdwoO26sx16uDxEf4ANhfNklISpo1g',
 });
 
+zaim.getPaid = function(callback) {
+  this.getMoney({
+    limit: 1000,
+    genre_id: '10203',
+  } , function(data) {
+    callback(data.money);
+  });
+};
 
-zaim.getMoney({
-  start_date: '2016-01-01',
-  end_date: '2016-12-31',
-  genre_id: '10203',
-} , function(data , err) {
-  console.log(data.money);
-});
+module.exports = zaim;
