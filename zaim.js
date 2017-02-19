@@ -7,12 +7,27 @@ var zaim = new Zaim({
   accessTokenSecret: 'KbEIZLRQEhagUIwrPWZCJplgbTNmo7b0yppFhXKdwoO26sx16uDxEf4ANhfNklISpo1g',
 });
 
-zaim.getPaid = function(callback) {
+var genre_id = '10203'; // ペット関連費
+
+/* 支出履歴を全て取得する */
+zaim.getAllPurchased = function(callback) {
   this.getMoney({
-    genre_id: '10203',
+    genre_id: genre_id,
   } , function(data) {
     callback(data.money);
   });
 };
+
+/* 指定した年月の支出履歴を全て取得する */
+zaim.getMonthlyPurchased = function(year , month , callback) {
+  var yearMonth = year + '-' + month;
+  this.getMoney({
+    genre_id: genre_id,
+    start_date: yearMonth + '-01',
+    end_date: yearMonth + '-31',
+  } , function(data) {
+    callback(data.money);
+  });
+}
 
 module.exports = zaim;
