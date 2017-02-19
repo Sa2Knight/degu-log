@@ -7,27 +7,60 @@ var zaim = new Zaim({
   accessTokenSecret: 'KbEIZLRQEhagUIwrPWZCJplgbTNmo7b0yppFhXKdwoO26sx16uDxEf4ANhfNklISpo1g',
 });
 
-var genre_id = '10203'; // ペット関連費
+/* ペット関連費のジャンルID */
+var genre_id = '10203';
+
+/* APIを呼び出し、支払履歴を取得 */
+var getMoney = function(params , callback) {
+  params = params || {};
+  params.genre_id = genre_id;
+  zaim.getMoney(params, callback);
+};
+
+/* 日時文字列から年と月を正数で戻す */
+/* dateString: YYYY-MM-DD 形式の文字列 */
+var dateStringToYearMonth = function(dateString) {
+  var reg = /^(([0-9]{4})-([0-9]{2}))-[0-9]{2}$/;
+  var matched = dateString.match(reg);
+  return {
+    yearMonth: matched[1],
+    year: Number(matched[2]),
+    month: Number(matched[3]),
+  };
+};
 
 /* 支出履歴を全て取得する */
-zaim.getAllPurchased = function(callback) {
-  this.getMoney({
-    genre_id: genre_id,
-  } , function(data) {
+zaim.getAllHistories = function(callback) {
+  getMoney({} , function(data) {
     callback(data.money);
   });
 };
 
 /* 指定した年月の支出履歴を全て取得する */
-zaim.getMonthlyPurchased = function(year , month , callback) {
+zaim.getMonthHistories = function(year , month , callback) {
   var yearMonth = year + '-' + month;
-  this.getMoney({
-    genre_id: genre_id,
+  var params = {
     start_date: yearMonth + '-01',
     end_date: yearMonth + '-31',
-  } , function(data) {
+  };
+  getMoney(params, function(data , err) {
     callback(data.money);
   });
-}
+};
+
+/* 月ごとの支出総額を取得 */
+zaim.getMonthlyTotalPaid = function() {
+  this.getAllHistories(function(money) {
+    var monthlyTotalPaid = {};
+    money.forEach(function(h) {
+      var yearMonth = dateStringToYearMonth(h.date).yearMonth;
+      if (! monthlyTotalPaid[yearMonth]) {
+        monthlyTotalPaid[yearMonth] = 0;
+      }
+      monthlyTotalPaid[yearMonth] += h.amount;
+    });
+    console.log(monthlyTotalPaid);
+  });
+};
 
 module.exports = zaim;
