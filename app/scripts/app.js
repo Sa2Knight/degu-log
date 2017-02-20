@@ -50,14 +50,11 @@ degulog.config(function($routeProvider) {
   })
   /* 購入履歴 */
   .when('/bought' , {
-    redirectTo: 'bought/history'
+    redirectTo: 'bought/monthly'
   })
-  .when('/bought/create' , {
-    templateUrl: 'views/bought/edit.html'
-  })
-  .when('/bought/list' , {
-    templateUrl: 'views/bought/list.html',
-    controller: 'boughtListController as boughtList',
+  .when('/bought/monthly' , {
+    templateUrl: 'views/bought/monthly.html',
+    controller: 'boughtMonthlyController as boughtMonthly',
   })
   .when('/bought/graf' , {
     templateUrl: 'views/bought/graf.html'

@@ -1,8 +1,8 @@
 /*
  * 購入記録一覧
  */
-degulog.controller('boughtListController' , ['boughtModel' , function(boughtModel) {
-  let boughtList = this;
-  boughtList.list = [];
-  boughtModel.load().then(() => boughtList.list = boughtModel.all());
+degulog.controller('boughtMonthlyController' , ['boughtModel' , function(boughtModel) {
+  let boughtMonthly = this;
+  boughtMonthly.list = [];
+  boughtModel.loadMonthlyPaid().then(() => boughtMonthly.list = boughtModel.monthlyPaid());
 }]);

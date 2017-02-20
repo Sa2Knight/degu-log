@@ -1,0 +1,15 @@
+<h1>購入履歴</h1>
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>年月</th>
+      <th>支出</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="(month, amount) in boughtMonthly.list">
+      <td>{{ month }}</td>
+      <td>{{ amount }}円</td>
+    </tr>
+  </tbody>
+</table>

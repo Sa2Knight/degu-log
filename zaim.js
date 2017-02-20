@@ -49,7 +49,7 @@ zaim.getMonthHistories = function(year , month , callback) {
 };
 
 /* 月ごとの支出総額を取得 */
-zaim.getMonthlyTotalPaid = function() {
+zaim.getMonthlyTotalPaid = function(callback) {
   this.getAllHistories(function(money) {
     var monthlyTotalPaid = {};
     money.forEach(function(h) {
@@ -59,7 +59,7 @@ zaim.getMonthlyTotalPaid = function() {
       }
       monthlyTotalPaid[yearMonth] += h.amount;
     });
-    console.log(monthlyTotalPaid);
+    callback(monthlyTotalPaid);
   });
 };
 

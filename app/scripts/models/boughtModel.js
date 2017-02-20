@@ -2,17 +2,17 @@
   [モデル] 購入履歴
 */
 degulog.factory('boughtModel' , ['$http' , function($http) {
-  let list = [];
+  let monthlyPaid = [];
   return {
-    /* load: 購入記録の一覧をサーバから取得する */
-    load() {
-      return $http.get('/rest/bought/get').success(function(data) {
-        list = data;
+    /* loadMonthlyPaid: 月ごとの支出額一覧をサーバから取得 */
+    loadMonthlyPaid() {
+      return $http.get('/rest/bought/monthly').success(function(data) {
+        monthlyPaid = data;
       });
     },
-    /* all: 購入記録を全て取得する */
-    all() {
-      return list;
+    /* monthlyPaid: 月ごとの支出額一覧を取得 */
+    monthlyPaid() {
+      return monthlyPaid;
     },
   };
 }]);
