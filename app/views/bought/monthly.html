@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="(month, amount) in boughtMonthly.list">
+    <tr ng-repeat="(month, amount) in boughtMonthly.list" ng-click="boughtMonthly.showDetail(month)">
       <td>{{ month }}</td>
       <td>{{ amount }}円</td>
     </tr>

@@ -56,8 +56,9 @@ degulog.config(function($routeProvider) {
     templateUrl: 'views/bought/monthly.html',
     controller: 'boughtMonthlyController as boughtMonthly',
   })
-  .when('/bought/graf' , {
-    templateUrl: 'views/bought/graf.html'
+  .when('/bought/detail/:month' , {
+    templateUrl: 'views/bought/detail.html',
+    controller: 'boughtDetailController as boughtDetail',
   })
   /* 写真 */
   .when('/photo' , {

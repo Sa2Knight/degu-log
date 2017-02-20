@@ -53,10 +53,18 @@ app.post('/rest/weight/post' , function(req , res) {
   res.send('success');
 });
 
-/* 月ごとの支出一覧を取得 */
+/* 月ごとの総支出額一覧を取得 */
 app.get('/rest/bought/monthly' , function(req , res) {
   zaim.getMonthlyTotalPaid(function(monthlyPaid) {
     res.send(monthlyPaid);
+  });
+});
+
+/* 指定した月の支出一覧を取得 */
+app.get('/rest/bought/detail/:month' , function(req , res) {
+  var yearMonth = req.params.month.split('-');
+  zaim.getHistoriesByMonth(yearMonth[0] , yearMonth[1] , function(details) {
+    res.send(details);
   });
 });
 

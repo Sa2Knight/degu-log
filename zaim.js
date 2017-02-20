@@ -37,7 +37,7 @@ zaim.getAllHistories = function(callback) {
 };
 
 /* 指定した年月の支出履歴を全て取得する */
-zaim.getMonthHistories = function(year , month , callback) {
+zaim.getHistoriesByMonth = function(year , month , callback) {
   var yearMonth = year + '-' + month;
   var params = {
     start_date: yearMonth + '-01',

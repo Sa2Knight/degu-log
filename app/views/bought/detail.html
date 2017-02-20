@@ -1,0 +1,17 @@
+<h1>購入履歴({{ boughtDetail.yearMonth }})</h1>
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th>日時</th>
+      <th>支出</th>
+      <th>内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="history in boughtDetail.list">
+      <td>{{ history.date }}</td>
+      <td>{{ history.amount }}円</td>
+      <td>{{ history.comment }}</td>
+    </tr>
+  </tbody>
+</table>
