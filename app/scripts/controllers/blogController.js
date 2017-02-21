@@ -4,7 +4,7 @@
 degulog.controller('blogListController' , ['blogModel' , function(blogModel) {
   let blogList = this;
   blogList.remove = (_id) => blogModel.remove(_id),
-  blogModel.load().then(() => blogList.list = blogModel.all());
+  blogModel.load().then(() => blogList.list = blogModel.all().reverse());
 }]);
 
 /*
