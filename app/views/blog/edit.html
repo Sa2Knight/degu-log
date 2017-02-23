@@ -34,16 +34,6 @@
     <textarea class="form-control" rows="10" name="body" placeholder="本文を入力してください" ng-model="blogEdit.post.body"></textarea>
   </div>
 
-  <!-- 添付ファイル -->
-  <div class="form-group">
-    <label>写真</label>
-    <div class="input-group">
-      <input class="dummy-file" type="file" style="display:none">
-      <input type="text" class="file form-control" placeholder="投稿する写真を選択" readonly>
-      <span class="input-group-btn"><button type="button" class="btn btn-info" onclick="$('.dummy-file').click();">選択</button></span>
-    </div>
-  </div>
-
   <!-- submit -->
   <div class="form-group">
     <button class="form-control btn-primary" type="submit">投稿</button>

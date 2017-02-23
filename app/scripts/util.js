@@ -21,3 +21,18 @@ degulog.factory('util' , [function() {
     },
   };
 }]);
+
+/*
+  [fileModel] ファイルアップロード用のディレクティブ
+*/
+
+degulog.directive('fileModel', ['$parse', function($parse) {
+  return function(scope, element, attrs) {
+    const model = $parse(attrs.fileModel);
+    element.bind('change', function() {
+      scope.$apply(() => {
+        model.assign(scope, element[0].files[0]);
+      });
+    });
+  };
+}]);

@@ -45,9 +45,6 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 
   };
 
   /* 初期化 */
-  $('.dummy-file').change(function() {
-    $('.file').val($(this).val().replace("C:\\fakepath\\", ""));
-  });
   $.datetimepicker.setLocale('ja');
   $('.datetime').datetimepicker({
     format : 'Y/m/d H:i',
