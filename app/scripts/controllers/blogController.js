@@ -12,13 +12,22 @@ degulog.controller('blogListController' , ['blogModel' , function(blogModel) {
  */
 degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 'blogModel' , function($scope , $routeParams , util , blogModel) {
   let blogEdit = this;
+
+  /* [フィールド] 編集ステータス */
+  blogEdit.success = false;
+
+  /* [フィールド] ヘッダータイトル */
+  blogEdit.headerText = $routeParams._id ? `【${blogEdit.post.title}】を編集` : '新規投稿';
+
+  /* [フィールド] 編集中の記事 */
   blogEdit.post = (function() {
     if ($routeParams._id) {
       return blogModel.get($routeParams._id);
     }
     return {datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')};
   })();
-  blogEdit.success = false;
+
+  /* [メソッド] 記事を送信 */
   blogEdit.submit = function() {
     if ($scope.postForm.$invalid) {
       this.success = false;
@@ -34,7 +43,8 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 
     this.success = true;
     $scope.postForm.$submitted = false;
   };
-  blogEdit.headerText = $routeParams._id ? `【${blogEdit.post.title}】を編集` : '新規投稿';
+
+  /* 初期化 */
   $('.dummy-file').change(function() {
     $('.file').val($(this).val().replace("C:\\fakepath\\", ""));
   });
