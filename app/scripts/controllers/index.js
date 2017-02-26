@@ -46,7 +46,7 @@ degulog.controller('MainController', ['$scope', '$location' , 'util', function($
   $scope.isActiveMenu = (viewLocation) => (viewLocation === baseURL());
 
   /* 指定したサイドメニューが現在選択中か？ */
-  $scope.isActiveSideMenu = (viewLocation) => ('#/' + subURL()) === viewLocation;
+  $scope.isActiveSideMenu = (viewLocation) => viewLocation.indexOf(subURL()) > 0;
 
   /* メニューに応じたサブメニューのリストを取得 */
   $scope.getSideMenu = () => $scope.sideMenus[baseURL()];
