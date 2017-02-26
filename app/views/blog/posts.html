@@ -21,7 +21,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="post in blogList.list | filter:blogList.searchWord">
+    <tr ng-repeat="post in blogList.list | filter:blogList.searchWord | orderBy: 'datetime': true">
       <td class="post-title" id="post-title-{{$index}}">{{ post.title|abbreviate:20 }}</td>
       <td class="post-body"  id="post-body-{{$index}}">{{ post.body|abbreviate:25 }}</td>
       <td class="post-datetime"  id="post-datetime-{{$index}}">{{ post.datetime }}</td>
