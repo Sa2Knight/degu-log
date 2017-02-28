@@ -30,6 +30,10 @@ form .error {
   color: #A00;
 }
 
+.dummy-file {
+  display: none !important;
+}
+
 /*------------------------
  * Header
  *------------------------*/

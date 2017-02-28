@@ -6,12 +6,14 @@ var ObjectID = require('mongodb').ObjectID;
 var collection = require('./mongo');
 var zaim = require('./zaim');
 var bodyParser = require('body-parser');
+var multer  = require('multer');
 var app = express();
 
 app.set('views', __dirname + '/');
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(multer({ dest: './uploads/'}).any());
 
 /* トップページ */
 app.get('/', function (req, res) {
@@ -66,6 +68,11 @@ app.get('/rest/bought/detail/:month' , function(req , res) {
   zaim.getHistoriesByMonth(yearMonth[0] , yearMonth[1] , function(details) {
     res.send(details);
   });
+});
+
+/* 写真を新規アップロード */
+app.post('/rest/photo/put' , function(req, res) {
+  console.log(req.body);
 });
 
 /* 静的ファイル */

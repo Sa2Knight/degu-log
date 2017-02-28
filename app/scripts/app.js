@@ -65,7 +65,8 @@ degulog.config(function($routeProvider) {
     redirectTo: 'photo/collection'
   })
   .when('/photo/create' , {
-    templateUrl: 'views/photo/edit.html'
+    templateUrl: 'views/photo/edit.html',
+    controller: 'photoEditController as photo',
   })
   .when('/photo/collection' , {
     templateUrl: 'views/photo/collection.html'
