@@ -72,7 +72,12 @@ app.get('/rest/bought/detail/:month' , function(req , res) {
 
 /* 写真を新規アップロード */
 app.post('/rest/photo/put' , function(req, res) {
-  console.log(req.body);
+  collection('photo').insert({
+    fileName: req.files[0].filename,
+    title: req.body.title,
+    tags: req.body.tags.split(','),
+  });
+  res.send('success');
 });
 
 /* 静的ファイル */

@@ -15,6 +15,7 @@ degulog.controller('photoEditController' , ['photoModel' , 'util' , function(pho
     let photoInfo = {
       tags: photo.tags,
       file: photo.file,
+      title: photo.title,
     };
     photoModel.upload(photoInfo);
   };
