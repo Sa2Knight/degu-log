@@ -1,4 +1,19 @@
 /*
+ * 写真の一覧
+ */
+degulog.controller('photoCollectionController', ['photoModel' , function(photoModel) {
+  let photo = this;
+
+  /* [フィールド] 写真の一覧 */
+  photo.collections = [];
+
+  /* 画面初期化 */
+  (function() {
+    photoModel.all((data) => photo.collections = data);
+  })();
+}]);
+
+/*
  * 写真の新規作成/編集画面
  */
 degulog.controller('photoEditController' , ['photoModel' , '$scope' , function(photoModel, $scope) {

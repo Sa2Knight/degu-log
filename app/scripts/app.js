@@ -69,7 +69,8 @@ degulog.config(function($routeProvider) {
     controller: 'photoEditController as photo',
   })
   .when('/photo/collection' , {
-    templateUrl: 'views/photo/collection.html'
+    templateUrl: 'views/photo/collection.html',
+    controller: 'photoCollectionController as photo',
   })
   .when('/photo/tag' , {
     templateUrl: 'views/photo/tag.html'

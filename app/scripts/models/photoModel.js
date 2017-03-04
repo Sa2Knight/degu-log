@@ -3,6 +3,7 @@
 */
 degulog.factory('photoModel' , ['$http' , function($http) {
   return {
+    /* [メソッド] 写真をアップロードする */
     upload(photo) {
       const formData = new FormData();
       formData.append('file', photo.file);
@@ -16,6 +17,12 @@ degulog.factory('photoModel' , ['$http' , function($http) {
       $http.post('/rest/photo/put', formData, {
         headers: {'Content-Type': undefined} ,
         transformRequest: null
+      });
+    },
+    /* [メソッド] 写真一覧を取得する */
+    all(callback) {
+      $http.get('/rest/photo/get').success(function(data) {
+        callback(data);
       });
     },
   };

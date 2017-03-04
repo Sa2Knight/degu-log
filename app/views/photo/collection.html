@@ -1,1 +1,9 @@
-写真一覧
+<h1>写真一覧</h1>
+<table class="table" ng-repeat="p in photo.collections">
+  <tr>
+    <th>{{ p.title }}</th>
+  </tr>
+  <tr>
+    <td><img src="/rest/photo/ref/{{ p.fileName }}" width="300px"></td>
+  </tr>
+</table>

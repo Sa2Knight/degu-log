@@ -7,6 +7,7 @@ var collection = require('./mongo');
 var zaim = require('./zaim');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
+var fs = require('fs');
 var app = express();
 
 app.set('views', __dirname + '/');
@@ -78,6 +79,19 @@ app.post('/rest/photo/put' , function(req, res) {
     tags: req.body.tags.split(','),
   });
   res.send('success');
+});
+
+/* 全ての写真一覧を取得 */
+app.get('/rest/photo/get', function(req, res) {
+  collection('photo').find({}).toArray(function(err , docs) {
+    res.send(docs);
+  });
+});
+
+/* 画像ファイルを取得 */
+app.get('/rest/photo/ref/:id', function(req, res) {
+  var buf = fs.readFileSync('uploads/' + req.params.id);
+  res.send(buf, { 'Content-Type': 'image/jpeg' }, 200);
 });
 
 /* 静的ファイル */
