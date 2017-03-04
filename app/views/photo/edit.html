@@ -1,27 +1,36 @@
 <h1>写真投稿</h1>
 <form novalidate name="photoForm" enctype=multipart/form-data method="POST" ng-submit="photo.submit()">
+
+  <!-- システムメッセージ -->
+  <div id="success-msg" class="system-msg" ng-show="photo.success">投稿しました</div>
+
   <!-- 写真 -->
   <div class="form-group">
     <label>写真</label>
-    <input class="dummy-file" type="file" name="file" file-model="photo.file">
-    <input type="text" class="form-control file" 
+    <input class="dummy-file" type="file" name="file" file-model="photo.file" required>
+    <input type="text" class="form-control file" ng-model="photo.filename"
            onclick="$('.dummy-file').click();"
-           placeholder="クリックで投稿する写真を選択" readonly>
+           placeholder="クリックで投稿する写真を選択">
   </div>
+
   <!-- タイトル -->
   <div class="form-group">
     <label>タイトル</label>
-    <input class="form-control" type="text" name="title" ng-model="photo.title">
+    <input class="form-control" type="text" name="title" ng-model="photo.title" required>
+    <div class="error" ng-show="photoForm.$submitted">
+      <span id="title-require-error" ng-show="photoForm.title.$error.required">(※入力必須です)</span>
+    </div>
   </div>
+
   <!-- タグ -->
   <div class="form-group">
     <label>タグ</label>
     <input class="form-control" type="text" name="tags" ng-model="photo.tags">
   </div>
+
   <!-- submit -->
   <div class="form-group">
     <button class="form-control btn-primary" type="submit">投稿</button>
   </div>
-</form>
 
-{{ photo }}
+</form>
