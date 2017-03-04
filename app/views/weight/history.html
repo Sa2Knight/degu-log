@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="w in weightHistory.list">
+    <tr ng-repeat="w in weightHistory.list | orderBy: 'date' : true">
       <td id="weight-date-{{$index}}">{{w.date}}</td>
       <td id="weight-pazoo-{{$index}}">{{w.pazoo}}</td>
       <td id="weight-may-{{$index}}">{{w.may}}</td>
