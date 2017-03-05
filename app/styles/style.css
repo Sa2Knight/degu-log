@@ -25,6 +25,9 @@ table.center td {
 form .error {
   color: #A00;
 }
+.right {
+  text-align: right;
+}
 .system-msg {
   text-align: center;
   color: #A00;

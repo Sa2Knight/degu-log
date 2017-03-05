@@ -2,8 +2,13 @@
 <table class="table" ng-repeat="p in photo.collections">
   <tr>
     <th>{{ p.title }}</th>
+    <td class="right">
+      <button class="btn btn-primary btn-sm" ng-click="">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+      </button>
+    </td>
   </tr>
   <tr>
-    <td><img src="/rest/photo/ref/{{ p.fileName }}" width="300px"></td>
+    <td colspan="2"><img src="/rest/photo/ref/{{ p.fileName }}" width="300px"></td>
   </tr>
 </table>
