@@ -5,16 +5,22 @@ degulog.controller('boughtMonthlyController' , ['boughtModel' , function(boughtM
 
   let boughtMonthly = this;
 
-  // 支出額一覧 画面表示にサーバからロード
+  /* [フィールド] 月ごとの支出額一覧 */
   boughtMonthly.list = [];
 
-  // 月詳細ページへ移動
+  /* [フィールド] 支出一覧読み込み中 */
+  boughtMonthly.isLoading = true;
+
+  /* [メソッド] 月の詳細ページへ移動する */
   boughtMonthly.showDetail = function(yearMonth) {
     location.href = '/#/bought/detail/' + yearMonth;
   };
 
-  // 画面表示時に支出額一覧をサーバから取得
-  boughtModel.loadMonthlyPaid().then(() => boughtMonthly.list = boughtModel.getMonthlyPaid());
+  /* 初期化 */
+  boughtModel.loadMonthlyPaid().then(function() {
+    boughtMonthly.list = boughtModel.getMonthlyPaid();
+    boughtMonthly.isLoading = false;
+  });
 
 }]);
 
