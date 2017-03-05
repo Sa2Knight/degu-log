@@ -1,16 +1,30 @@
 /*
  * 写真の一覧
  */
-degulog.controller('photoCollectionController', ['photoModel' , function(photoModel) {
+degulog.controller('photoCollectionController', ['$http' , function($http) {
   let photo = this;
 
   /* [フィールド] 写真の一覧 */
   photo.collections = [];
 
-  /* 画面初期化 */
-  (function() {
-    photoModel.all((data) => photo.collections = data);
-  })();
+  /* [メソッド] 写真一覧の取得 */
+  photo.getAll = function() {
+    $http.get('/rest/photo/get').success((data) => photo.collections = data);
+  };
+
+  /* [メソッド] 写真の削除 */
+  photo.remove = function(fileName) {
+    let targetIndex = photo.collections.findIndex((p) => p.fileName === fileName);
+    $http({
+      url: "/rest/photo/remove",
+      method: "POST",
+      data: {fileName: fileName},
+    }).then(() => photo.collections.splice(targetIndex, 1));
+  };
+
+  /* 初期化 */
+  photo.getAll();
+
 }]);
 
 /*

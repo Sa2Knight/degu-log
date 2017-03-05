@@ -88,10 +88,22 @@ app.get('/rest/photo/get', function(req, res) {
   });
 });
 
+/* 画像ファイルを削除 */
+app.post('/rest/photo/remove', function(req, res) {
+  collection('photo').remove({fileName: req.body.fileName});
+  fs.unlink('uploads/' + req.body.fileName, function() {
+    res.send('success');
+  });
+});
+
 /* 画像ファイルを取得 */
 app.get('/rest/photo/ref/:id', function(req, res) {
-  var buf = fs.readFileSync('uploads/' + req.params.id);
-  res.send(buf, { 'Content-Type': 'image/jpeg' }, 200);
+  if (req.params.id.match(/^\w+$/) !== null) {
+    var buf = fs.readFileSync('uploads/' + req.params.id);
+    res.send(buf, { 'Content-Type': 'image/jpeg' }, 200);
+  } else {
+    res.status(404).send('Not found picture');
+  }
 });
 
 /* 静的ファイル */
