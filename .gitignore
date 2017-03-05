@@ -1,4 +1,5 @@
 *.swp
+/uploads/*
 /app/build/*.js
 /app/build/bin
 !.gitkeep
