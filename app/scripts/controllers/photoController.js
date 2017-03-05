@@ -30,7 +30,7 @@ degulog.controller('photoCollectionController', ['$http' , function($http) {
 /*
  * 写真の新規作成/編集画面
  */
-degulog.controller('photoEditController' , ['photoModel' , '$scope' , function(photoModel, $scope) {
+degulog.controller('photoEditController' , ['$http' , '$scope' , function($http, $scope) {
   let photo = this;
 
   /* [フィールド] 投稿成功 */
@@ -51,18 +51,21 @@ degulog.controller('photoEditController' , ['photoModel' , '$scope' , function(p
       this.success = false;
       return;
     }
-    let photoInfo = {
-      tags: photo.tags,
-      file: photo.file,
-      title: photo.title,
-    };
-    photoModel.upload(photoInfo);
-    this.success = true;
-    photo.title = "";
-    photo.filename = "";
-    photo.tags = "";
-    photo.file = null;
-    $scope.postForm.$submitted = false;
+    let formData = new FormData();
+    formData.append('file', photo.file);
+    formData.append('tags', photo.tags);
+    formData.append('title', photo.title);
+    $http.post('/rest/photo/put', formData, {
+      headers: {'Content-Type': undefined} ,
+      transformRequest: null
+    }).then(function() {
+      photo.success = true;
+      photo.title = "";
+      photo.filename = "";
+      photo.tags = "";
+      photo.file = null;
+      $scope.photoForm.$submitted = false;
+    });
   };
 
   /* 画面初期化 */
