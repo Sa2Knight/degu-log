@@ -2,6 +2,10 @@
 <table class="table" ng-repeat="p in photo.collections">
   <tr>
     <th>{{ p.title }}</th>
+    <td class="center">
+      <span>タグ: </span>
+      {{ p.tags.join(',') }}
+    </td>
     <td class="right">
       <button class="btn btn-primary btn-sm" ng-click="photo.remove(p.fileName)">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -9,6 +13,6 @@
     </td>
   </tr>
   <tr>
-    <td colspan="2"><img src="/rest/photo/ref/{{ p.fileName }}" width="300px"></td>
+    <td colspan="3"><img src="/rest/photo/ref/{{ p.fileName }}" width="300px"></td>
   </tr>
 </table>
