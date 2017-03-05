@@ -7,9 +7,23 @@ degulog.controller('photoCollectionController', ['$http' , function($http) {
   /* [フィールド] 写真の一覧 */
   photo.collections = [];
 
+  /* [フィールド] タイトル検索ワード */
+  photo.searchTitleWord = "";
+
+  /* [フィールド] タグ検索ワード */
+  photo.searchTagsWord = "";
+
   /* [メソッド] 写真一覧の取得 */
-  photo.getAll = function() {
-    $http.get('/rest/photo/get').success((data) => photo.collections = data);
+  photo.search = function() {
+    //$http.get('/rest/photo/get').success((data) => photo.collections = data);
+    $http({
+      url: '/rest/photo/list',
+      method: 'POST',
+      data: {
+        title: photo.searchTitleWord,
+        tags: photo.searchTagsWord
+      },
+    }).success((data) => photo.collections = data);
   };
 
   /* [メソッド] 写真の削除 */
@@ -23,7 +37,7 @@ degulog.controller('photoCollectionController', ['$http' , function($http) {
   };
 
   /* 初期化 */
-  photo.getAll();
+  photo.search();
 
 }]);
 

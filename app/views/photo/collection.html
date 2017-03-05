@@ -1,4 +1,17 @@
 <h1>写真一覧</h1>
+<form name="photoSearchForm">
+  <div class="form-group">
+    <label>タイトル</label>
+    <input type="text" class="form-control" ng-model="photo.searchTitleWord">
+  </div>
+  <div class="form-group">
+    <label>タグ</label>
+    <input type="text" class="form-control" ng-model="photo.searchTagsWord">
+  </div>
+  <div class="form-group">
+    <button class="form-control btn btn-primary" ng-click="photo.search()">検索</button>
+  </div>
+</form>
 <table class="table" ng-repeat="p in photo.collections">
   <tr>
     <th>{{ p.title }}</th>

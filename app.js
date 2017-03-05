@@ -81,9 +81,20 @@ app.post('/rest/photo/put' , function(req, res) {
   res.send('success');
 });
 
-/* 全ての写真一覧を取得 */
-app.get('/rest/photo/get', function(req, res) {
-  collection('photo').find({}).toArray(function(err , docs) {
+/* 写真一覧を取得 */
+app.post('/rest/photo/list', function(req, res) {
+  let title = req.body.title;
+  let tags = req.body.tags;
+  let query = {};
+  if (title !== "") {
+    let reg = new RegExp(title);
+    query.title = reg;
+  }
+  if (tags !== "") {
+    let tagsArray = tags.split(',');
+    query.tags = { '$all': tagsArray };
+  }
+  collection('photo').find(query).toArray(function(err, docs) {
     res.send(docs);
   });
 });
