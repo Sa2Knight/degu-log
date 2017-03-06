@@ -81,7 +81,24 @@ app.post('/rest/photo/put' , function(req, res) {
   res.send('success');
 });
 
-/* ファイルネームを指定して写真を取得 */
+/* 写真を更新 */
+app.post('/rest/photo/post', function(req, res) {
+  let whereQuery = {fileName: req.body.fileName};
+  let setQuery = {'$set': {}};
+  let title = req.body.title;
+  let tags = req.body.tags;
+  if (title && title !== "") {
+    setQuery.$set.title = title;
+  }
+  if (tags && tags !== "") {
+    setQuery.$set.tags = tags.split(',');
+  }
+  collection('photo').update(whereQuery, setQuery, function() {
+    res.send('success');
+  });
+});
+
+/* 写真を取得 */
 app.get('/rest/photo/get/:fileName' , function(req, res) {
   let query = {fileName: req.params.fileName};
   collection('photo').findOne(query, function(err, doc) {

@@ -119,7 +119,25 @@ degulog.controller('photoEditController' , ['$http', '$scope' , '$controller' , 
 
   /* [メソッド(override)] アップロード */
   photo.submit = function() {
-    console.log("未実装");
+    if ($scope.photoForm.$invalid) {
+      this.success = false;
+      return;
+    }
+    let formData = new FormData();
+    formData.append('tags', photo.tags);
+    formData.append('title', photo.title);
+    $http({
+      url: '/rest/photo/post',
+      method: 'POST',
+      data: {
+        fileName: photo.fileName,
+        title: photo.title,
+        tags: photo.tags,
+      }
+    }).success(function(data) {
+      photo.success = true;
+      $scope.photoForm.$submitted = false;
+    });
   };
 
 }]);
