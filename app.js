@@ -81,6 +81,14 @@ app.post('/rest/photo/put' , function(req, res) {
   res.send('success');
 });
 
+/* ファイルネームを指定して写真を取得 */
+app.get('/rest/photo/get/:fileName' , function(req, res) {
+  let query = {fileName: req.params.fileName};
+  collection('photo').findOne(query, function(err, doc) {
+    res.send(doc);
+  });
+});
+
 /* 写真一覧を取得 */
 app.post('/rest/photo/list', function(req, res) {
   let title = req.body.title;
