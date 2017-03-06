@@ -16,9 +16,6 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 
   /* [フィールド] 編集ステータス */
   blogEdit.success = false;
 
-  /* [フィールド] ヘッダータイトル */
-  blogEdit.headerText = $routeParams._id ? `【${blogEdit.post.title}】を編集` : '新規投稿';
-
   /* [フィールド] 編集中の記事 */
   blogEdit.post = (function() {
     if ($routeParams._id) {
@@ -26,6 +23,9 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 
     }
     return {datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')};
   })();
+
+  /* [フィールド] ヘッダータイトル */
+  blogEdit.headerText = $routeParams._id ? `【${blogEdit.post.title}】を編集` : '新規投稿';
 
   /* [メソッド] 記事を送信 */
   blogEdit.submit = function() {
