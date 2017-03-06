@@ -134,7 +134,7 @@ degulog.controller('photoEditController' , ['$http', '$scope' , '$controller' , 
         title: photo.title,
         tags: photo.tags,
       }
-    }).success(function(data) {
+    }).success(function() {
       photo.success = true;
       $scope.photoForm.$submitted = false;
     });
