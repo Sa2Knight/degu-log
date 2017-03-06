@@ -5,7 +5,10 @@
   <div id="success-msg" class="system-msg" ng-show="photo.success">投稿しました</div>
 
   <!-- 写真 -->
-  <div class="form-group">
+  <div ng-show="photo.fileName">
+    <img src="/rest/photo/ref/{{photo.fileName}}" width="300px">
+  </div>
+  <div class="form-group" ng-hide="photo.fileName">
     <label>写真</label>
     <input class="dummy-file" type="file" name="file" file-model="photo.file" required>
     <input type="text" class="form-control file" ng-model="photo.filename"

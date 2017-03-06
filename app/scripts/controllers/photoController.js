@@ -15,7 +15,6 @@ degulog.controller('photoCollectionController', ['$http' , function($http) {
 
   /* [メソッド] 写真一覧の取得 */
   photo.search = function() {
-    //$http.get('/rest/photo/get').success((data) => photo.collections = data);
     $http({
       url: '/rest/photo/list',
       method: 'POST',
@@ -24,6 +23,11 @@ degulog.controller('photoCollectionController', ['$http' , function($http) {
         tags: photo.searchTagsWord
       },
     }).success((data) => photo.collections = data);
+  };
+
+  /* [メソッド] 写真の編集画面に移動 */
+  photo.moveToEditPage = function(fileName) {
+    location.href = "/#/photo/create/" + fileName;
   };
 
   /* [メソッド] 写真の削除 */
@@ -42,9 +46,9 @@ degulog.controller('photoCollectionController', ['$http' , function($http) {
 }]);
 
 /*
- * 写真の新規作成/編集画面
+ * 写真の新規作成
  */
-degulog.controller('photoEditController' , ['$http' , '$scope' , function($http, $scope) {
+degulog.controller('photoCreateController' , ['$http' , '$scope' , function($http, $scope) {
   let photo = this;
 
   /* [フィールド] 投稿成功 */
@@ -59,7 +63,7 @@ degulog.controller('photoEditController' , ['$http' , '$scope' , function($http,
   /* [フィールド] ファイル名 */
   photo.filename = "";
 
-  /* [メソッド] 投稿 */
+  /* [メソッド] アップロード */
   photo.submit = function() {
     if ($scope.photoForm.$invalid || ! photo.file) {
       this.success = false;
@@ -73,19 +77,49 @@ degulog.controller('photoEditController' , ['$http' , '$scope' , function($http,
       headers: {'Content-Type': undefined} ,
       transformRequest: null
     }).then(function() {
-      photo.success = true;
-      photo.title = "";
-      photo.filename = "";
-      photo.tags = "";
-      photo.file = null;
-      $scope.photoForm.$submitted = false;
+      photo.reset();
     });
   };
 
+  /* フォームを初期化 */
+  photo.reset = function() {
+    photo.success = true;
+    photo.title = "";
+    photo.filename = "";
+    photo.tags = "";
+    photo.file = null;
+    $scope.photoForm.$submitted = false;
+  };
+
   /* 画面初期化 */
-  $(function() {
+  photo.init = function() {
     $('.dummy-file').change(function() {
       $('.file').val($(this).val().replace("C:\\fakepath\\", ""));
     });
+  };
+  photo.init();
+}]);
+
+/**
+ * 写真の編集
+ * extend photoCreateController
+ */
+degulog.controller('photoEditController' , ['$http', '$scope' , '$controller' , '$routeParams' , function($http, $scope, $controller, $routeParams) {
+
+  // 親コントローラを継承
+  let photo = this;
+  angular.extend(photo, $controller('photoCreateController', {$scope: $scope}));
+
+  // 該当の写真データを取得
+  $http.get('/rest/photo/get/' + $routeParams.fileName).success(function(data) {
+    photo.fileName = data.fileName;
+    photo.title = data.title;
+    photo.tags = data.tags.join(',');
   });
+
+  /* [メソッド(override)] アップロード */
+  photo.submit = function() {
+    console.log("未実装");
+  };
+
 }]);

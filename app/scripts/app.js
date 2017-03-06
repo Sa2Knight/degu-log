@@ -66,6 +66,10 @@ degulog.config(function($routeProvider) {
   })
   .when('/photo/create' , {
     templateUrl: 'views/photo/edit.html',
+    controller: 'photoCreateController as photo',
+  })
+  .when('/photo/create/:fileName' , {
+    templateUrl: 'views/photo/edit.html',
     controller: 'photoEditController as photo',
   })
   .when('/photo/collection' , {
