@@ -1,0 +1,94 @@
+@charset "utf-8";
+/*------------------------
+ * Common
+ *-----------------------*/
+body {
+  font-size: 14px;
+  font-family: Verdana, sans-serif;
+  color: #333;
+  position: relative;
+  margin: auto;
+}
+a {
+  text-decoration: none;
+}
+p {
+  line-height: 2;
+}
+table.center th {
+  text-align: center;
+}
+table.center td {
+  text-align: center;
+}
+form .error {
+  color: #A00;
+}
+.right {
+  text-align: right;
+}
+.system-msg {
+  text-align: center;
+  color: #A00;
+}
+.dummy-file {
+  display: none !important;
+}
+/*------------------------
+ * Header
+ *------------------------*/
+header {
+  background-size: cover;
+  height: 80px;
+}
+/*------------------------
+ * Content
+ *-----------------------*/
+.content {
+  width: 100%;
+  margin: auto;
+  width: 1280px;
+}
+@media (max-width: 768px) {
+  .content {
+    padding-top: 180px;
+  }
+}
+/*-------------------------
+ * Article
+ *-------------------------*/
+article {
+  margin-top: -20px;
+}
+article h1 {
+  font-size: 18px;
+  padding: .5em .75em;
+  background-color: #f6f6f6;
+  border-left: 6px solid #ccc;
+}
+/*-------------------------
+ * Footer
+ *-------------------------*/
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: #f8f8f8;
+}
+/*-------------------------
+ * Animation
+ * ------------------------*/
+.pageContainer {
+  opacity: 1;
+  transition: all .1s linear 0s;
+}
+.pageContainer .ng-leave-active {
+  opacity: 0;
+}
+.pageContainer .ng-enter {
+  opacity: 0;
+}
+.pageContainer .ng-enter-active {
+  opacity: 0;
+}
