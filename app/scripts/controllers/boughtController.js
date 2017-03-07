@@ -1,7 +1,7 @@
 /*
  * 月ごとの支出一覧画面
  */
-degulog.controller('boughtMonthlyController' , ['boughtModel' , function(boughtModel) {
+degulog.controller('boughtMonthlyController' , ['$http' , function($http) {
 
   let boughtMonthly = this;
 
@@ -17,8 +17,8 @@ degulog.controller('boughtMonthlyController' , ['boughtModel' , function(boughtM
   };
 
   /* 初期化 */
-  boughtModel.loadMonthlyPaid().then(function() {
-    boughtMonthly.list = boughtModel.getMonthlyPaid();
+  $http.get('/rest/bought/monthly').success(function(data) {
+    boughtMonthly.list = data;
     boughtMonthly.isLoading = false;
   });
 
@@ -27,11 +27,11 @@ degulog.controller('boughtMonthlyController' , ['boughtModel' , function(boughtM
 /*
  * 月の支出一覧画面
  */
-degulog.controller('boughtDetailController' , ['boughtModel' , '$routeParams' , function(boughtModel , $routeParams) {
+degulog.controller('boughtDetailController' , ['$http' , '$routeParams' , function($http , $routeParams) {
   let boughtDetail = this;
   boughtDetail.yearMonth = $routeParams.month;
   boughtDetail.list = [];
-  boughtModel.loadMonthDetails(boughtDetail.yearMonth).then(function() {
-    boughtDetail.list = boughtModel.getDetails();
+  $http.get('/rest/bought/detail/' + this.yearMonth).success(function(data) {
+    boughtDetail.list = data;
   });
 }]);
