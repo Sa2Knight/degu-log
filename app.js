@@ -7,13 +7,14 @@ var collection = require('./mongo');
 var zaim = require('./zaim');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
+var base64 = require('urlsafe-base64');
 var fs = require('fs');
 var app = express();
 
 app.set('views', __dirname + '/');
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(multer({ dest: './uploads/'}).any());
 
 /* トップページ */
@@ -140,6 +141,16 @@ app.get('/rest/photo/ref/:id', function(req, res) {
   } else {
     res.status(404).send('Not found picture');
   }
+});
+
+/* テスト */
+app.post('/test' , function(req, res) {
+  var base64File = req.body.file;
+  console.log(req.body.meta);
+  var image = base64.decode(base64File);
+  fs.writeFile('/vagrant/result.jpg', image, function() {
+    res.send('success');
+  });
 });
 
 /* 静的ファイル */
