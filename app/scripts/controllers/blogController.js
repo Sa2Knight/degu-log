@@ -15,8 +15,15 @@ degulog.controller('blogListController' , ['$http' , function($http) {
     },
 
     /* [メソッド] 記事を削除 */
-    remove() {
-      //Todo 記事削除機能
+    remove(_id) {
+      $http({
+        method: 'POST',
+        url: '/rest/blog/remove',
+        data: {_id: _id},
+      }).success(function() {
+        let targetIndex = blogList.list.findIndex((b) => b._id === _id);
+        blogList.list.splice(targetIndex, 1);
+      });
     },
 
   });

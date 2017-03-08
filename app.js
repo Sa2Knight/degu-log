@@ -29,18 +29,19 @@ app.get('/rest/blog/list' , function(req , res) {
   });
 });
 
-/* ブログ一覧を更新 */
-app.post('/rest/blog/post' , function(req , res) {
-  collection('blog').remove();
-  collection('blog').insert(req.body);
-  res.send('success');
-});
-
 /* ブログを新規登録 */
 app.post('/rest/blog/put' , function(req , res) {
   var blog = req.body;
   collection('blog').insert(blog);
   res.send('success');
+});
+
+/* ブログを削除 */
+app.post('/rest/blog/remove', function(req, res) {
+  var query = {'_id': new ObjectID(req.body._id)};
+  collection('blog').remove(query, function() {
+    res.send('success');
+  });
 });
 
 /* 体重一覧を取得 */
