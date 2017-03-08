@@ -29,11 +29,38 @@ app.get('/rest/blog/list' , function(req , res) {
   });
 });
 
+/* ブログを取得 */
+app.get('/rest/blog/get/:_id', function(req, res) {
+  var targetID = new ObjectID(req.params._id);
+  collection('blog').findOne({'_id': targetID}, function(err, doc) {
+    res.send(doc);
+  });
+});
+
 /* ブログを新規登録 */
 app.post('/rest/blog/put' , function(req , res) {
   var blog = req.body;
   collection('blog').insert(blog);
   res.send('success');
+});
+
+/* ブログを更新 */
+app.post('/rest/blog/post', function(req, res) {
+  var _id       = req.body._id;
+  var datetime  = req.body.datetime;
+  var title     = req.body.title;
+  var body      = req.body.body;
+  var whereQuery = {'_id': new ObjectID(_id)};
+  var setQuery = {
+    '$set': {
+      datetime: datetime,
+      title   : title,
+      body    : body,
+    }
+  };
+  collection('blog').update(whereQuery, setQuery, function(err, result) {
+    res.send('success');
+  });
 });
 
 /* ブログを削除 */
@@ -48,6 +75,14 @@ app.post('/rest/blog/remove', function(req, res) {
 app.get('/rest/weight/list' , function(req , res) {
   collection('weight').find({}).toArray(function(err , docs) {
     res.send(docs);
+  });
+});
+
+/* 体重記録を取得 */
+app.get('/rest/weight/get/:_id', function(req, res) {
+  var targetID = new ObjectID(req.params._id);
+  collection('weight').findOne({'_id': targetID}, function(err, doc) {
+    res.send(doc);
   });
 });
 

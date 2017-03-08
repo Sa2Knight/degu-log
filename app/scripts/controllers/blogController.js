@@ -50,6 +50,13 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 
     /* [フィールド] ヘッダータイトル */
     headerText: '新規投稿',
 
+    /* [メソッド] 既存の記事をサーバから取得 */
+    download(_id) {
+      $http.get('/rest/blog/get/' + _id).success(function(post) {
+        blogEdit.post = post;
+      });
+    },
+
     /* [メソッド] 記事を送信 */
     submit() {
       if ($scope.postForm.$invalid) {
@@ -57,7 +64,11 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 
         return;
       }
       if (this.post._id) {
-        // Todo: 記事更新
+        $http({
+          method: 'POST',
+          url: '/rest/blog/post',
+          data: blogEdit.post
+        });
       } else {
         $http({
           method: 'POST',
@@ -74,6 +85,9 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 
   });
 
   /* 初期化 */
+  if ($routeParams._id) {
+    blogEdit.download($routeParams._id);
+  }
   $.datetimepicker.setLocale('ja');
   $('.datetime').datetimepicker({
     format : 'Y/m/d H:i',

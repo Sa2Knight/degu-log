@@ -56,9 +56,8 @@ degulog.controller('weightEditController' , ['$routeParams' , '$scope' ,  'util'
 
     /* [メソッド] 対象の体重記録をダウンロード */
     download(_id) {
-      $http.get('/rest/weight/list').success(function(weights) {
-        let targetIndex = weights.findIndex((h) => h._id === _id);
-        weightEdit.post = weights[targetIndex];
+      $http.get('/rest/weight/get/' + _id).success(function(weight) {
+        weightEdit.post = weight;
         weightEdit.headerText = `【${weightEdit.post.date}】を編集`;
       });
     },
