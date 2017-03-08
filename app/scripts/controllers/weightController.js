@@ -16,16 +16,6 @@ degulog.controller('weightHistoryController' , ['$http' , function($http) {
       });
     },
 
-    /* [メソッド] 体重記録一覧をサーバにアップロードする */
-    upload() {
-      $http({
-        url: "/rest/weight/post",
-        method: "POST",
-        data: weightHistory.list,
-        headers: {'Content-Type': 'application/json; charset=utf-8'},
-      });
-    },
-
     /* [メソッド] 指定した体重記録を削除する */
     remove(_id) {
       $http({
@@ -80,7 +70,13 @@ degulog.controller('weightEditController' , ['$routeParams' , '$scope' ,  'util'
         return;
       }
       if (this.post._id) {
-        // Todo 記事更新
+        $http({
+          method: 'POST',
+          url: '/rest/weight/post',
+          data: weightEdit.post
+        }).success(function() {
+          weightEdit.headerText = `【${weightEdit.post.date}】を編集`;
+        });
       } else {
         $http({
           method: 'POST',

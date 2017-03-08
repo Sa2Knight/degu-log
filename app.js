@@ -61,6 +61,25 @@ app.post('/rest/weight/put', function(req, res) {
   res.send('success');
 });
 
+/* 体重記録を更新 */
+app.post('/rest/weight/post', function(req, res) {
+  var _id   = req.body._id;
+  var date  = req.body.date;
+  var may   = req.body.may;
+  var pazoo = req.body.pazoo;
+  var whereQuery = {'_id': new ObjectID(_id)};
+  var setQuery = {
+    '$set': {
+      date: date,
+      pazoo: pazoo,
+      may: may,
+    }
+  };
+  collection('weight').update(whereQuery, setQuery, function(err, result) {
+    res.send('success');
+  });
+});
+
 /* 体重記録を削除 */
 app.post('/rest/weight/remove', function(req, res) {
   var targetID = new ObjectID(req.body._id);
@@ -94,23 +113,6 @@ app.post('/rest/photo/put' , function(req, res) {
   res.send('success');
 });
 
-/* 写真を更新 */
-app.post('/rest/photo/post', function(req, res) {
-  let whereQuery = {fileName: req.body.fileName};
-  let setQuery = {'$set': {}};
-  let title = req.body.title;
-  let tags = req.body.tags;
-  if (title && title !== "") {
-    setQuery.$set.title = title;
-  }
-  if (tags && tags !== "") {
-    setQuery.$set.tags = tags.split(',');
-  }
-  collection('photo').update(whereQuery, setQuery, function() {
-    res.send('success');
-  });
-});
-
 /* 写真を取得 */
 app.get('/rest/photo/get/:fileName' , function(req, res) {
   let query = {fileName: req.params.fileName};
@@ -134,6 +136,23 @@ app.post('/rest/photo/list', function(req, res) {
   }
   collection('photo').find(query).toArray(function(err, docs) {
     res.send(docs);
+  });
+});
+
+/* 写真を更新 */
+app.post('/rest/photo/post', function(req, res) {
+  let whereQuery = {fileName: req.body.fileName};
+  let setQuery = {'$set': {}};
+  let title = req.body.title;
+  let tags = req.body.tags;
+  if (title && title !== "") {
+    setQuery.$set.title = title;
+  }
+  if (tags && tags !== "") {
+    setQuery.$set.tags = tags.split(',');
+  }
+  collection('photo').update(whereQuery, setQuery, function() {
+    res.send('success');
   });
 });
 
