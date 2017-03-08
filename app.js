@@ -44,10 +44,20 @@ app.post('/rest/blog/put' , function(req , res) {
 });
 
 /* 体重一覧を取得 */
-app.get('/rest/weight/get' , function(req , res) {
+app.get('/rest/weight/list' , function(req , res) {
   collection('weight').find({}).toArray(function(err , docs) {
     res.send(docs);
   });
+});
+
+/* 体重記録を新規登録 */
+app.post('/rest/weight/put', function(req, res) {
+  collection('weight').insert({
+    date: req.body.date,
+    pazoo: req.body.pazoo,
+    may: req.body.may
+  });
+  res.send('success');
 });
 
 /* 体重一覧を更新 */
