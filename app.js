@@ -23,7 +23,7 @@ app.get('/', function (req, res) {
 });
 
 /* ブログ一覧を取得 */
-app.get('/rest/blog/get' , function(req , res) {
+app.get('/rest/blog/list' , function(req , res) {
   collection('blog').find({}).toArray(function(err , docs) {
     res.send(docs);
   });

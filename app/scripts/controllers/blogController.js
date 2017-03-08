@@ -1,48 +1,70 @@
 /*
   飼育日記: 記事一覧ページ
 */
-degulog.controller('blogListController' , ['blogModel' , function(blogModel) {
+degulog.controller('blogListController' , ['$http' , function($http) {
+
   let blogList = this;
-  blogList.remove = (_id) => blogModel.remove(_id),
-  blogModel.load().then(() => blogList.list = blogModel.all());
+  angular.extend(blogList, {
+
+    /* [フィールド] 記事一覧 */
+    list: [],
+
+    /* [メソッド] 記事一覧をサーバからダウンロード */
+    download() {
+      $http.get('/rest/blog/list').success((list) => this.list = list);
+    },
+
+    /* [メソッド] 記事を削除 */
+    remove() {
+      //Todo 記事削除機能
+    },
+
+  });
+
+  /* 初期化 */
+  blogList.download();
+
 }]);
 
 /*
  * 飼育日記: 記事新規登録・編集ページ
  */
-degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 'blogModel' , function($scope , $routeParams , util , blogModel) {
+degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , '$http' , function($scope , $routeParams , util , $http) {
+
   let blogEdit = this;
+  angular.extend(blogEdit, {
 
-  /* [フィールド] 編集ステータス */
-  blogEdit.success = false;
+    /* [フィールド] 編集ステータス */
+    success: false,
 
-  /* [フィールド] 編集中の記事 */
-  blogEdit.post = (function() {
-    if ($routeParams._id) {
-      return blogModel.get($routeParams._id);
-    }
-    return {datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')};
-  })();
+    /* [フィールド] 編集中の記事 */
+    post: {datetime: util.formatDate(new Date() , 'YYYY/MM/DD hh:mm')},
 
-  /* [フィールド] ヘッダータイトル */
-  blogEdit.headerText = $routeParams._id ? `【${blogEdit.post.title}】を編集` : '新規投稿';
+    /* [フィールド] ヘッダータイトル */
+    headerText: '新規投稿',
 
-  /* [メソッド] 記事を送信 */
-  blogEdit.submit = function() {
-    if ($scope.postForm.$invalid) {
-      this.success = false;
-      return;
-    }
-    if (this.post._id) {
-      blogModel.update(this.post);
-    } else {
-      blogModel.append(this.post);
-      this.post.title = '';
-      this.post.body = '';
-    }
-    this.success = true;
-    $scope.postForm.$submitted = false;
-  };
+    /* [メソッド] 記事を送信 */
+    submit() {
+      if ($scope.postForm.$invalid) {
+        this.success = false;
+        return;
+      }
+      if (this.post._id) {
+        // Todo: 記事更新
+      } else {
+        $http({
+          method: 'POST',
+          url: '/rest/blog/put',
+          data: blogEdit.post,
+        }).success(function() {
+          this.post.title = '';
+          this.post.body = '';
+        });
+      }
+      this.success = true;
+      $scope.postForm.$submitted = false;
+    },
+  });
 
   /* 初期化 */
   $.datetimepicker.setLocale('ja');
@@ -61,49 +83,72 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 
 /*
  * 飼育日記: カレンダーページ
  */
-degulog.controller('blogCalendarController' , ['blogModel' , function(blogModel) {
+degulog.controller('blogCalendarController' , ['$http', function($http) {
+
   let blogCalendar = this;
-  blogCalendar.year = 2017,
-  blogCalendar.month = 2,
-  blogCalendar.show = function() {
-    let events = [];
-    let posts = blogModel.getByMonth(this.year , this.month);
-    let reg = new RegExp('^[0-9]{4}/[0-9]{2}/([0-9]{2}) [0-9]{2}:[0-9]{2}$');
-    posts.forEach(function(post) {
-      let day = Number(post.datetime.match(reg)[1]);
-      events.push({
-        day: day,
-        text: post.title,
-        onclick: () => location.href = `/#/blog/create/${post._id}`
+  angular.extend(blogCalendar, {
+
+    /* [フィールド] 年月 */
+    year: 1980,
+    month: 1,
+
+    /* [フィールド] 記事一覧 */
+    posts: [],
+
+    /* [メソッド] カレンダーを表示 */
+    show() {
+      let events = [];
+      let yearMonthRegexp = new RegExp(`^${this.year}/0?${this.month}/[0-9]{2} [0-9]{2}:[0-9]{2}$`);
+      let dayRegexp = new RegExp('^[0-9]{4}/[0-9]{2}/([0-9]{2}) [0-9]{2}:[0-9]{2}$');
+      let monthPosts = this.posts.filter((e) => e.datetime.match(yearMonthRegexp));
+      monthPosts.forEach(function(post) {
+        let day = Number(post.datetime.match(dayRegexp)[1]);
+        events.push({
+          day: day,
+          text: post.title,
+          onclick: () => location.href = `/#/blog/create/${post._id}`
+        });
       });
-    });
-    $('#mini-calendar').html('').miniCalendar({
-      year: this.year,
-      month: this.month,
-      events: events,
-    });
-  };
-  blogCalendar.next = function() {
-    this.month++;
-    if (this.month > 12) {
-      this.year++;
-      this.month = 1;
-    }
-    this.show();
-  };
-  blogCalendar.prev = function() {
-    this.month--;
-    if (this.month <= 0) {
-      this.year--;
-      this.month = 12;
-    }
-    this.show();
-  };
-  blogCalendar.today = function() {
-    let today = new Date();
-    this.year = today.getFullYear();
-    this.month = today.getMonth() + 1;
-    this.show();
-  };
-  blogModel.load().then(() => blogCalendar.show());
+      $('#mini-calendar').html('').miniCalendar({
+        year: this.year,
+        month: this.month,
+        events: events,
+      });
+    },
+
+    /* [メソッド] 翌月へ切り替え */
+    next() {
+      this.month++;
+      if (this.month > 12) {
+        this.year++;
+        this.month = 1;
+      }
+      this.show();
+    },
+
+    /* [メソッド] 前月へ切り替え */
+    prev() {
+      this.month--;
+      if (this.month <= 0) {
+        this.year--;
+        this.month = 12;
+      }
+      this.show();
+    },
+
+    /* [メソッド] 本日へ切り替え */
+    today() {
+      let today = new Date();
+      this.year = today.getFullYear();
+      this.month = today.getMonth() + 1;
+      this.show();
+    },
+
+  });
+
+  /* 初期化 */
+  $http.get('/rest/blog/list').success((posts) => {
+    this.posts = posts;
+    this.today();
+  });
 }]);
