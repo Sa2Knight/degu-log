@@ -99,7 +99,7 @@ degulog.controller('weightEditController' , ['$routeParams' , '$scope' ,  'util'
     timepicker: false
   });
   $('.date').change(function() {
-    $scope.$apply(() => $scope.weight.edit.post.date = $(this).val());
+    $scope.$apply(() => weightEdit.post.date = $(this).val());
   });
   if ($routeParams._id) {
     weightEdit.download($routeParams._id);
