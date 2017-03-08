@@ -60,11 +60,12 @@ app.post('/rest/weight/put', function(req, res) {
   res.send('success');
 });
 
-/* 体重一覧を更新 */
-app.post('/rest/weight/post' , function(req , res) {
-  collection('weight').remove();
-  collection('weight').insert(req.body);
-  res.send('success');
+/* 体重記録を削除 */
+app.post('/rest/weight/remove', function(req, res) {
+  var targetID = new ObjectID(req.body._id);
+  collection('weight').remove({"_id": new ObjectID(targetID)} , function() {
+    res.send('success');
+  });
 });
 
 /* 月ごとの総支出額一覧を取得 */

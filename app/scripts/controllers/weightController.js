@@ -27,8 +27,16 @@ degulog.controller('weightHistoryController' , ['$http' , function($http) {
     },
 
     /* [メソッド] 指定した体重記録を削除する */
-    remove() {
-      // Todo:記事の削除
+    remove(_id) {
+      $http({
+        method: 'POST',
+        url: '/rest/weight/remove',
+        data: {_id: _id},
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+      }).success(function() {
+        let targetIndex = weightHistory.list.findIndex((h) => h._id === _id);
+        weightHistory.list.splice(targetIndex, 1);
+      });
     },
   });
 
