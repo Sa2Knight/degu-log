@@ -15,7 +15,6 @@
       <th>タイトル</th>
       <th>本文</th>
       <th>投稿日時</th>
-      <th>サムネイル</th>
       <th>編集</th>
       <th>削除</th>
     </tr>
@@ -25,7 +24,6 @@
       <td class="post-title" id="post-title-{{$index}}">{{ post.title|abbreviate:20 }}</td>
       <td class="post-body"  id="post-body-{{$index}}">{{ post.body|abbreviate:25 }}</td>
       <td class="post-datetime"  id="post-datetime-{{$index}}">{{ post.datetime }}</td>
-      <td class="post-thumbnail" id="post-thumbnail-{{$index}}"></td>
       <td class="post-edit-btn">
         <a ng-href="#/blog/edit/{{post._id}}">
           <button class="btn btn-primary btn-sm" id="post-edit-btn-{{$index}}">
