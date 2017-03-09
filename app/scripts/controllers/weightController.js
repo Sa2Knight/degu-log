@@ -36,12 +36,12 @@ degulog.controller('weightHistoryController' , ['$http' , function($http) {
 }]);
 
 /*
- * 体重の新規登録・編集
+ * 体重の新規登録
  */
-degulog.controller('weightEditController' , ['$routeParams' , '$scope' ,  'util' , '$http' , function($routeParams , $scope , util , $http) {
+degulog.controller('weightCreateController' , ['$scope' ,  'util' , '$http' , function($scope , util , $http) {
 
-  let weightEdit = this;
-  angular.extend(weightEdit, {
+  let weight = this;
+  angular.extend(weight, {
 
     /* [フィールド] 編集中の体重記録 */
     post: {
@@ -54,59 +54,95 @@ degulog.controller('weightEditController' , ['$routeParams' , '$scope' ,  'util'
     /* [フィールド] ヘッダーテキスト */
     headerText: '新規登録',
 
-    /* [メソッド] 対象の体重記録をダウンロード */
-    download(_id) {
-      $http.get('/rest/weight/get/' + _id).success(function(weight) {
-        weightEdit.post = weight;
-        weightEdit.headerText = `【${weightEdit.post.date}】を編集`;
-      });
-    },
-
     /* [メソッド] 投稿する */
     submit() {
       if ($scope.weightForm.$invalid) {
         this.success = false;
         return;
       }
-      if (this.post._id) {
-        $http({
-          method: 'POST',
-          url: '/rest/weight/post',
-          data: weightEdit.post
-        }).success(function() {
-          weightEdit.headerText = `【${weightEdit.post.date}】を編集`;
-        });
-      } else {
-        $http({
-          method: 'POST',
-          url: '/rest/weight/put',
-          data: weightEdit.post,
-          headers: {'Content-Type': 'application/json; charset=utf-8'}
-        }).then(function() {
-          weightEdit.post.pazoo = '';
-          weightEdit.post.may = '';
-        });
-      }
+      this.upload();
       this.success = true;
       $scope.weightForm.$submitted = false;
+    },
+
+    /* [メソッド] サーバに登録データをアップロード */
+    upload() {
+      $http({
+        method: 'POST',
+        url: '/rest/weight/put',
+        data: weight.post,
+        headers: {'Content-Type': 'application/json; charset=utf-8'}
+      }).then(function() {
+        weight.post.pazoo = '';
+        weight.post.may = '';
+      });
     },
   });
 
   /* 初期化 */
-  $.datetimepicker.setLocale('ja');
-  $('.date').datetimepicker({
-    format : 'Y/m/d',
-    timepickerScrollbar: false,
-    scrollMonth: false,
-    scrollInput: false,
-    timepicker: false
+  $(function() {
+    $.datetimepicker.setLocale('ja');
+    $('.date').datetimepicker({
+      format : 'Y/m/d',
+      timepickerScrollbar: false,
+      scrollMonth: false,
+      scrollInput: false,
+      timepicker: false
+    });
+    $('.date').change(function() {
+      $scope.$apply(() => weight.post.date = $(this).val());
+    });
   });
-  $('.date').change(function() {
-    $scope.$apply(() => weightEdit.post.date = $(this).val());
+}]);
+
+/*
+ * 体重の編集
+ * extend weightCreateController
+ */
+degulog.controller('weightEditController' , ['$routeParams' , '$scope'  , '$http', '$controller' , function($routeParams , $scope ,$http , $controller) {
+
+  /* 親コントローラを継承 */
+  let weight = this;
+  angular.extend(weight, $controller('weightCreateController', {$scope: $scope}));
+
+  angular.extend(weight, {
+
+    /* [メソッド] 対象の体重記録をダウンロード */
+    download(_id) {
+      $http.get('/rest/weight/get/' + _id).success(function(result) {
+        weight.post = result;
+        weight.headerText = `【${weight.post.date}】を編集`;
+      });
+    },
+
+    /* [メソッド(override)] サーバに登録データをアップロード */
+    upload() {
+      $http({
+        method: 'POST',
+        url: '/rest/weight/post',
+        data: weight.post
+      }).success(function() {
+        weight.headerText = `【${weight.post.date}】を編集`;
+      });
+    },
   });
-  if ($routeParams._id) {
-    weightEdit.download($routeParams._id);
-  }
+
+  /* 初期化 */
+  weight.download($routeParams._id);
+  $(function() {
+    $.datetimepicker.setLocale('ja');
+    $('.date').datetimepicker({
+      format : 'Y/m/d',
+      timepickerScrollbar: false,
+      scrollMonth: false,
+      scrollInput: false,
+      timepicker: false
+    });
+    $('.date').change(function() {
+      $scope.$apply(() => weight.post.date = $(this).val());
+    });
+  });
+
 }]);
 
 /*

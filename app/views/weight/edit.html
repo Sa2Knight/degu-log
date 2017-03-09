@@ -1,9 +1,9 @@
-<h1>{{weightEdit.headerText}}</h1>
+<h1>{{weight.headerText}}</h1>
 
-<form novalidate name="weightForm" ng-submit="weightEdit.submit()">
+<form novalidate name="weightForm" ng-submit="weight.submit()">
 
   <!-- システムメッセージ -->
-  <div id="success-msg" class="system-msg" ng-show="weightEdit.success">投稿しました</div>
+  <div id="success-msg" class="system-msg" ng-show="weight.success">投稿しました</div>
 
   <!-- 計測日 -->
   <div class="form-group">
@@ -13,7 +13,7 @@
       <span id="date-format-error" ng-show="weightForm.date.$error.pattern">(※計測日のフォーマットが正しくありません)</span>
     </div>
     <div class="input-group">
-      <input type="text" class="form-control date" name="date" ng-model="weightEdit.post.date" ng-pattern="/^\d{4}/\d{2}/\d{2}$/" required>
+      <input type="text" class="form-control date" name="date" ng-model="weight.post.date" ng-pattern="/^\d{4}/\d{2}/\d{2}$/" required>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
   </div>
@@ -26,7 +26,7 @@
       <span id="pazoo-min-error" ng-show="weightForm.pazoo.$error.min">(※体重は100g以上にしてください)</span>
       <span id="pazoo-max-error" ng-show="weightForm.pazoo.$error.max">(※体重は300g以下にしてください)</span>
     </div>
-    <input type="number" class="form-control" name="pazoo" step="0.1" ng-model="weightEdit.post.pazoo" min="100" max="300" required>
+    <input type="number" class="form-control" name="pazoo" step="0.1" ng-model="weight.post.pazoo" min="100" max="300" required>
   </div>
 
   <!-- 体重(メイ) -->
@@ -37,7 +37,7 @@
       <span id="may-min-error" ng-show="weightForm.may.$error.min">(※体重は100g以上にしてください)</span>
       <span id="may-max-error" ng-show="weightForm.may.$error.max">(※体重は300g以下にしてください)</span>
     </div>
-    <input type="number" class="form-control" name="may" step="0.1" ng-model="weightEdit.post.may" min="100" max="300" required>
+    <input type="number" class="form-control" name="may" step="0.1" ng-model="weight.post.may" min="100" max="300" required>
   </div>
 
   <!-- Submit -->
@@ -46,3 +46,5 @@
   </div>
 
 </form>
+
+{{weight.post}}

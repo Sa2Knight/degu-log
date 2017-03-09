@@ -34,11 +34,11 @@ degulog.config(function($routeProvider) {
   })
   .when('/weight/create' , {
     templateUrl: 'views/weight/edit.html',
-    controller: 'weightEditController as weightEdit'
+    controller: 'weightCreateController as weight'
   })
-  .when('/weight/create/:_id' , {
+  .when('/weight/edit/:_id' , {
     templateUrl: 'views/weight/edit.html',
-    controller: 'weightEditController as weightEdit'
+    controller: 'weightEditController as weight'
   })
   .when('/weight/history' , {
     templateUrl: 'views/weight/history.html',
