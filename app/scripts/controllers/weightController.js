@@ -79,20 +79,6 @@ degulog.controller('weightCreateController' , ['$scope' ,  'util' , '$http' , fu
     },
   });
 
-  /* 初期化 */
-  $(function() {
-    $.datetimepicker.setLocale('ja');
-    $('.date').datetimepicker({
-      format : 'Y/m/d',
-      timepickerScrollbar: false,
-      scrollMonth: false,
-      scrollInput: false,
-      timepicker: false
-    });
-    $('.date').change(function() {
-      $scope.$apply(() => weight.post.date = $(this).val());
-    });
-  });
 }]);
 
 /*
@@ -129,19 +115,6 @@ degulog.controller('weightEditController' , ['$routeParams' , '$scope'  , '$http
 
   /* 初期化 */
   weight.download($routeParams._id);
-  $(function() {
-    $.datetimepicker.setLocale('ja');
-    $('.date').datetimepicker({
-      format : 'Y/m/d',
-      timepickerScrollbar: false,
-      scrollMonth: false,
-      scrollInput: false,
-      timepicker: false
-    });
-    $('.date').change(function() {
-      $scope.$apply(() => weight.post.date = $(this).val());
-    });
-  });
 
 }]);
 

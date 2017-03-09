@@ -12,8 +12,8 @@
       <span id="datetime-require-error" ng-show="postForm.datetime.$error.required">(※投稿日は入力必須です)</span>
       <span id="datetime-format-error" ng-show="postForm.datetime.$error.pattern">(※日時のフォーマットが正しくありません)</span>
     </div>
-    <div class="input-group">
-      <input type="text" class="form-control datetime" name="datetime" ng-model="blog.post.datetime" ng-pattern="/^\d{4}/\d{2}/\d{2} \d{2}:\d{2}$/" required>
+    <div class="form-group">
+      <date-time-picker format="Y/m/d H:i" time=true ng-model="blog.post.datetime"/>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
   </div>

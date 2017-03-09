@@ -76,16 +76,6 @@ degulog.controller('blogCreateController' , ['$scope' , 'util' , '$http' , funct
 
   /* 初期化 */
   $.datetimepicker.setLocale('ja');
-  $('.datetime').datetimepicker({
-    format : 'Y/m/d H:i',
-    timepickerScrollbar: false,
-    scrollMonth: false,
-    scrollTime: false,
-    scrollInput: false,
-  });
-  $('.datetime').change(function() {
-    $scope.$apply(() => blog.post.datetime = $(this).val());
-  });
 }]);
 
 /*
@@ -117,17 +107,6 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , '$http' ,
 
   /* 初期化 */
   blog.download($routeParams._id);
-  $.datetimepicker.setLocale('ja');
-  $('.datetime').datetimepicker({
-    format : 'Y/m/d H:i',
-    timepickerScrollbar: false,
-    scrollMonth: false,
-    scrollTime: false,
-    scrollInput: false,
-  });
-  $('.datetime').change(function() {
-    $scope.$apply(() => blog.post.datetime = $(this).val());
-  });
 }]);
 
 /*

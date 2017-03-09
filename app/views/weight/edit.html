@@ -10,10 +10,9 @@
     <label>計測日</label>
     <div class="error" ng-show="weightForm.$submitted">
       <span id="date-require-error" ng-show="weightForm.date.$error.required">(※入力必須です)</span>
-      <span id="date-format-error" ng-show="weightForm.date.$error.pattern">(※計測日のフォーマットが正しくありません)</span>
     </div>
-    <div class="input-group">
-      <input type="text" class="form-control date" name="date" ng-model="weight.post.date" ng-pattern="/^\d{4}/\d{2}/\d{2}$/" required>
+    <div class="form-group">
+      <date-time-picker format="Y/m/d" time=false ng-model="weight.post.date"/>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
   </div>
@@ -46,5 +45,3 @@
   </div>
 
 </form>
-
-{{weight.post}}

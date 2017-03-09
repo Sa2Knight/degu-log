@@ -23,9 +23,8 @@ degulog.factory('util' , [function() {
 }]);
 
 /*
-  [fileModel] ファイルアップロード用のディレクティブ
+  [ディレクティブ] ファイルアップロード
 */
-
 degulog.directive('fileModel', ['$parse', function($parse) {
   return function(scope, element, attrs) {
     const model = $parse(attrs.fileModel);
@@ -36,3 +35,36 @@ degulog.directive('fileModel', ['$parse', function($parse) {
     });
   };
 }]);
+
+/*
+  [ディレクティブ] datetimepicker
+*/
+degulog.directive('dateTimePicker', function() {
+  return {
+    restrict: 'E',
+    require: 'ngModel',
+    scope: {
+      format: "@",
+      time: "@",
+    },
+    replace: true,
+    template: '<input type="text" class="form-control date-time-picker" required>',
+    link(scope, element, attrs, controller) {
+      if (scope.format === undefined) {
+        scope.format = 'Y/m/d H:i';
+      }
+      scope.time = scope.time === 'true' ? true : false;
+      $(element).datetimepicker({
+        format: scope.format,
+        timepickerScrollbar: false,
+        timepicker: scope.time,
+        scrollMonth: false,
+        scrollTime: false,
+        scrollInput: false,
+        onChangeDateTime(dp, $input) {
+          controller.$setViewValue($input.val());
+        },
+      });
+    },
+  };
+});
