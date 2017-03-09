@@ -14,11 +14,11 @@ degulog.config(function($routeProvider) {
   })
   .when('/blog/create' , {
     templateUrl: 'views/blog/edit.html',
-    controller: 'blogEditController as blogEdit'
+    controller: 'blogCreateController as blog'
   })
-  .when('/blog/create/:_id' , {
+  .when('/blog/edit/:_id' , {
     templateUrl: 'views/blog/edit.html',
-    controller: 'blogEditController as blogEdit'
+    controller: 'blogEditController as blog'
   })
   .when('/blog/posts' , {
     templateUrl: 'views/blog/posts.html',

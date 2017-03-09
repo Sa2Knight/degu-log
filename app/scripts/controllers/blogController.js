@@ -34,12 +34,12 @@ degulog.controller('blogListController' , ['$http' , function($http) {
 }]);
 
 /*
- * 飼育日記: 記事新規登録・編集ページ
+ * 飼育日記: 記事新規登録
  */
-degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , '$http' , function($scope , $routeParams , util , $http) {
+degulog.controller('blogCreateController' , ['$scope' , 'util' , '$http' , function($scope , util , $http) {
 
-  let blogEdit = this;
-  angular.extend(blogEdit, {
+  let blog = this;
+  angular.extend(blog, {
 
     /* [フィールド] 編集ステータス */
     success: false,
@@ -50,44 +50,31 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 
     /* [フィールド] ヘッダータイトル */
     headerText: '新規投稿',
 
-    /* [メソッド] 既存の記事をサーバから取得 */
-    download(_id) {
-      $http.get('/rest/blog/get/' + _id).success(function(post) {
-        blogEdit.post = post;
-      });
-    },
-
     /* [メソッド] 記事を送信 */
     submit() {
       if ($scope.postForm.$invalid) {
         this.success = false;
         return;
       }
-      if (this.post._id) {
-        $http({
-          method: 'POST',
-          url: '/rest/blog/post',
-          data: blogEdit.post
-        });
-      } else {
-        $http({
-          method: 'POST',
-          url: '/rest/blog/put',
-          data: blogEdit.post,
-        }).success(function() {
-          this.post.title = '';
-          this.post.body = '';
-        });
-      }
+      this.upload();
       this.success = true;
       $scope.postForm.$submitted = false;
     },
+
+    /* [メソッド] 登録した記事をサーバにアップロードする */
+    upload() {
+      $http({
+        method: 'POST',
+        url: '/rest/blog/put',
+        data: blog.post,
+      }).success(() => {
+        this.post.title = '';
+        this.post.body = '';
+      });
+    }
   });
 
   /* 初期化 */
-  if ($routeParams._id) {
-    blogEdit.download($routeParams._id);
-  }
   $.datetimepicker.setLocale('ja');
   $('.datetime').datetimepicker({
     format : 'Y/m/d H:i',
@@ -97,7 +84,49 @@ degulog.controller('blogEditController' , ['$scope' , '$routeParams' , 'util' , 
     scrollInput: false,
   });
   $('.datetime').change(function() {
-    $scope.$apply(() => blogEdit.post.datetime = $(this).val());
+    $scope.$apply(() => blog.post.datetime = $(this).val());
+  });
+}]);
+
+/*
+ * 飼育日記: 記事編集
+ * extend blogCreateController
+ */
+degulog.controller('blogEditController' , ['$scope' , '$routeParams' , '$http' , '$controller' , function($scope , $routeParams , $http, $controller) {
+
+  let blog = this;
+  angular.extend(blog, $controller('blogCreateController', {$scope: $scope}));
+  angular.extend(blog, {
+
+    /* [メソッド] 既存の記事をサーバから取得 */
+    download(_id) {
+      $http.get('/rest/blog/get/' + _id).success(function(post) {
+        blog.post = post;
+      });
+    },
+
+    /* [メソッド] 登録した記事をサーバにアップロードする */
+    upload() {
+      $http({
+        method: 'POST',
+        url: '/rest/blog/post',
+        data: blog.post
+      });
+    }
+  });
+
+  /* 初期化 */
+  blog.download($routeParams._id);
+  $.datetimepicker.setLocale('ja');
+  $('.datetime').datetimepicker({
+    format : 'Y/m/d H:i',
+    timepickerScrollbar: false,
+    scrollMonth: false,
+    scrollTime: false,
+    scrollInput: false,
+  });
+  $('.datetime').change(function() {
+    $scope.$apply(() => blog.post.datetime = $(this).val());
   });
 }]);
 
