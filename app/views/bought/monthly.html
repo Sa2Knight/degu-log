@@ -1,8 +1,8 @@
 <h1>購入履歴</h1>
-<div ng-show="boughtMonthly.isLoading">
+<div ng-show="bought.isLoading">
   読み込み中...
 </div>
-<table class='table table-hover' ng-hide="boughtMonthly.isLoading">
+<table class='table table-hover' ng-hide="bought.isLoading">
   <thead>
     <tr>
       <th>年月</th>
@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="(month, amount) in boughtMonthly.list" ng-click="boughtMonthly.showDetail(month)">
+    <tr ng-repeat="(month, amount) in bought.list" ng-click="bought.showDetail(month)">
       <td>{{ month }}</td>
       <td>{{ amount }}円</td>
     </tr>

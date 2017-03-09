@@ -3,23 +3,33 @@
  */
 degulog.controller('boughtMonthlyController' , ['$http' , function($http) {
 
-  let boughtMonthly = this;
+  let bought = this;
+  angular.extend(bought, {
 
-  /* [フィールド] 月ごとの支出額一覧 */
-  boughtMonthly.list = [];
+    /* [フィールド] 月ごとの支出額一覧 */
+    list: [],
 
-  /* [フィールド] 支出一覧読み込み中 */
-  boughtMonthly.isLoading = true;
+    /* [フィールド] 支出一覧読み込み中 */
+    isLoading: true,
 
-  /* [メソッド] 月の詳細ページへ移動する */
-  boughtMonthly.showDetail = function(yearMonth) {
-    location.href = '/#/bought/detail/' + yearMonth;
-  };
+    /* [メソッド] 月の詳細ページへ移動する */
+    showDetail(yearMonth) {
+      location.href = '/#/bought/detail/' + yearMonth;
+    },
+
+    /* [メソッド] 月ごとの支出額一覧をダウンロード */
+    download(callback) {
+      $http.get('/rest/bought/monthly').success(function(data) {
+        callback(data);
+      });
+    },
+
+  });
 
   /* 初期化 */
-  $http.get('/rest/bought/monthly').success(function(data) {
-    boughtMonthly.list = data;
-    boughtMonthly.isLoading = false;
+  bought.download(function(data) {
+    bought.list = data;
+    bought.isLoading = false;
   });
 
 }]);
@@ -35,3 +45,4 @@ degulog.controller('boughtDetailController' , ['$http' , '$routeParams' , functi
     boughtDetail.list = data;
   });
 }]);
+

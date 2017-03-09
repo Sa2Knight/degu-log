@@ -30,12 +30,10 @@ degulog.controller('MainController', ['$scope', '$location' , 'util', function($
     '/bought': [
       {label: '支出一覧' ,   url: '#/bought/monthly' ,             icon: 'fa-list'},
       {label: '支出詳細' ,   url: '#/bought/detail/' + thisMonth , icon: 'fa-jpy'},
-      {label: '支出記録' ,   url: '#/bought/graf' ,                icon: 'fa-bar-chart'},
     ],
     '/photo': [
       {label: '写真一覧' ,   url: '#/photo/collection' ,           icon: 'fa-picture-o'},
       {label: '新規・編集' , url: '#/photo/create' ,               icon: 'fa-picture-o'},
-      {label: 'タグ管理' ,   url: '#/photo/tag' ,                  icon: 'fa-tags'},
     ]
   };
 
