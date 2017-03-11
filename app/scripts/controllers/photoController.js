@@ -104,8 +104,8 @@ degulog.controller('photoCreateController' , ['$http' , '$scope' , function($htt
 
   /* [メソッド] アップロード */
   photo.submit = function() {
+    this.success = false;
     if ($scope.photoForm.$invalid || ! photo.file) {
-      this.success = false;
       return;
     }
     let formData = new FormData();
@@ -127,6 +127,7 @@ degulog.controller('photoCreateController' , ['$http' , '$scope' , function($htt
     photo.filename = "";
     photo.tags = "";
     photo.file = null;
+    $('input[ng-model="photo.filename"]').val('');
     $scope.photoForm.$submitted = false;
   };
 
