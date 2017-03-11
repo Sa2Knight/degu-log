@@ -79,19 +79,3 @@ footer {
   text-align: center;
   background-color: #f8f8f8;
 }
-/*-------------------------
- * Animation
- * ------------------------*/
-.pageContainer {
-  opacity: 1;
-  transition: all .1s linear 0s;
-}
-.pageContainer .ng-leave-active {
-  opacity: 0;
-}
-.pageContainer .ng-enter {
-  opacity: 0;
-}
-.pageContainer .ng-enter-active {
-  opacity: 0;
-}
