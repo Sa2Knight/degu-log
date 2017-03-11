@@ -3,6 +3,8 @@
 * 個人用のデグー飼育支援アプリ
 * MEANスタックによる開発の練習が主な目的
 
+![スクリーンショット](https://github.com/Sa2Knight/degu-log/blob/master/ss/20170312.png)
+
 # 機能
 
 * 写真管理
