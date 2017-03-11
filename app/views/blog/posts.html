@@ -1,41 +1,44 @@
 <h1>記事一覧</h1>
-<form name="postSearchForm">
-  <div class="row">
-    <div class="col-sm-5">
-      <div class="input-group">
-        <input type="text" class="form-control" ng-model="blogList.searchWord" name="searchWord" placeholder="フリーワード検索">
-        <span class="input-group-btn"><button class="form-control btn btn-primary">検索</button></span>
+<div ng-show="blogList.list.length">
+  <form name="postSearchForm">
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="input-group">
+          <input type="text" class="form-control" ng-model="blogList.searchWord" name="searchWord" placeholder="フリーワード検索">
+          <span class="input-group-btn"><button class="form-control btn btn-primary">検索</button></span>
+        </div>
       </div>
     </div>
-  </div>
-</form>
-<table class='blog-posts table table-striped center'>
-  <thead>
-    <tr>
-      <th>タイトル</th>
-      <th>本文</th>
-      <th>投稿日時</th>
-      <th>編集</th>
-      <th>削除</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="post in blogList.list | filter:blogList.searchWord | orderBy: 'datetime': true">
-      <td class="post-title" id="post-title-{{$index}}">{{ post.title|abbreviate:20 }}</td>
-      <td class="post-body"  id="post-body-{{$index}}">{{ post.body|abbreviate:25 }}</td>
-      <td class="post-datetime"  id="post-datetime-{{$index}}">{{ post.datetime }}</td>
-      <td class="post-edit-btn">
-        <a ng-href="#/blog/edit/{{post._id}}">
-          <button class="btn btn-primary btn-sm" id="post-edit-btn-{{$index}}">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
+  </form>
+  <table class='blog-posts table table-striped center'>
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>本文</th>
+        <th>投稿日時</th>
+        <th>編集</th>
+        <th>削除</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="post in blogList.list | filter:blogList.searchWord | orderBy: 'datetime': true">
+        <td class="post-title" id="post-title-{{$index}}">{{ post.title|abbreviate:20 }}</td>
+        <td class="post-body"  id="post-body-{{$index}}">{{ post.body|abbreviate:25 }}</td>
+        <td class="post-datetime"  id="post-datetime-{{$index}}">{{ post.datetime }}</td>
+        <td class="post-edit-btn">
+          <a ng-href="#/blog/edit/{{post._id}}">
+            <button class="btn btn-primary btn-sm" id="post-edit-btn-{{$index}}">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+          </a>
+        </td>
+        <td class="post-delete-btn">
+          <button class="btn btn-primary btn-sm" ng-click="blogList.remove(post._id)">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
           </button>
-        </a>
-      </td>
-      <td class="post-delete-btn">
-        <button class="btn btn-primary btn-sm" ng-click="blogList.remove(post._id)">
-          <i class="fa fa-trash-o" aria-hidden="true"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div ng-hide="blogList.list.length">記事がありません</div>

@@ -135,7 +135,7 @@ degulog.controller('blogCalendarController' , ['$http', function($http) {
         events.push({
           day: day,
           text: post.title,
-          onclick: () => location.href = `/#/blog/create/${post._id}`
+          onclick: () => location.href = `/#/blog/edit/${post._id}`
         });
       });
       $('#mini-calendar').html('').miniCalendar({

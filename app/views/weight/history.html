@@ -1,29 +1,32 @@
 <h1>体重記録</h1>
-<table class="table table-striped center">
-  <thead>
-    <tr>
-      <th class="col-xs-2">日時</th>
-      <th class="col-xs-4">パズー</th>
-      <th class="col-xs-4">メイ</th>
-      <th class="col-xs-1">編集</th>
-      <th class="col-xs-1">削除</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="w in weightHistory.list | orderBy: 'date' : true">
-      <td id="weight-date-{{$index}}">{{w.date}}</td>
-      <td id="weight-pazoo-{{$index}}">{{w.pazoo}}</td>
-      <td id="weight-may-{{$index}}">{{w.may}}</td>
-      <td>
-        <a ng-href="#/weight/edit/{{w._id}}">
-          <button id="weight-edit-btn-{{$index}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-        </a>
-      </td>
-      <td>
-        <button id="weight-remove-btn-{{$index}}" class="btn btn-primary btn-sm" ng-click="weightHistory.remove(w._id)">
-          <i class="fa fa-trash-o" aria-hidden="true"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div ng-show="weightHistory.list.length">
+  <table class="table table-striped center">
+    <thead>
+      <tr>
+        <th class="col-xs-2">日時</th>
+        <th class="col-xs-4">パズー</th>
+        <th class="col-xs-4">メイ</th>
+        <th class="col-xs-1">編集</th>
+        <th class="col-xs-1">削除</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="w in weightHistory.list | orderBy: 'date' : true">
+        <td id="weight-date-{{$index}}">{{w.date}}</td>
+        <td id="weight-pazoo-{{$index}}">{{w.pazoo}}</td>
+        <td id="weight-may-{{$index}}">{{w.may}}</td>
+        <td>
+          <a ng-href="#/weight/edit/{{w._id}}">
+            <button id="weight-edit-btn-{{$index}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          </a>
+        </td>
+        <td>
+          <button id="weight-remove-btn-{{$index}}" class="btn btn-primary btn-sm" ng-click="weightHistory.remove(w._id)">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div ng-hide="weightHistory.list.length">体重記録がありません</div>
