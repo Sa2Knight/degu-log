@@ -222,7 +222,8 @@ app.post('/rest/photo/remove', function(req, res) {
 app.get('/rest/photo/ref/:id', function(req, res) {
   if (req.params.id.match(/^\w+(-thumbnail)?$/) !== null) {
     var buf = fs.readFileSync('uploads/' + req.params.id);
-    res.send(buf, { 'Content-Type': 'image/jpeg' }, 200);
+    res.set({'Content-Type': 'image/jpeg'});
+    res.send(buf);
   } else {
     res.status(404).send('Not found picture');
   }
