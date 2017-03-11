@@ -156,7 +156,6 @@ app.post('/rest/photo/put' , function(req, res) {
   };
 
   easyimg.resize(easyimgSettings).then(function(img) {
-    console.log(img);
     collection('photo').insert({
       fileName: req.files[0].filename,
       title: req.body.title,
@@ -177,8 +176,12 @@ app.get('/rest/photo/get/:fileName' , function(req, res) {
 
 /* 写真一覧を取得 */
 app.post('/rest/photo/list', function(req, res) {
+
+  /* 検索クエリの構築 */
   let title = req.body.title;
   let tags = req.body.tags;
+  let page = Number(req.body.page) || 1;
+  let numPerPage = 5;
   let query = {};
   if (title !== "") {
     let reg = new RegExp(title);
@@ -188,8 +191,20 @@ app.post('/rest/photo/list', function(req, res) {
     let tagsArray = tags.split(',');
     query.tags = { '$all': tagsArray };
   }
-  collection('photo').find(query).toArray(function(err, docs) {
-    res.send(docs);
+
+  /* 検索結果の返却 */
+  let c = collection('photo').find(query);
+  c.count().then(function(count) {
+    let pageNum = Math.ceil(count / numPerPage);
+    if (page > pageNum) { page = pageNum; }
+    c.skip((page - 1) * numPerPage).limit(numPerPage).toArray(function(err, docs) {
+      res.send({
+        page: page,
+        pageNum: pageNum,
+        count: count,
+        photo: docs,
+      });
+    });
   });
 });
 
@@ -232,7 +247,6 @@ app.get('/rest/photo/ref/:id', function(req, res) {
 /* テスト */
 app.post('/test' , function(req, res) {
   var base64File = req.body.file;
-  console.log(req.body.meta);
   var image = base64.decode(base64File);
   fs.writeFile('/vagrant/result.jpg', image, function() {
     res.send('success');

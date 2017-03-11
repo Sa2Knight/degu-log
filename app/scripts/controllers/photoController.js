@@ -13,6 +13,18 @@ degulog.controller('photoCollectionController', ['$http' , function($http) {
   /* [フィールド] タグ検索ワード */
   photo.searchTagsWord = "";
 
+  /* [フィールド] 総写真枚数 */
+  photo.count = 0;
+
+  /* [フィールド] 現在ページ番号 */
+  photo.page = 1;
+
+  /* [フィールド] 総ページ数 */
+  photo.pageNum = 1;
+
+  /* [フィールド] ページャオブジェクト */
+  photo.pager = [];
+
   /* [メソッド] 写真一覧の取得 */
   photo.search = function() {
     $http({
@@ -20,9 +32,36 @@ degulog.controller('photoCollectionController', ['$http' , function($http) {
       method: 'POST',
       data: {
         title: photo.searchTitleWord,
-        tags: photo.searchTagsWord
+        tags: photo.searchTagsWord,
+        page: photo.page,
       },
-    }).success((data) => photo.collections = data);
+    }).success(function(data) {
+      photo.count = data.count;
+      photo.page = data.page;
+      photo.pageNum = data.pageNum;
+      photo.collections = data.photo;
+      photo.createPager();
+    });
+  };
+
+  /* [メソッド] ページングを行う */
+  photo.paging = function(page) {
+    if (page !== photo.page) {
+      photo.page = page;
+      photo.search();
+    }
+  };
+
+  /* [メソッド] ページャの生成 */
+  photo.createPager = function() {
+    photo.pager = [];
+    for (let i = 1; i <= photo.pageNum; i++) {
+      photo.pager.push({
+        label: String(i),
+        page: i,
+        active: photo.page === i ? 'active' : ''
+      });
+    }
   };
 
   /* [メソッド] 写真の編集画面に移動 */
