@@ -38,4 +38,5 @@ pull後、以下の手順でNode環境を構築
 
 ```lang=bash
 $ sudo npm install
+$ sudo apt-get install ImageMagick
 ```

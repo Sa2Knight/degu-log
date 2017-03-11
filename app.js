@@ -7,6 +7,7 @@ var collection = require('./mongo');
 var zaim = require('./zaim');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
+var easyimg = require('easyimage');
 var base64 = require('urlsafe-base64');
 var fs = require('fs');
 var app = express();
@@ -140,12 +141,30 @@ app.get('/rest/bought/detail/:month' , function(req , res) {
 
 /* 写真を新規アップロード */
 app.post('/rest/photo/put' , function(req, res) {
-  collection('photo').insert({
-    fileName: req.files[0].filename,
-    title: req.body.title,
-    tags: req.body.tags.split(','),
+
+  var file = req.files[0];
+  var tmpPath = file.path;
+  var thumbnailPath = tmpPath + '-thumbnail';
+
+  var easyimgSettings = {
+    format: file.mimetype.split('/')[1],
+    src: tmpPath,
+    dst: thumbnailPath,
+    width: 360,
+    height: 360,
+    file: true,
+  };
+
+  easyimg.resize(easyimgSettings).then(function(img) {
+    console.log(img);
+    collection('photo').insert({
+      fileName: req.files[0].filename,
+      title: req.body.title,
+      tags: req.body.tags.split(','),
+    });
+    res.send('success');
   });
-  res.send('success');
+
 });
 
 /* 写真を取得 */
@@ -201,7 +220,7 @@ app.post('/rest/photo/remove', function(req, res) {
 
 /* 画像ファイルを取得 */
 app.get('/rest/photo/ref/:id', function(req, res) {
-  if (req.params.id.match(/^\w+$/) !== null) {
+  if (req.params.id.match(/^\w+(-thumbnail)?$/) !== null) {
     var buf = fs.readFileSync('uploads/' + req.params.id);
     res.send(buf, { 'Content-Type': 'image/jpeg' }, 200);
   } else {
