@@ -133,18 +133,20 @@ degulog.controller('weightGrafController' , ['$http' , function($http) {
 
     /* [メソッド] グラフを生成 */
     show() {
-      let date = ['date'] , pazoo = ['パズー'] , may = ['メイ'];
+      let date  = ['date'], pazoo = ['パズー'], may = ['メイ'], kiki  = ['キキ'], jiji  = ['ジジ'];
       this.history.forEach(function(h) {
         date.push(h.date);
-        pazoo.push(h.pazoo);
-        may.push(h.may);
+        pazoo.push(h.pazoo || null);
+        may.push(h.may     || null);
+        kiki.push(h.kiki   || null);
+        jiji.push(h.jiji   || null);
       });
       c3.generate({
         bindto: '#weight-graf',
         data: {
           x: 'date',
           xFormat: '%Y/%m/%d',
-          columns: [date , pazoo , may]
+          columns: [date , pazoo , may , kiki , jiji]
         },
         axis: {
           x: {
