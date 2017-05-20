@@ -75,6 +75,8 @@ degulog.controller('weightCreateController' , ['$scope' ,  'util' , '$http' , fu
       }).then(function() {
         weight.post.pazoo = '';
         weight.post.may = '';
+        weight.post.kiki = '';
+        weight.post.jiji = '';
       });
     },
   });

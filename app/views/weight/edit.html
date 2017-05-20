@@ -21,22 +21,44 @@
   <div class="form-group">
     <label>パズー(g)</label>
     <div class="error" ng-show="weightForm.$submitted">
-      <span id="pazoo-require-error" ng-show="weightForm.pazoo.$error.required">(※入力必須です)</span>
       <span id="pazoo-min-error" ng-show="weightForm.pazoo.$error.min">(※体重は100g以上にしてください)</span>
       <span id="pazoo-max-error" ng-show="weightForm.pazoo.$error.max">(※体重は300g以下にしてください)</span>
     </div>
-    <input type="number" class="form-control" name="pazoo" step="0.1" ng-model="weight.post.pazoo" min="100" max="300" required>
+    <input type="number" class="form-control" name="pazoo"
+            step="0.1" ng-model="weight.post.pazoo" min="100" max="300">
   </div>
 
   <!-- 体重(メイ) -->
   <div class="form-group">
     <label>メイ(g)</label>
     <div class="error" ng-show="weightForm.$submitted">
-      <span id="may-require-error" ng-show="weightForm.may.$error.required">(※入力必須です)</span>
       <span id="may-min-error" ng-show="weightForm.may.$error.min">(※体重は100g以上にしてください)</span>
       <span id="may-max-error" ng-show="weightForm.may.$error.max">(※体重は300g以下にしてください)</span>
     </div>
-    <input type="number" class="form-control" name="may" step="0.1" ng-model="weight.post.may" min="100" max="300" required>
+    <input type="number" class="form-control" name="may"
+            step="0.1" ng-model="weight.post.may" min="100" max="300">
+  </div>
+
+  <!-- 体重(キキ) -->
+  <div class="form-group">
+    <label>キキ(g)</label>
+    <div class="error" ng-show="weightForm.$submitted">
+      <span id="may-min-error" ng-show="weightForm.may.$error.min">(※体重は100g以上にしてください)</span>
+      <span id="may-max-error" ng-show="weightForm.may.$error.max">(※体重は300g以下にしてください)</span>
+    </div>
+    <input type="number" class="form-control" name="may"
+            step="0.1" ng-model="weight.post.kiki" min="100" max="300">
+  </div>
+
+  <!-- 体重(ジジ) -->
+  <div class="form-group">
+    <label>ジジ(g)</label>
+    <div class="error" ng-show="weightForm.$submitted">
+      <span id="may-min-error" ng-show="weightForm.may.$error.min">(※体重は100g以上にしてください)</span>
+      <span id="may-max-error" ng-show="weightForm.may.$error.max">(※体重は300g以下にしてください)</span>
+    </div>
+    <input type="number" class="form-control" name="may"
+            step="0.1" ng-model="weight.post.jiji" min="100" max="300">
   </div>
 
   <!-- Submit -->
