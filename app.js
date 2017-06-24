@@ -263,4 +263,4 @@ app.use('/views' , express.static('app/views'));
 app.use('/fonts' , express.static('app/fonts'));
 
 /* サーバー起動 */
-var server = app.listen(8086);
+var server = app.listen(80);
